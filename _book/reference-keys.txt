@@ -1,0 +1,5 @@
+introduction
+the-three-rs
+the-general-linear-model
+section-readings--
+install-some-extra-packages--
