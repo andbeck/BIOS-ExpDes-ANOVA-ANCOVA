@@ -3,3 +3,17 @@ the-three-rs
 the-general-linear-model
 section-readings--
 install-some-extra-packages--
+readings--
+intro
+how-to-think-about-experiments-components-of-an-experiment
+how-do-we-increase-precision-and-reduce-bias
+blinding
+placebos
+confounders
+experimental-vs-measurement-units
+identifying-the-experimental-unit---an-example-of-pseudo-replication
+this-really-matters.
+take-home-message-randomization-properly-with-replication-protects-against-confounding
+a-non-randomized-experiment-haphazard-is-not-randomized
+mini-quiz
+replication-how-many

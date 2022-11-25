@@ -30,15 +30,13 @@ You will also need to feel comfortable with dplyr and ggplot - we'll be reinforc
 The learning outcome for this mini-module are that you will understand the basic ideas about
 
 - Replication, Randomisation and Reducing Noise
-- Experimental Design and Analysis - The Completely Randomised Design
-- Experimental Design and Analysis - The Randomised Block Design
-- Experimental Design and Analysis - The Latin Square Design
-- Experimental Design and Analysis - The ANCOVA Design
-- Multiple Regression and Non-linearity.
+- Precision, Bias and Systematic Error
+- The Completely Randomised Design
+- The Randomised Block Design
+- The 2-way ANOVA
+- The ANCOVA Design
 
-A note on time allocation: In a 'normal semester', you'd be in the computer room working on these topics for ~12 hours over the course of 3 days in a week.  
-
-### The Three Rs
+## The Three Rs
 
 Before we get started, it's vital that you understand that there are some very basic principles needed to ensure that your experiments can provide robust and reliable inference (answers to your questions).  The “3 R’s”. 
 
@@ -48,7 +46,7 @@ Before we get started, it's vital that you understand that there are some very b
 
 As we develop ideas, you should come back to these definitions and see if your understanding of them has improved.
 
-### The General Linear Model
+## The General Linear Model
 
 This module is focused on a class of model called the General Linear Model.  It is not a **GLM**.  The **GLM** is a generalised linear model.  I know, right?
 
@@ -119,7 +117,7 @@ ggplot(df, aes(x = x, y = y))+
   geom_point()
 ```
 
-### Section Readings ----
+# Readings ----
 
 There are several resources that will help with this section of the stats course, and onwards
 
@@ -127,7 +125,7 @@ There are several resources that will help with this section of the stats course
 - Experimental Design for the Life Sciences - Nick Colegrave and Graham Ruxton (seen on eBay for £2.50!)
 - Of course, the venerable coursebook for APS 240: https://dzchilds.github.io/stats-for-bio/index.html
 
-### Install some extra packages ----
+## Install some extra packages ----
 
 In order to make this module more effective, we are going to use some additional resources from CRAN.
 

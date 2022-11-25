@@ -31,7 +31,7 @@
   
   
 
-
+<link rel="next" href="readings--.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -136,12 +136,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="#introduction"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="#the-three-rs"><i class="fa fa-check"></i><b>1.0.1</b> The Three Rs</a></li>
-<li class="chapter" data-level="1.0.2" data-path="index.html"><a href="#the-general-linear-model"><i class="fa fa-check"></i><b>1.0.2</b> The General Linear Model</a></li>
-<li class="chapter" data-level="1.0.3" data-path="index.html"><a href="#section-readings--"><i class="fa fa-check"></i><b>1.0.3</b> Section Readings —-</a></li>
-<li class="chapter" data-level="1.0.4" data-path="index.html"><a href="#install-some-extra-packages--"><i class="fa fa-check"></i><b>1.0.4</b> Install some extra packages —-</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-three-rs"><i class="fa fa-check"></i><b>1.1</b> The Three Rs</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#the-general-linear-model"><i class="fa fa-check"></i><b>1.2</b> The General Linear Model</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="readings--.html"><a href="readings--.html"><i class="fa fa-check"></i><b>2</b> Readings —-</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="readings--.html"><a href="readings--.html#install-some-extra-packages--"><i class="fa fa-check"></i><b>2.1</b> Install some extra packages —-</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>3</b> Introduction To Experiments (Some Philosophy)</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="intro.html"><a href="intro.html#how-to-think-about-experiments-components-of-an-experiment"><i class="fa fa-check"></i><b>3.1</b> How to think about experiments: Components of an Experiment</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="intro.html"><a href="intro.html#how-do-we-increase-precision-and-reduce-bias"><i class="fa fa-check"></i><b>3.1.1</b> How do we increase precision and reduce bias?</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="intro.html"><a href="intro.html#experimental-vs-measurement-units"><i class="fa fa-check"></i><b>3.2</b> Experimental vs Measurement units</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="intro.html"><a href="intro.html#take-home-message-randomization-properly-with-replication-protects-against-confounding"><i class="fa fa-check"></i><b>3.2.1</b> Take Home Message: Randomization properly with Replication protects against Confounding</a></li>
+<li class="chapter" data-level="3.2.2" data-path="intro.html"><a href="intro.html#a-non-randomized-experiment-haphazard-is-not-randomized"><i class="fa fa-check"></i><b>3.2.2</b> A non-randomized experiment – <strong>haphazard</strong> is NOT randomized</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="intro.html"><a href="intro.html#mini-quiz"><i class="fa fa-check"></i><b>3.3</b> Mini-Quiz</a></li>
+<li class="chapter" data-level="3.4" data-path="intro.html"><a href="intro.html#replication-how-many"><i class="fa fa-check"></i><b>3.4</b> Replication: How many?</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -169,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="date"><em>2022-11-25</em></p>
 </div>
 <div id="introduction" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 1</span> Introduction<a href="index.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Welcome to An Introduction to Experimental Design ANOVA and ANCOVA</p>
 <p>In this mini-module, you’ll be learning about the principles of experimental design and analysis of 2x2 ANOVA and ANCOVA experiments.</p>
 <p>This module is compulsory for all, because it forms the foundation for most of the more complex experiments you will do as a researcher. And it is the major step beyond the t-test, 1-way ANOVA, simple regression and chi-square contingency table analyses we covered in semester 1.</p>
@@ -179,15 +195,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The learning outcome for this mini-module are that you will understand the basic ideas about</p>
 <ul>
 <li>Replication, Randomisation and Reducing Noise</li>
-<li>Experimental Design and Analysis - The Completely Randomised Design</li>
-<li>Experimental Design and Analysis - The Randomised Block Design</li>
-<li>Experimental Design and Analysis - The Latin Square Design</li>
-<li>Experimental Design and Analysis - The ANCOVA Design</li>
-<li>Multiple Regression and Non-linearity.</li>
+<li>Precision, Bias and Systematic Error</li>
+<li>The Completely Randomised Design</li>
+<li>The Randomised Block Design</li>
+<li>The 2-way ANOVA</li>
+<li>The ANCOVA Design</li>
 </ul>
-<p>A note on time allocation: In a ‘normal semester’, you’d be in the computer room working on these topics for ~12 hours over the course of 3 days in a week.</p>
-<div id="the-three-rs" class="section level3 hasAnchor" number="1.0.1">
-<h3><span class="header-section-number">1.0.1</span> The Three Rs<a href="#the-three-rs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-three-rs" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> The Three Rs<a href="index.html#the-three-rs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Before we get started, it’s vital that you understand that there are some very basic principles needed to ensure that your experiments can provide robust and reliable inference (answers to your questions). The “3 R’s”.</p>
 <ul>
 <li><strong>Randomisation</strong>: the random allocation of treatments to the experimental units, to avoid confounding between treatment effects and other unknown effects.</li>
@@ -196,8 +211,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>As we develop ideas, you should come back to these definitions and see if your understanding of them has improved.</p>
 </div>
-<div id="the-general-linear-model" class="section level3 hasAnchor" number="1.0.2">
-<h3><span class="header-section-number">1.0.2</span> The General Linear Model<a href="#the-general-linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="the-general-linear-model" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> The General Linear Model<a href="index.html#the-general-linear-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This module is focused on a class of model called the General Linear Model. It is not a <strong>GLM</strong>. The <strong>GLM</strong> is a generalised linear model. I know, right?</p>
 <p>The general linear model is, as we learned last semester, a model fit in R with the <code>lm()</code> function. It includes regression, ANOVA, ANCOVA and variations of these. There are a few key characterstics to remember about these models</p>
 <p>The general linear model has the following form</p>
@@ -224,41 +239,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>we hopefully can see that <span class="math inline">\(\beta_{0} = 0.01\)</span>, <span class="math inline">\(\beta_{1} = 0\)</span> and <span class="math inline">\(\beta_{2} = 1\)</span>, where <span class="math inline">\(X_{2} = X^{2}\)</span>!</p>
 <p>Linear models are perfectly capable of being used to estimate non-linear relationships.</p>
 <p>Here is the code to make that figure.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set x range</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">100</span><span class="sc">:</span><span class="dv">100</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># define y without error</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>y_det <span class="ot">&lt;-</span> <span class="fl">0.01</span><span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add some random variation</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y_det<span class="sc">+</span><span class="fu">rnorm</span>(<span class="fu">length</span>(x),<span class="dv">0</span>,<span class="dv">1000</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create dataframe and plot</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y))<span class="sc">+</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
-</div>
-<div id="section-readings--" class="section level3 hasAnchor" number="1.0.3">
-<h3><span class="header-section-number">1.0.3</span> Section Readings —-<a href="#section-readings--" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>There are several resources that will help with this section of the stats course, and onwards</p>
-<ul>
-<li>Getting Started with R - An Introducton for Biologists, Second Edition (available as an electronic online resource via StarPlus)</li>
-<li>Experimental Design for the Life Sciences - Nick Colegrave and Graham Ruxton (seen on eBay for £2.50!)</li>
-<li>Of course, the venerable coursebook for APS 240: <a href="https://dzchilds.github.io/stats-for-bio/index.html" class="uri">https://dzchilds.github.io/stats-for-bio/index.html</a></li>
-</ul>
-</div>
-<div id="install-some-extra-packages--" class="section level3 hasAnchor" number="1.0.4">
-<h3><span class="header-section-number">1.0.4</span> Install some extra packages —-<a href="#install-some-extra-packages--" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In order to make this module more effective, we are going to use some additional resources from CRAN.</p>
-<p>Please install these packages, if you have not already, using the install packages tab in RStudio:</p>
-<ul>
-<li><code>tidyverse</code></li>
-<li><code>ggfortify</code></li>
-<li><code>agricolae</code></li>
-<li><code>car</code></li>
-<li><code>gmodels</code></li>
-<li><code>visreg</code></li>
-<li><code>patchwork</code></li>
-</ul>
-
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set x range</span></span>
+<span id="cb1-2"><a href="index.html#cb1-2" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">100</span><span class="sc">:</span><span class="dv">100</span></span>
+<span id="cb1-3"><a href="index.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># define y without error</span></span>
+<span id="cb1-4"><a href="index.html#cb1-4" aria-hidden="true" tabindex="-1"></a>y_det <span class="ot">&lt;-</span> <span class="fl">0.01</span><span class="sc">+</span>x<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb1-5"><a href="index.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># add some random variation</span></span>
+<span id="cb1-6"><a href="index.html#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> y_det<span class="sc">+</span><span class="fu">rnorm</span>(<span class="fu">length</span>(x),<span class="dv">0</span>,<span class="dv">1000</span>)</span>
+<span id="cb1-7"><a href="index.html#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="index.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># create dataframe and plot</span></span>
+<span id="cb1-9"><a href="index.html#cb1-9" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(x, y)</span>
+<span id="cb1-10"><a href="index.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y))<span class="sc">+</span></span>
+<span id="cb1-11"><a href="index.html#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 </div>
             </section>
@@ -267,7 +258,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 
-
+<a href="readings--.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
