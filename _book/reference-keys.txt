@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+fig:unnamed-chunk-52
+>>>>>>> 410c3a92209ce2716e1a419ba63eefce65277593
 introduction
 the-three-rs-the-foundation-of-experimental-design.
 the-general-linear-model
@@ -67,6 +71,10 @@ specifying-models-in-r
 introduction-1
 the-three-rs-the-foundation-of-experimental-design.-1
 the-general-linear-model-1
+<<<<<<< HEAD
+=======
+readings---1
+>>>>>>> 410c3a92209ce2716e1a419ba63eefce65277593
 install-some-extra-packages---1
 conepts-associated-with-causation-1
 components-of-an-experiment-1
@@ -82,6 +90,7 @@ randomization-properly-with-replication-protects-against-confounding-1
 haphazard-is-not-randomized---beware-the-non-randomized-experiment-1
 mini-quiz-1
 replication-how-many-1
+<<<<<<< HEAD
 the-holy-grail-of-a-control
 so-what-does-a-good-experimental-design-do
 experimental-and-measurement-units-an-example
@@ -102,3 +111,5 @@ building-the-model-1
 are-the-estimates-of-the-parameters-what-we-expect-1
 correct-standard-errors-for-a-figure-1
 making-inference-confidence-intervals-and-contrasts-1
+=======
+>>>>>>> 410c3a92209ce2716e1a419ba63eefce65277593
