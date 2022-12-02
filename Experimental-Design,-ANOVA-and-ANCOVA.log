@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.11.15)  2 DEC 2022 15:24
+This is XeTeX, Version 3.141592653-2.6-0.999994 (TeX Live 2022) (preloaded format=xelatex 2022.11.15)  2 DEC 2022 16:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -976,65 +976,55 @@ Chapter 6.
 [43
 
 ]
-Overfull \hbox (66.38452pt too wide) has occurred while \output is active
+Overfull \hbox (207.49013pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 44 \TU/lmr/m/sl/10 CHAPTER 6.  DESIGNS FOR TESTING FOR INTERACTI
-ONS: FACTORIAL DESIGNS.
+ONS: THE TWO-WAY ANOVA AND FACTORIAL DESIGNS.
  []
 
-[44]
-Underfull \hbox (badness 4048) in paragraph at lines 1434--1434
+[44] [45]
+Underfull \hbox (badness 4048) in paragraph at lines 1437--1437
 []\TU/lmr/bx/n/14.4 A Factorial Design and the Two-Way
  []
 
-[45]
-Underfull \vbox (badness 6575) has occurred while \output is active []
-
-
-Overfull \hbox (66.38452pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 46 \TU/lmr/m/sl/10 CHAPTER 6.  DESIGNS FOR TESTING FOR INTERACTI
-ONS: FACTORIAL DESIGNS.
- []
-
-[46] [47]
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-32
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-31
 -1.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-32-
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-31-
 1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \hbox (66.38452pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 48 \TU/lmr/m/sl/10 CHAPTER 6.  DESIGNS FOR TESTING FOR INTERACTI
-ONS: FACTORIAL DESIGNS.
+Overfull \hbox (207.49013pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 46 \TU/lmr/m/sl/10 CHAPTER 6.  DESIGNS FOR TESTING FOR INTERACTI
+ONS: THE TWO-WAY ANOVA AND FACTORIAL DESIGNS.
  []
 
-[48] [49]
-Overfull \hbox (66.38452pt too wide) has occurred while \output is active
+[46] [47]
+Overfull \hbox (207.49013pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 48 \TU/lmr/m/sl/10 CHAPTER 6.  DESIGNS FOR TESTING FOR INTERACTI
+ONS: THE TWO-WAY ANOVA AND FACTORIAL DESIGNS.
+ []
+
+[48]
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-33
+-1.pdf Graphic file (type pdf)
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-33-
+1.pdf>
+[49]
+Overfull \hbox (207.49013pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 50 \TU/lmr/m/sl/10 CHAPTER 6.  DESIGNS FOR TESTING FOR INTERACTI
-ONS: FACTORIAL DESIGNS.
+ONS: THE TWO-WAY ANOVA AND FACTORIAL DESIGNS.
  []
 
 [50]
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-34
--1.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-34-
-1.pdf>
-[51]
-Overfull \hbox (66.38452pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 52 \TU/lmr/m/sl/10 CHAPTER 6.  DESIGNS FOR TESTING FOR INTERACTI
-ONS: FACTORIAL DESIGNS.
- []
-
-[52
+Chapter 7.
+[51
 
 ]
-Chapter 7.
-[53]
 File: images/ANCOVA_1.png Graphic file (type bmp)
 <images/ANCOVA_1.png>
 
-Overfull \hbox (436.89824pt too wide) in paragraph at lines 1705--1706
+Overfull \hbox (436.89824pt too wide) in paragraph at lines 1598--1599
 [][] 
  []
 
@@ -1042,154 +1032,166 @@ Overfull \hbox (436.89824pt too wide) in paragraph at lines 1705--1706
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
+Overfull \hbox (44.82344pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 52 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
+YSIS OF COVARIANCE
+ []
+
+[52]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[53]
 Overfull \hbox (44.82344pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 54 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
 YSIS OF COVARIANCE
  []
 
 [54]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[55]
-Overfull \hbox (44.82344pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 56 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
-YSIS OF COVARIANCE
- []
-
-[56]
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1766--1766
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1659--1659
 []\TU/lmtt/m/n/10 ## $ sex    <fct> M, F, F, M, F, M, M, M, M, M, M, F, F, F, F
 , F, M, F, M, F, M, ~[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1766--1766
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1659--1659
 []\TU/lmtt/m/n/10 ## $ weight <int> 77, 58, 53, 68, 59, 76, 76, 69, 71, 65, 70,
  166, 51, 64, 52, 65~[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1766--1766
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1659--1659
 []\TU/lmtt/m/n/10 ## $ height <int> 182, 161, 161, 177, 157, 170, 167, 186, 178
 , 171, 175, 57, 161,~[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1766--1766
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1659--1659
 []\TU/lmtt/m/n/10 ## $ repwt  <int> 77, 51, 54, 70, 59, 76, 77, 73, 71, 64, 75,
  56, 52, 64, 57, 66,~[] 
  []
 
 
-Overfull \hbox (85.5pt too wide) in paragraph at lines 1766--1766
+Overfull \hbox (85.5pt too wide) in paragraph at lines 1659--1659
 []\TU/lmtt/m/n/10 ## $ repht  <int> 180, 159, 158, 175, 155, 165, 165, 180, 175
 , 170, 174, 163, 158~[] 
  []
 
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-36
 -1.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37-
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-36-
 1.pdf>
 
 Underfull \vbox (badness 1803) has occurred while \output is active []
 
-[57]
+[55]
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37
+-1.pdf Graphic file (type pdf)
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37-
+1.pdf>
 File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-38
 -1.pdf Graphic file (type pdf)
 <use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-38-
 1.pdf>
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-39
--1.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-39-
-1.pdf>
 
 Overfull \hbox (44.82344pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 58 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
+\TU/lmr/m/n/10 56 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
 YSIS OF COVARIANCE
  []
 
-[58] [59]
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41
+[56] [57]
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-40
 -1.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41-
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-40-
 1.pdf>
 
 Underfull \vbox (badness 2197) has occurred while \output is active []
 
 
 Overfull \hbox (44.82344pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 58 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
+YSIS OF COVARIANCE
+ []
+
+[58]
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41
+-1.pdf Graphic file (type pdf)
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41-
+1.pdf>
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41
+-2.pdf Graphic file (type pdf)
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41-
+2.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[59]
+Overfull \hbox (44.82344pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 60 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
 YSIS OF COVARIANCE
  []
 
 [60]
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42
--1.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42-
-1.pdf>
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42
--2.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42-
-2.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[61]
-Overfull \hbox (44.82344pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 62 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
-YSIS OF COVARIANCE
- []
-
-[62]
 File: images/ANCOVA_1.png Graphic file (type bmp)
 <images/ANCOVA_1.png>
 
-Overfull \hbox (436.89824pt too wide) in paragraph at lines 1985--1986
+Overfull \hbox (436.89824pt too wide) in paragraph at lines 1878--1879
 [][] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[63]
+[61]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
+Overfull \hbox (44.82344pt too wide) has occurred while \output is active
+\TU/lmr/m/n/10 62 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
+YSIS OF COVARIANCE
+ []
+
+[62] [63]
 Overfull \hbox (44.82344pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 64 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
 YSIS OF COVARIANCE
  []
 
-[64] [65]
+[64]
+File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-46
+-1.pdf Graphic file (type pdf)
+<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-46-
+1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[65]
 Overfull \hbox (44.82344pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 66 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
 YSIS OF COVARIANCE
  []
 
-[66]
-File: Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-47
--1.pdf Graphic file (type pdf)
-<use Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-47-
-1.pdf>
+[66] [67]
+File: images/GSwithR_Grid.png Graphic file (type bmp)
+<images/GSwithR_Grid.png>
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Overfull \hbox (364.1255pt too wide) in paragraph at lines 2120--2120
+[][] 
+ []
 
-[67]
+
+LaTeX Warning: Float too large for page by 24.1114pt on input line 2121.
+
+
 Overfull \hbox (44.82344pt too wide) has occurred while \output is active
 \TU/lmr/m/n/10 68 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
 YSIS OF COVARIANCE
  []
 
 [68] [69]
-File: images/GSwithR_Grid.png Graphic file (type bmp)
-<images/GSwithR_Grid.png>
-
-Overfull \hbox (364.1255pt too wide) in paragraph at lines 2227--2227
-[][] 
+Underfull \hbox (badness 3229) in paragraph at lines 2171--2173
+[]\TU/lmr/m/n/10 Have crossed terms \TU/lmtt/m/n/10 weight ~ sex * height \TU/l
+mr/m/n/10 which is \TU/lmtt/m/n/10 weight ~ sex +
  []
-
-
-LaTeX Warning: Float too large for page by 24.1114pt on input line 2228.
 
 
 Overfull \hbox (44.82344pt too wide) has occurred while \output is active
@@ -1197,26 +1199,14 @@ Overfull \hbox (44.82344pt too wide) has occurred while \output is active
 YSIS OF COVARIANCE
  []
 
-[70] [71]
-Underfull \hbox (badness 3229) in paragraph at lines 2278--2280
-[]\TU/lmr/m/n/10 Have crossed terms \TU/lmtt/m/n/10 weight ~ sex * height \TU/l
-mr/m/n/10 which is \TU/lmtt/m/n/10 weight ~ sex +
- []
-
-
-Overfull \hbox (44.82344pt too wide) has occurred while \output is active
-\TU/lmr/m/n/10 72 \TU/lmr/m/sl/10 CHAPTER 7.  INTRODUCING THE ANCOVA - THE ANAL
-YSIS OF COVARIANCE
- []
-
-[72] (./Experimental-Design,-ANOVA-and-ANCOVA.aux) ) 
+[70] (./Experimental-Design,-ANOVA-and-ANCOVA.aux) ) 
 Here is how much of TeX's memory you used:
  19576 strings out of 476179
- 369233 string characters out of 5809543
- 836129 words of memory out of 5000000
+ 369370 string characters out of 5809543
+ 836274 words of memory out of 5000000
  40016 multiletter control sequences out of 15000+600000
  475734 words of font info for 84 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 86i,6n,121p,1034b,504s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 86i,6n,121p,1080b,504s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Experimental-Design,-ANOVA-and-ANCOVA.pdf (72 pages).
+Output written on Experimental-Design,-ANOVA-and-ANCOVA.pdf (70 pages).
