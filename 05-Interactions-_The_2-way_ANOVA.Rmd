@@ -1,4 +1,4 @@
-# Designs for testing for interactions: factorial designs.
+# Designs for testing for interactions: the two-way ANOVA and factorial designs.
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -12,6 +12,8 @@ library(patchwork)
 
 ## Introducing Interactions
 
+In the previous sections, and the 1-way ANOVA module in week 7, we have focused on a single explanatory variable.  In week 7, it was the `parasite` factor.  In the previous chapters focusing on yield, it was the `herbicide` treatment.  In these cases, the question we are asking is about a single, main effect.   However, there are many cases where we design experiments that might have two variables.  For example, we may be interesting in the effect of `parasite` on growth but also whether this effect varies by the amount of food available.  Or we might be interested in the yeild of a crop as a function of the herbicide, but also of soil water content.  Or we might be interested in the rate of cell division as a function of a growth hormon, but also of whether this varies by the presence of a calcium blocker.  In all of these cases we are asking a question about whether the effect of one treatment varies by the level of another.  Thus, our question here is about an *interaction*.
+
 Before jumping into an example, let's introduce a simple statement that forms the core of both asking and interpreting _interactions_.
 
 If there is an interaction between two explanatory variables, X and Z, on our response variable Y, then:
@@ -20,7 +22,7 @@ If there is an interaction between two explanatory variables, X and Z, on our re
 
 This use of _varies by_ __OR__ _depends on_ defines context dependency and that's what defines interactions.
 
-Now, let's return to our CO2 and UV-B solar radiation experiment in the Arctic Tundra example to introduce the idea of an interaction again.  
+### An Example with CO2 and UV-B solar radiation impact on plant growth in the artic.
 
 Context: an arctic tundra study 
 Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
@@ -28,14 +30,21 @@ Increasing atmospheric CO2 (+CO2) from anthropogenic emissions
 For plants: UV-B potentially harmful, +CO2 potentially beneficial
 Therefore +CO2 could alleviate UV-B damage impacts.
 
-Hypotheses
+_Hypothesis_
+
+The effect of UV-B radiation on growth will depend on levels of CO2
+
+_Predictions_:
+
 +UV-B radiation will reduce the growth of arctic plants
 +CO2 will increase the growth of arctic plants
 +UV-B radiation impacts will be less under +CO2
 
-What is unique about these context and hypotheses?  It's the presentation of CO2 and UVB in the same statement and the use of words like "the effect of X will alleviate the impacts of Y" and words like "the effects of X will be less under Y".  These words and phrases reflect the context dependency of the effects of treatment levels.
+What is unique about this context, hypothesis, and predictions?  
 
-Thus, to restate what we introduced above.... when we talk about interactions, we can rely on a very simple vocabulary that is independent of the actual treatment levels: we can always describe an interaction like this:
+It's the presentation of CO2 and UVB in the same statement and the use of words like "the effect of X will alleviate the impacts of Y" and words like "the effects of X will be less under Y".  These words and phrases reflect the _context dependency_ of the effects of treatment levels.
+
+Thus, to restate what we introduced above.... when we talk about *interactions*, we can rely on a very simple vocabulary that is independent of the actual treatment levels: we can always describe an interaction like this:
 
 > The effect of X on Y depends on Z.
 
@@ -53,89 +62,65 @@ OR
 
 This simple phrasing describes any interaction.
 
-Here are some numerical examples to drive home the point.
+#### Numerical example for emphasis
+
+Let's imagine the following situation.  The folowing three numbers are what we call *Main Effects*:
 
 Control = 20g Yield
 UV-B = 10g Yield
 C02 = 29g Yield
 
+These numbers allow us to calculate the *Additive Effect*, where the effect of both CO2 and UV-B is simply estimated by adding the two independent effects together:
+
 ADDITIVE RESULT: C02 + UV-B = 39g Yield
+
+However, this additive outcome may not be what happens.  Imagine if there were Synergy - the effects are more than the sum of the independent effects - or Antagonism - the effects are less than expected because one offsets the other.
+
 SYNERGISTIC RESULT: C02 + UV-B = 60g Yield
 ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield
 
-###  Let's design an experiment, again... 
+#### The Factorial Design: Why Study Interactions?
 
-Your resources:
-
-The arctic research station has given permission for 16 plots (each 2m x 2m) in the natural vegetation nearby.
-- One UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)
-- One CO2 plot (2m x 2m) costs £6000 (this provides a CO2 release system, CO2 control and covers CO2 purchase costs, wooden walkways around the plots)
-- One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)
-- Yes, the CO2 supply system does fit underneath the UV-B lamps.
-
-You have a budget of £86,000
-
-Design an experiment to test the hypotheses. (An answer is on the BB Site)
-
-
-### The Factorial Design: How and Why Study Interactions?  
-
-The UV-B and C02 experiment could be thought of as two experiments -- a Control vs UV-B and a Control vs C02 experiment. If we combine these we get a Factorial Experiment where the treatments are
+The UV-B and C02 experiment could be thought of as two experiments -- a Control vs UV-B and a Control vs C02 experiment. If we combine these we get a Factorial Experiment where we can actually estimate whether there is an interaction, and whether it is synergy or antagonism.  In the factorial design for this example, there are four treatment levels and all combinations of all treatments.
 
 - Control
 - UV-B
 - C02
 - UV-B + C02
 
-So we have all combinations of treatments.
+Some of you may be thinking that we could simply treat each of these treatment levels indepdently, as unique treatments levels - e.g. the one-way ANOVA.  But we don't.  We design and analyse the data we collect in a two-way analysis - a factorial design.  Two-way ANOVA is the design
 
-But do we treat each of these as unique treatments (e.g. the one-way ANOVA example)?  No, we don't.  We design and analyse the data we collect in a two-way analysis - a factorial design.  Two-way ANOVA (and ANCOVA - see later), are the toolboxes.
+Factorial treatments have two main advantages over the 1-way approach.  
 
-Factorial treatments have two main advantages.  When factors *DO interact* – so the effect of C02 depends on UV-B – then we can estimate the interaction - the dependency. _One-way designs_ cannot do this, and can lead to serious misunderstandings (because we are assuming that the effect of one thing DOES NOT depend on the other).
+When factors *DO interact* – so the effect of C02 depends on UV-B – then we can estimate the interaction - the dependency. _One-way designs_ cannot do this, and can lead to serious misunderstandings (because we are assuming that the effect of one thing DOES NOT depend on the other).
 
 Furthermore, when factors *DON’T interact*, _factorial designs_ are more precise (smaller error variance) at estimating the main (non-interacting effects) than one-way designs experiments.
 
-Hence ALWAYS use factorial designs when your experimental design contains the interaction! 
+Hence ALWAYS use factorial designs when your experimental design contains the interaction (when you are asking the question that includes the word(s) _depends_ or _varies by_! 
 
 ## A Factorial Design and the Two-Way ANOVA
 
-I'd recommend a new script now for this section.  It's a pretty distinct example.  Don't forget to use library() at the top to get all those packages working for this script.  And don't forget, this script can live in the same R Project as the other one(s).
+The following dataset `plantYield_factorial` contains two observation columns - `yield_ind` are data where there is NO INTERACTION.  `yield_int` are data where there are an interaction.  We will use both of these to showcase how to work the 2-way ANOVA and the analysis of a factorial design.
 
-```{r}
+We note that these data have replication and randomisation.  There are _four_ replicate plants/plots allocated randomly to each of the four treatment combinations.
+
+```{r, echo = FALSE}
 set.seed(123)
 
 Nreps <- 4 # 4 replicates per treatment level
 trt <- c(2,2) # sets out the 2-way design
-design <- design.ab(trt, r=Nreps, serie=0, design="crd")$book
+design3 <- design.ab(trt, r=Nreps, serie=0, design="crd")$book
 
 # look at it.
-head(design)
-```
+# head(design)
 
-So, the `design.ab` function generates a nice picture, but uses numbers instead of words for the various treatments and has set Letters as the treatments.  
-
-We don't support this approach of using numbers to _code for_ the actual treatment level names - you WILL forget what the numbers and letters mean. So let's change these _codes_ to represent the words "CO2" and "UVB" which are our reality.  
-
-We'll use `fct_recode` from the tidyverse package called `forcats` (for categories, but we like cats) - this is part of the tidyverse, so if you're using that, it's just there! 
-
-```{r}
-design <- design %>%
+design3 <- design3 %>%
   rename(UVB = A, CO2 = B) %>% 
   mutate(UVB = fct_recode(UVB, "Con" = "1", "UVB+" = "2"),
          CO2 = fct_recode(CO2, "Con" = "1","CO2+" = "2"))
 
-head(design, 10) # is this what you expect
-```
+#head(design, 10) # is this what you expect
 
->NOTE 1: this is using the `fct_recode` function from the _forcats_ package in the _tidyverse_ collection.
-
->NOTE 2: we used the design = "crd" argument to specify a completely randomised, 2-way factorial design... you could make this a block design with the "rcbd".... see the help file for `design.ab`
-
-### Build the Data
-
-Here we will build two sources of data - one that has NO INTERACTION, and one that DOES.
-
-```{r}
 #Sample Sizes and errors
 Total.units <- 2 * 2 * Nreps # make sure you understand the 2*2 !!
 error <- rnorm(Total.units,0,3)
@@ -143,56 +128,63 @@ error <- rnorm(Total.units,0,3)
 # Here we make to sets of observations - obs and obs2
 
 # the data with no interaction (obs)
-design$obs <- 20 - 
-  (design$"UVB"=="UVB+") * 10 + 
-  (design$"CO2" == "CO2+") * 9 + 
+design3$yield_ind <- 20 - 
+  (design3$"UVB"=="UVB+") * 10 + 
+  (design3$"CO2" == "CO2+") * 9 + 
   error
 
 # the data with interaction (obs2)
-design$obs2 <- 20 - 
-  (design$"UVB"=="UVB+") * 10 + 
-  (design$"CO2" == "CO2+") * 9 + 
+design3$yield_int <- 20 - 
+  (design3$"UVB"=="UVB+") * 10 + 
+  (design3$"CO2" == "CO2+") * 9 + 
   # when both are together add 8 more (synergy)
   # this is the interaction.  the effect of UVB now depends on CO2.
-  ((design$"UVB"=="UVB+") & (design$"CO2" == "CO2+")) * 8 +
+  ((design3$"UVB"=="UVB+") & (design3$"CO2" == "CO2+")) * 8 +
   # add the variation
   error
 
-head(design)
+#head(design3$book)
+
+plantYield_factorial <- design3
 ```
 
-### Plot the data!
+Here is the evidence of the factorial design
 
-Here we combine some dplyr magic (calcuating means in each group - there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts. 
+```{r}
+xtabs(~UVB+CO2, data = plantYield_factorial)
+```
+
+
+### Plot the factorial design!
+
+Here we combine some dplyr magic (calculating means in each group - there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts. 
 
 Our goal here is to plot the data that does not have the interaction next to a plot of the data that does have the interaction.
 
-Don't forget to check that you've got all of the `library()` calls at the top of your script, and that you ran them!
-
-```{r, message = FALSE}
+```{r, message = FALSE, echo = FALSE}
 
 # No interaction summary
-sumDat1 <- design %>% 
+sumDat1 <- plantYield_factorial %>% 
   group_by(UVB, CO2) %>% 
   summarise(
-    obs = mean(obs)
+    yield_ind = mean(yield_ind)
   )
 
 # with interaction summary
-sumDat2 <- design %>% 
+sumDat2 <- plantYield_factorial %>% 
   group_by(UVB, CO2) %>% 
   summarise(
-    obs2 = mean(obs2)
+    yield_int = mean(yield_int)
   )
 
 # The two plots.
 # no interaction
-p1 <- ggplot(design, aes(x = UVB, y = obs, colour = CO2, shape = CO2, group = CO2))+
+p1 <- ggplot(plantYield_factorial, aes(x = UVB, y = yield_ind, colour = CO2, shape = CO2, group = CO2))+
   geom_point()+
   geom_line(data = sumDat1)
 
 # with interaction
-p2 <- ggplot(design, aes(x = UVB, y = obs2, colour = CO2, shape = CO2, group = CO2))+
+p2 <- ggplot(plantYield_factorial, aes(x = UVB, y = yield_int, colour = CO2, shape = CO2, group = CO2))+
   geom_point()+
   geom_line(data = sumDat2)
 
@@ -200,41 +192,53 @@ p2 <- ggplot(design, aes(x = UVB, y = obs2, colour = CO2, shape = CO2, group = C
 p1+p2
 ```
 
-What you see above on the left, is a pattern that suggest that the effect of ______ on ________ does not vary by ________. In contrast, on the right the pattern suggests that the effect of ______ on ________ ________ by ________: 
+Given what you've read above, you should be able to fill in these blanks:
 
-### Analyse the data
+What you see above on the left, is a pattern that suggest that the effect of ______ on ________ does not vary by ________. 
+
+In contrast, on the right the pattern suggests that the effect of ______ on ________ ________ by ________: 
+
+### How to analyse and interpret the factorial design
 
 As with the plotting, we now analyse each data set.  
-We also make a mistake of analysing the data that has an interaction with a model that does not specify this interaction.  This mod3 is incorrect, but fitting it helps illuminate why you should fit the interaction if your design contains the potential for an interaction (a factorial design).
+
+We also make a mistake of analysing the data that has an interaction with a model that does not specify this interaction.  
+
+We are thus making three models.  A model of the no interaction data without specifying and interaction, a model of the interaction data without specifying and interaction and a model of the interaction data with and interaction specified.  This second model is incorrect, but fitting it helps illuminate why you should fit the interaction if your design contains the potential for an interaction (a factorial design).
 
 ```{r}
-# model with no interaction
-int_mod_1 <- lm(obs ~ CO2*UVB, data = design)
+# A Correct model with no interaction on data with no interaction
+int_mod_1 <- lm(yield_ind ~ CO2 + UVB, data = plantYield_factorial)
 
-# model with interaction
-int_mod_2 <- lm(obs2 ~ CO2*UVB, data = design)
+# A Correct model with interaction where the should be an interaction
+int_mod_2 <- lm(yield_int ~ CO2 * UVB, data = plantYield_factorial)
 
-# model with interaction, but specified incorrectly.
-int_mod_3 <- lm(obs2 ~ CO2 + UVB, data = design)
+# THE WRONG MODEL: model without interaction, on data that should use the interaction
+int_mod_3 <- lm(yield_int ~ CO2 + UVB, data = plantYield_factorial)
 
-anova(int_mod_1)
-anova(int_mod_2)
-anova(int_mod_3)
+anova(int_mod_1) # Good model, no interaction in the data and none in the model
+anova(int_mod_2) # Good model, interaction in the data and interaction in the model
+anova(int_mod_3) # Bad model, interaction in the data, but failure to specify in the model
 ```
 
-Note the differences in the outputs.  Note what we infer if we model the interaction data incorrectly.  There is no free lunch.  You must understand your data and your question and you must fit the model that correctly matches your design!
+Let's focus on model 2 and how we interpret this.  The ANOVA table now has multiple rows.  We saw this before with the block design.  The important thing to note here is that the table is now read _sequentially_.  We first note that CO2 explains $507.19$ units of variation (Mean Sq) in plant Yield.  Having captured this variation, we then note that UVB captures $216.29$ additional units.  Then, having capture the variation caused directly by CO2 and UVB, we now see that the interaction - asking whether the effect of CO2 varies by UVB - explains an additional $127.72$ units.  And... there are $11.11$ units of unexplained variation.
 
+Great.  So, remember as well how we calculate the F-value.  In the ANOVA (categorial variable) framework, the F-value is the ratio of variance explained by the factor relative to the residual variation.  So that's where the F values come from.... And recall that BIG F-values indicate that more variation is allocated to the treatment levels, versus what's left over.  The bigger the numerator value relative to the residual denominator, the more variation this term has explained.  
 
-### final figuring
+In this experimental design, and any like it, one must remember that there is actually a single question, and it does not related to the independent main effects.It relates only to the interaction term: we designed this experiment to test the hypothesis that the effect of CO2 on yield varies by UVB.  There is only a single choice of answer - yes or no.  In this case, having captured variation with each independent effect, there is still a large amount of variation captured by 'allowing' the effects of each to vary by the other.  Under a null hypothesis that these two variables to not interact (do not depend on each other), getting a Mean square estimate of $127.72$ relative to the residual of $11.11$ is very unlikely. So we reject the null!
 
-Don't forget that the correct standard error for the 'result' is the residuals mean squared.  You can use the dplyr+ggplot2 method, or visreg.
+Spend some time investigating what has happened with model 2 and model 3 and recall that ONLY ONE OF THEM IS CORRECT, regardless of whether the data look like the left or right panel above. Note the differences in the outputs.  Note what we infer if we model the interaction data incorrectly.  
 
-Here we use visreg and put the figure next to our original ggplot for the interaction data.
+There is no free lunch.  
 
-We plot the correct model for the interaction data.
+You must understand your data and your question and you must fit the model that correctly matches your design!  In this case, there really is only one model you should fit.  It is model 2.  EVEN if the data look like the left panel, with no interaction, this experiment was designed to test the hypothesis that the effect of CO2 varies by UVB.  You can only accept or reject the null hypothesis of no interaction by fitting model 2.  You can not guess the right model from the picture.  The design dictates the model.  But, you can guess the answer....
+
+### visreg and the 2-way ANOVA
+
+Don't forget that the correct standard error for the 'result' is the residuals mean squared.  You can use the dplyr + ggplot2 method, or visreg to estimate these.  Here we use visreg and put the figure next to our original ggplot for the interaction data.  Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and quesion (model 2).
 
 ```{r}
-p3 <- visreg(int_mod_2,"CO2",by="UVB",gg=TRUE) +
+p3 <- visreg(int_mod_2,"CO2",by="UVB", gg=TRUE) +
   theme_classic()
 
 p2+p3
