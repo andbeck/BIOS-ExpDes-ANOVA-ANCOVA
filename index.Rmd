@@ -40,7 +40,7 @@ Before we get started, it's vital that you understand that there are some very b
 - **Replication**: the repetition of a treatment within an experiment, to quantify the natural variation between experimental units and increase accuracy of estimated effects.
 - **Reduce noise:** by controlling as much as possible the conditions in the experiment, e.g. by grouping of similar experimental units in blocks.
 
-As we develop our understanding of experimental design, you should come back to these core definitions and see if your understanding of them has improved.  We work on these concepts in the next chapter of the book.
+At this point, you may want to revisit, again, the following section of the APS 240 book [on Randomisation](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#randomisation)
 
 ## The General Linear Model
 

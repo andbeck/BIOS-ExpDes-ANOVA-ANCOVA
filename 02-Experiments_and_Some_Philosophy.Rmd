@@ -40,6 +40,12 @@ An experiment has _treatments, experimental units, responses, and a method to as
 
 Not all experimental designs are created equal. A good experimental design must adhere to the 3Rs. It should reveal consistency, responsiveness and mechanism.  The way this happens is by avoiding systematic error in measuring things, and allow estimation of error in measurements with precision.  
 
+## The holy grail of a control
+
+At this point, it would be good to revisit the APS 240 sections [on controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#experimental-control) and [procedural controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#EXPT-DESIGN-PROCEDURAL-CONTROLS)
+
+## So what does a good experimental design do?
+
 In short, a good experimental design must:
 
 - Avoid systematic error
@@ -79,11 +85,15 @@ This is despite the fact that we know that Yorkshire will be better.... (that's 
 
 A common source of difficulty in designing experiments is the distinction between experimental units and measurement units.  We need to know the experimental units, as this is the key value used to generate our inference. 
 
+Now is a good time to re-look at the short section on [Jargon Busting](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#jargon-busting) from the APS 240 book.
+
+### Experimental and measurement units: an example
+
 Consider an educational study, with six classrooms of 25 pupils. Each classroom of students is then assigned, at random, to one of two different reading programmes.  
 
 At the end of a six-week term, all the students are evaluated via a common reading exam.
 
-### The challenge question
+#### The challenge question
 
 > Are there six experimental units (the classrooms) or 150 (25*6; the students)?  We measured the reading ability of the students... but they were in classroom sets of 25....
 
@@ -101,6 +111,9 @@ However, you are right - we don’t _measure_ how a classroom reads; we measure 
 
 Confusing these two things can lead to **pseudo-replication**. Treating measurement units as experimental usually leads to overoptimistic analysis — we will reject null hypotheses more often than we should, and our confidence intervals will be too narrow. The usual way around this is to determine a single response for each experimental unit. 
 
+There is additional information on [Independence and Pseudoreplication](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#independence) in the the APS 240 book.
+
+#### Independence: and example
 Consider an experiment with two growth chambers each containing 100 plants. One of the chambers received enhanced C02. One night after collecting data you leave the door open on the C02 chamber and the temperature drops and so the plants grow more slowly. When you come to analyze the data you get a highly significant effect of slow growth.  However, that C02 results in reduced plant growth not what you expect (CO2 is good for photosynthesis...). 
 
 This is an entirely plausible outcome caused by misallocating plants as the experimental unit - it was really the CO2 chamber... to avoid such problems, one needs many chambers.
@@ -111,7 +124,7 @@ Consider a second experiment where you have 200 growth chambers and randomly all
 
 Proper **randomization** and **replication** is very different from **pseudo-replication**.
 
-### Randomization properly with Replication protects against Confounding
+### Randomization with Replication protects against Confounding
 
 An experiment is properly randomized if the method for assigning treatments to units involves a known, well-understood probabilistic scheme. The probabilistic scheme is called a randomization.
 
