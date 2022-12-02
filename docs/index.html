@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Introduction | An Introduction to Experimental Design ANOVA and ANCOVA</title>
+<meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
+<meta name="description" content="This is an introduction to Experimental Design, ANOVA and ANCOVA analyses.">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Introduction | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This is an introduction to Experimental Design, ANOVA and ANCOVA analyses.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Introduction | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta name="twitter:description" content="This is an introduction to Experimental Design, ANOVA and ANCOVA analyses.">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">An Introduction to Experimental Design ANOVA and ANCOVA</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></li>
+<li><a class="" href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></li>
+<li><a class="" href="examples-and-challenge-questions.html"><span class="header-section-number">4</span> Examples and Challenge Questions</a></li>
+<li><a class="" href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></li>
+<li><a class="" href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></li>
+<li><a class="" href="introducing-the-ancova---the-analysis-of-covariance.html"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="introduction" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Introduction<a class="anchor" aria-label="anchor" href="#introduction"><i class="fas fa-link"></i></a>
+</h1>
+<p>Welcome to An Introduction to Experimental Design ANOVA and ANCOVA</p>
+<p>In this mini-module, you’ll be learning about the principles of experimental design and analysis of a few classic designes, the 2x2 ANOVA and ANCOVA experiments.</p>
+<p>This module is compulsory for all, because it forms the foundation for most of the more complex experiments you will do as a researcher. And it is the major step beyond the t-test, 1-way ANOVA, simple regression and chi-square contingency table analyses we’ve covered thus far.</p>
+<p>The learning outcome for this mini-module are that you will understand the basic ideas about</p>
+<ul>
+<li>Replication, Randomisation and Reducing Noise</li>
+<li>Precision, Bias and Systematic Error</li>
+<li>The Completely Randomised Design</li>
+<li>The Randomised Block Design</li>
+<li>The 2-way ANOVA</li>
+<li>The ANCOVA Design</li>
+</ul>
+<p>In order to be successful with this final section of the course, you need to feel comfortable with the 1-way ANOVA and the Regression model. Please review these concepts. You can also refer to Chapter 5 and 6 in Getting Started with R (available as an online Resource via STARPlus) which covers a great deal of the mechanics of using R to do these types of models. Finally, you will also need to feel comfortable with dplyr and ggplot - we’ll be reinforcing the old stuff and introducing a few new tricks.</p>
+<div id="the-three-rs-the-foundation-of-experimental-design." class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> The Three Rs: The Foundation of Experimental Design.<a class="anchor" aria-label="anchor" href="#the-three-rs-the-foundation-of-experimental-design."><i class="fas fa-link"></i></a>
+</h2>
+<p>Before we get started, it’s vital that you understand that there are some very basic principles needed to ensure that your experiments can provide robust and reliable inference (answers to your questions). The “3 R’s”.</p>
+<ul>
+<li>
+<strong>Randomisation</strong>: the random allocation of treatments to the experimental units, to avoid confounding between treatment effects and other unknown effects.</li>
+<li>
+<strong>Replication</strong>: the repetition of a treatment within an experiment, to quantify the natural variation between experimental units and increase accuracy of estimated effects.</li>
+<li>
+<strong>Reduce noise:</strong> by controlling as much as possible the conditions in the experiment, e.g. by grouping of similar experimental units in blocks.</li>
+</ul>
+<p>At this point, you may want to revisit, again, the following section of the APS 240 book <a href="https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#randomisation">on Randomisation</a></p>
+</div>
+<div id="the-general-linear-model" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> The General Linear Model<a class="anchor" aria-label="anchor" href="#the-general-linear-model"><i class="fas fa-link"></i></a>
+</h2>
+<p>This section of the course is focused on a class of model called the General Linear Model. It is not a <strong>GLM</strong>. The <strong>GLM</strong> is a generalised linear model. I know, right?</p>
+<p>The general linear model is, as we learned in the past few weeks, a model fit in R with the <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> function. It includes regression, ANOVA, ANCOVA and variations of these.</p>
+<p>There are a few key characteristics to remember about these models. The general linear model has the following form:</p>
+<p><span class="math inline">\(y = \beta_{0}+\beta_{1}*X_{1}+\beta_{2}*X_{2}+\epsilon\)</span></p>
+<p>Where the <span class="math inline">\(y\)</span> is the response variable, the <span class="math inline">\(\beta\)</span>’s are estimated parameters, the <span class="math inline">\(X\)</span>’s are the predictor variables and the <span class="math inline">\(\epsilon\)</span> comes from a Gaussian distribution with zero mean and constant variance.</p>
+<p>Let’s decompose that a bit more.</p>
+<p>There are two types of predictor variable:</p>
+<p><em>Metric</em> predictor variables are measurements of some quantity that may help to predict the value of the response. For example, if the response is the blood pressure of patients in a clinical trial, then age, fat mass and height are potential metric predictor variables. You may know these as <strong>continuous explanatory (independent) variables</strong></p>
+<p><em>Factor</em> variables are labels that serve to categorize the response measurements into groups, which may have different expected values. Continuing the blood pressure example, factor variables might be sex and drug treatment received (drug A, drug B or placebo, for example). You may also know these as <strong>categorical explanatory (independent) variables</strong>.</p>
+<p>So, you hopefully can see how this <em>general</em> linear model is capable of representing</p>
+<ol style="list-style-type: decimal">
+<li>
+<em>ANOVA</em> – Analysis of variance -&gt; Predictors are factors.</li>
+<li>
+<em>Regression</em> -&gt; Predictor is a metric variable (continuous variable).<br>
+</li>
+<li>
+<em>Multiple regression</em> -&gt; Predictors are metric variables (continuous variables).</li>
+<li>
+<em>ANCOVA</em> - Analysis of co-variance -&gt; Predictors are a mixture of metric variables (continuous variables) and factors.</li>
+</ol>
+<p>Finally, it is important to understand that non-linear relationships such as these data below can be modelled with a linear model:</p>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-2-1.png" width="672"></div>
+<p>How, you ask!? Well…. consider this equation:</p>
+<p><span class="math inline">\(y = 0.01 + x + x^{2} + \epsilon\)</span></p>
+<p>Referring to our generic model structure above,</p>
+<p><span class="math inline">\(y = \beta_{0}+\beta_{1}*X_{1}+\beta_{2}*X_{2}+\epsilon\)</span></p>
+<p>we hopefully can see that <span class="math inline">\(\beta_{0} = 0.01\)</span>, <span class="math inline">\(\beta_{1} = 0\)</span> and <span class="math inline">\(\beta_{2} = 1\)</span>, where <span class="math inline">\(X_{2} = X^{2}\)</span>!</p>
+<p>Linear models are perfectly capable of being used to estimate non-linear relationships!</p>
+<p>Here is the code to make that figure.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># set x range</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">100</span><span class="op">:</span><span class="fl">100</span></span>
+<span><span class="co"># define y without error</span></span>
+<span><span class="va">y_det</span> <span class="op">&lt;-</span> <span class="fl">0.01</span><span class="op">+</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="co"># add some random variation</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">y_det</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,<span class="fl">0</span>,<span class="fl">1000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># create dataframe and plot</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">df</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="nav-link" href="#the-three-rs-the-foundation-of-experimental-design."><span class="header-section-number">1.1</span> The Three Rs: The Foundation of Experimental Design.</a></li>
+<li><a class="nav-link" href="#the-general-linear-model"><span class="header-section-number">1.2</span> The General Linear Model</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

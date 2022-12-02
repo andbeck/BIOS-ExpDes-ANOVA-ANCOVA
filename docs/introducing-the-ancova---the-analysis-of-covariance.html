@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Introducing the ANCOVA - the analysis of covariance | An Introduction to Experimental Design ANOVA and ANCOVA</title>
+<meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
+<meta name="description" content="In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Introducing the ANCOVA - the analysis of covariance | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Introducing the ANCOVA - the analysis of covariance | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta name="twitter:description" content="In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">An Introduction to Experimental Design ANOVA and ANCOVA</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></li>
+<li><a class="" href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></li>
+<li><a class="" href="examples-and-challenge-questions.html"><span class="header-section-number">4</span> Examples and Challenge Questions</a></li>
+<li><a class="" href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></li>
+<li><a class="" href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></li>
+<li><a class="active" href="introducing-the-ancova---the-analysis-of-covariance.html"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="introducing-the-ancova---the-analysis-of-covariance" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance<a class="anchor" aria-label="anchor" href="#introducing-the-ancova---the-analysis-of-covariance"><i class="fas fa-link"></i></a>
+</h1>
+<p>In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the explanatory variables are categorical (they are factors). This means explanatory variable has distinct, discrete categories or <em>levels</em>.</p>
+<p>In many of our experiments, however, we might combine these categorical variables with a continuous variable. For example, we might estimate eggs produced as a function of body size and season or we might estimate the effect on plant growth rates of soil moisture in high versus low Nitrogen (N) conditions.</p>
+<p>These simple examples describe an ANCOVA, where the one explanatory variable is continuous (e.g. body size or soil moisture) and the other is categorical (e.g. season or N-level). When this is the case, we are essentially combining the ANOVA with the Regression. If we recall that regression is largely about estimatinge slopes and intercepts, we might think, hey, COOL, so in an ANCOVA, we can ask if the categorical variable alters the slope or not…..</p>
+<p>What’s very important to understand is that our core statement about interactions does not change.</p>
+<blockquote>
+<p>The effect of X on Y varies by Z, translates to a) The effect of body size on egg production varies by season; or b) the effect of soil moisture on growth rate varies by N-level</p>
+</blockquote>
+<p>When written like this, the previous statements about slopes should be even more clear. The effect of body size (continuous) on egg production is a regression and we estimate a slope. We then can ask whether this slope is different between seasons.</p>
+<div id="setting-up-the-various-ideas." class="section level2" number="7.1">
+<h2>
+<span class="header-section-number">7.1</span> Setting up the various ideas.<a class="anchor" aria-label="anchor" href="#setting-up-the-various-ideas."><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s start by looking at an example where the effect of Height on Weight varies by Sex. This is a classic set of data from numerous organisms…. it captures biologically the question about sexual dimorphism - does the relationship between Height and Weight (a regression) vary by Sex (ANOVA)?</p>
+<p>This relationship can take on many patterns.</p>
+<div class="inline-figure"><img src="images/ANCOVA_1.png" width="644"></div>
+<ul>
+<li>In the upper left we see a pattern where Males are heavier than Females, but there is no effect of Height on Weight.</li>
+<li>In the upper right, we see that there is a positive relationship between Weight and Height, but no differences between Males and Females.</li>
+<li>In the lower left, we might argue that there is a positive relationship between Weight and Height, that the relationship between Weight and Height does not vary (the slope is the same) and that Males are heavier (the red dots are mostly above the blue)</li>
+<li>In the lower right, we see evidence of an interaction - the effect of Height on Weight (the slopes), varies by Sex.</li>
+</ul>
+<p>It’s quite important to recognise that each of patterns is possible outcome to testing the SAMEa hypothesis. The key thing to remember is that we have an a priori (in advance hypothesis). Regardless of the pattern, we should specify the appropriate model to test your the hypothesis and answer the question that motivated the design of the experiment and data collection.</p>
+<p>For example, in these data, we fundamentally start with the question - does the effect of Height on Weight vary by Sex. The data might look like any of the above patterns. But as we started with that, we have to try and answer that question. And there is only one model syntax in the above figure that does this: <code>Weight ~ Height * Sex</code>. We’ll expand on what this means as we work through the example.</p>
+</div>
+<div id="working-through-and-example." class="section level2" number="7.2">
+<h2>
+<span class="header-section-number">7.2</span> Working through and example.<a class="anchor" aria-label="anchor" href="#working-through-and-example."><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s work with a built in dataset in R - the Davis Study, which is exactly these data. The associated assignment is another example.</p>
+<p>The process of doing this will follow a tried and true approach to analysing data. You should embed this workflow in your head:</p>
+<ol style="list-style-type: decimal">
+<li>PLOT the Data</li>
+<li>Build the model to test the hypothesis</li>
+<li>Check the Assumptions</li>
+<li>Make Inference</li>
+<li>Update the Figure for Publication</li>
+</ol>
+<div id="get-the-data-and-make-your-picture" class="section level3" number="7.2.1">
+<h3>
+<span class="header-section-number">7.2.1</span> Get the data and make your picture<a class="anchor" aria-label="anchor" href="#get-the-data-and-make-your-picture"><i class="fas fa-link"></i></a>
+</h3>
+<p>The data are built into R, but embedded in the <code>carData</code> package, which was installed with the <code>car</code> package.</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Davis</span> <span class="op">&lt;-</span> <span class="fu">carData</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/carData/man/Davis.html">Davis</a></span></span>
+<span></span>
+<span><span class="fu">glimpse</span><span class="op">(</span><span class="va">Davis</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Rows: 200
+## Columns: 5
+## $ sex    &lt;fct&gt; M, F, F, M, F, M, M, M, M, M, M, F, F, F, F, F, M, F, M, F, M, …
+## $ weight &lt;int&gt; 77, 58, 53, 68, 59, 76, 76, 69, 71, 65, 70, 166, 51, 64, 52, 65…
+## $ height &lt;int&gt; 182, 161, 161, 177, 157, 170, 167, 186, 178, 171, 175, 57, 161,…
+## $ repwt  &lt;int&gt; 77, 51, 54, 70, 59, 76, 77, 73, 71, 64, 75, 56, 52, 64, 57, 66,…
+## $ repht  &lt;int&gt; 180, 159, 158, 175, 155, 165, 165, 180, 175, 170, 174, 163, 158…</code></pre>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">Davis</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-36-1.png" width="672"></div>
+<p>Ahh…. first hurdle…. what’s going on here? Well, always plot your data is totally justified, because it looks like one of the data points has the Height and Weight data entered incorrectly.</p>
+<p>Let’s fix that. Lets find the row, and make the change</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#which row? 12</span></span>
+<span><span class="va">Davis</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##    sex weight height repwt repht
+## 12   F    166     57    56   163</code></pre>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># BASE R syntax to see each observation</span></span>
+<span><span class="va">Davis</span><span class="op">$</span><span class="va">weight</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 166</code></pre>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Davis</span><span class="op">$</span><span class="va">height</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span></code></pre></div>
+<pre><code>## [1] 57</code></pre>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># BASE R syntax to change them</span></span>
+<span><span class="va">Davis</span><span class="op">$</span><span class="va">weight</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">57</span></span>
+<span><span class="va">Davis</span><span class="op">$</span><span class="va">height</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">166</span></span>
+<span></span>
+<span><span class="co"># replot</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">Davis</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-37-1.png" width="672"></div>
+<p>Excellent. Lets look at this picture and ask ourselves whether the effect of Height on Weight appears to vary by Sex? What do you think?</p>
+<p>We can actually get a bit of help here. We can use some ggplot magic to help us make this GUESS.
+&gt; NOTE: this is not doing statistics. This is using graphics to help guide our expectation of the outcome of doing the statistical test of our hypothesis.</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">ggplot</span><span class="op">(</span><span class="va">Davis</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="co"># add a best fit line to each group (the sex category)</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-38-1.png" width="672"></div>
+<p>Again, we have not ‘proven’ anything or tested our hypothesis. What we have is a good guess though. We can guess that</p>
+<ol style="list-style-type: decimal">
+<li>Males are heavier than females (what is the difference in the intercepts?)</li>
+<li>The effect of height on weight is positive (the slope(s) are positive, not negative)</li>
+<li>There might be a difference in slopes - the Male line is steeper.</li>
+</ol>
+<p>We might even go as far to estimate by eye the slope assuming that there is no effect of Sex. Recalling that the slope is the rise/run or the change in y over the change in x, we can guess that the slope is ~ (100-40)/(200-140) = (60/60) = 1. We are not expecting much variation around that. But if we see the statistics returning a value 10x more or less than this, we should be concerned!</p>
+</div>
+</div>
+<div id="building-the-model-and-understanding-it" class="section level2" number="7.3">
+<h2>
+<span class="header-section-number">7.3</span> Building the model (and understanding it)<a class="anchor" aria-label="anchor" href="#building-the-model-and-understanding-it"><i class="fas fa-link"></i></a>
+</h2>
+<p>The next step is to build the model to test our hypothesis. As we declared above, the model to test the interaction is <code>lm(weight ~ height * sex, data = Davis)</code>. Let’s discuss this a bit.</p>
+<p>First, this model expands to the following full description:</p>
+<p><code>lm(weight ~ height + sex + height:sex, data = Davis)</code></p>
+<p>This reads as “Weight is a function of the effect of Height (slope), Sex (intercept) and the interaction between Height and Sex (do the slopes vary?). The <code>Height * Sex</code> syntax always expands to this <em>full model</em> - the model containing the main effects and the interaction.</p>
+<p>OK. Let’s fit the model</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># we call the model mod_Davis.</span></span>
+<span><span class="va">mod_Davis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">height</span> <span class="op">+</span> <span class="va">sex</span> <span class="op">+</span> <span class="va">height</span><span class="op">:</span><span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span></code></pre></div>
+<p>That’s it. We’ve got the model. But before we make any attempts at actually evaluating our test of the hypothesis, we have to check the assumptions!</p>
+<p>To do this, we use the autplot function from the ggfortify package.</p>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">autoplot</span><span class="op">(</span><span class="va">mod_Davis</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-40-1.png" width="672"></div>
+<p>OK. Let’s walk through the three core diagnostics.</p>
+<p>In the upper left, we are evaluating the systematic part of the model - are there any systematic departures from the linear model we’ve speficied? Are there interactions missing or specific nonlinearities? Nope.</p>
+<p>In the upper right, we are evaluating the normality of the residuals. These too look pretty good.</p>
+<p>In the lower left, we are evalauting the assumption of a constant mean-variance relationship. Oops.</p>
+<div id="dealing-with-some-issues-with-residuals." class="section level3" number="7.3.1">
+<h3>
+<span class="header-section-number">7.3.1</span> Dealing with some issues with residuals.<a class="anchor" aria-label="anchor" href="#dealing-with-some-issues-with-residuals."><i class="fas fa-link"></i></a>
+</h3>
+<p>The above issue is one we can deal with via a <em>transformation</em>. Let’s start with the facts…. When the variance increases with the mean, one transformation that can work is the logarithm of the continuous variables.</p>
+<p>ADD DYLANS STUFF FROM MEE PAPERS and Mean - VARIANCE</p>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># re-plot with log-log</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span>data <span class="op">=</span> <span class="va">Davis</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_smooth</span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-41-1.png" width="672"></div>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># fit the model - note we can specify the transformation RIGHT IN THE MODEL</span></span>
+<span><span class="va">mod_Davis_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">*</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># check the new residuals</span></span>
+<span><span class="fu">autoplot</span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-41-2.png" width="672"></div>
+<p>This is definitely flatter - you can tell by the range on the y-axis of the scale-location plot.</p>
+<p>So, we can now move to evaluating the model. You are probably thinking about what it means to analyse the data on the log-log axis…. we will come to that shortly.</p>
+</div>
+<div id="making-inference-on-the-ancova" class="section level3" number="7.3.2">
+<h3>
+<span class="header-section-number">7.3.2</span> Making inference on the ANCOVA<a class="anchor" aria-label="anchor" href="#making-inference-on-the-ancova"><i class="fas fa-link"></i></a>
+</h3>
+<p>OK. So, the next step is to use review the ANOVA table - yes, we use the same Anova function to build an anova table to explore the results of an ANCOVA.</p>
+<p>Let’s revisit our initial guesses and work through what the model is telling us:</p>
+<ol style="list-style-type: decimal">
+<li>Males are heavier than females (what is the difference in the intercepts?)</li>
+<li>The effect of height on weight is positive (the slope(s) are positive, not negative)</li>
+<li>There might be a difference in slopes - the Male line is steeper.
+`</li>
+</ol>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: log(weight)
+##                  Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
+## log(height)       1 4.6643  4.6643 357.4735 &lt; 2.2e-16 ***
+## sex               1 0.3446  0.3446  26.4115 6.647e-07 ***
+## log(height):sex   1 0.0144  0.0144   1.1038    0.2947    
+## Residuals       196 2.5574  0.0130                       
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>The table tells us that there is no evidence for an interaction. The last line of this table contains the p-value for the interaction. It is testing the null hypothesis that the slopes are the same. We can not reject this null hypothesis. There is no evidence that allowing the slopes for Males and Females be different is supported. That’s the answer to guess 3 above. It is also the answer to our question: does the effect of Height on Weight vary by Sex. Nope.</p>
+<p>However, we do detect <em>main effects</em> of height and sex. This means that each of these DOES have an effect - but we say the effects are additive.</p>
+<p>Great. What this means is that the data actually conform to picture in the lower left.</p>
+<div class="inline-figure"><img src="images/ANCOVA_1.png" width="644"></div>
+<p>There is a slope associated with Height (we don’t know whether it’s positive or not, but we think it is), and there is an effect of sex (we don’t know whether Males are heavier yet). What we can say, with confidence, is this.</p>
+<blockquote>
+<p>The effect of height on weight did not vary by sex (F = 1.01, df = 1,196, p = 0.29). The effect of sex (F, df, p) and height (F, df, p) are thus additive on Weight.</p>
+</blockquote>
+<p>Another way to read this is the following:</p>
+<p>When we allow for a common slope associated with logHeight, we capture 4.66 units of variation in weight, which when compared to the 0.013 units of variation left over (residual MSE), is alot. The F is thus BIG and the p-value small. When we allow for an effect of Sex to define different average weights, this too is important as it captures 0.344 units of variation in weight, which comparied to the 0.013 units in the residual, is also big (Big F, small P). However, when we allow for the slopes caused by height to vary with sex, this captures very little variation with respect to the residual variation (0.014 comprared to 0.013) hence a small F and a large P.</p>
+</div>
+<div id="the-summary-table-and-making-sense-of-the-log-stuff." class="section level3" number="7.3.3">
+<h3>
+<span class="header-section-number">7.3.3</span> The summary table and making sense of the log stuff.<a class="anchor" aria-label="anchor" href="#the-summary-table-and-making-sense-of-the-log-stuff."><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s start investigating the actual details via the <code>summary</code> table:</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(weight) ~ log(height) * sex, data = Davis)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.29310 -0.06543 -0.00592  0.07420  0.43410 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       -5.3202     1.6016  -3.322  0.00107 ** 
+## log(height)        1.8329     0.3138   5.841 2.13e-08 ***
+## sexM              -2.3724     2.3765  -0.998  0.31936    
+## log(height):sexM   0.4852     0.4618   1.051  0.29473    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1142 on 196 degrees of freedom
+## Multiple R-squared:  0.6626, Adjusted R-squared:  0.6575 
+## F-statistic: 128.3 on 3 and 196 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>This table reports on the <em>treatment contrasts</em> we introduced earlier this semester. Let’s walk through the details.</p>
+<p>The first two rows correspond to one of the sexes. Can you identify which one? The hint is looking at the other rows. They have an M after them. M comes after F. So the first two rows correspond to the intercept and slope of the Females.</p>
+<p>You may be asking why the intercept is a negative number. A simple look back at the range of the x-axis should answer this… the y intercept occurs at x = 0, right?</p>
+<p>You should understand, from the principles of an equation for a line, the following:</p>
+<blockquote>
+<p>the effect of height on weight for females is <code>log(weightF) = -5.31 + 1.82*log(heightF)</code>.</p>
+</blockquote>
+<p>OK… let’s interpret what the next two lines mean. The third line is labelled <code>SexM.</code> The fourth is labelled <code>logHeight:SexM</code>. Any guesses as to which is associated with the slope and which the intercept?</p>
+<p>One trick, again, is to recognise the syntax -&gt; the presence of the <code>:</code> is indicative of the interaction which is the thing that lets slopes vary. So, <code>SexM</code> is about intercepts and <code>logHeight:SexM</code> is about slopes. But what are they?</p>
+<p>Please recall from previous work that treatment contrasts are about DIFFERENCES. Thus, the <code>sexM</code> term is a difference between the female and make intercept and the <code>logHeight:SexM</code> is about the difference between the female and make slopes.</p>
+<p>This allows the following maths….</p>
+<p><code>log(weightF) = -5.31 + 1.82*log(heightF)</code></p>
+<p><code>log(weightM) = (-5.31-2.37) + (1.82+0.48)*(log(heightF))</code></p>
+<p>However, we know that the 0.48 increase in the slope is not siginficant, and as a result, the -2.37 increase in the intercept is also not correct.</p>
+</div>
+<div id="the-equations-supported-by-the-model." class="section level3" number="7.3.4">
+<h3>
+<span class="header-section-number">7.3.4</span> The equations supported by the model.<a class="anchor" aria-label="anchor" href="#the-equations-supported-by-the-model."><i class="fas fa-link"></i></a>
+</h3>
+<p>In order to identify the equations supported by the model, we can refit the model to reflect the ADDITIVE effects only.</p>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod_Davis_log2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">+</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(weight) ~ log(height) + sex, data = Davis)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.28714 -0.06906 -0.00978  0.07615  0.43717 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -6.46349    1.17541  -5.499 1.18e-07 ***
+## log(height)  2.05688    0.23030   8.931 2.99e-16 ***
+## sexM         0.12417    0.02417   5.138 6.66e-07 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1143 on 197 degrees of freedom
+## Multiple R-squared:  0.6607, Adjusted R-squared:  0.6573 
+## F-statistic: 191.8 on 2 and 197 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>Right, now we get our expected pattern:</p>
+<p><code>log(weightF) = -6.46 + 2.05*log(heightF)</code></p>
+<p><code>log(weightM) = (-6.46 + 0.12) + 2.05*log(heightF)</code></p>
+<p>We can see the common slope and the slightly higher average weight (0.12 units!) of males.</p>
+</div>
+<div id="making-even-more-inference-and-drawing-the-picture" class="section level3" number="7.3.5">
+<h3>
+<span class="header-section-number">7.3.5</span> Making even more inference and drawing the picture<a class="anchor" aria-label="anchor" href="#making-even-more-inference-and-drawing-the-picture"><i class="fas fa-link"></i></a>
+</h3>
+<p>OK, lets use some plotting tricks and get a nice picture:</p>
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># first create a data frame to use that combines the raw data </span></span>
+<span><span class="co"># with the predictions from the model</span></span>
+<span><span class="co"># note that the model is the ADDITIVE model, for plotting</span></span>
+<span><span class="va">plotThis</span> <span class="op">&lt;-</span> <span class="va">Davis</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>preds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># now, make lines with the model predictions</span></span>
+<span><span class="co"># and add the points as the raw data</span></span>
+<span><span class="co"># pay attention to where we are using log()!</span></span>
+<span><span class="fu">ggplot</span><span class="op">(</span><span class="va">plotThis</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">preds</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="fu">aes</span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-46-1.png" width="672"></div>
+<p>Great. Now we can see that the full model (mod_Davis_log) told us. The lines are parallel. There is no interaction.</p>
+<p>In fact, we can do a bit more here.</p>
+<p>Remember that the model says</p>
+<p>For women log(weight)= -6.46 + 2.05 * log(height)
+For men log(weight)= (-6.46 + 0.12) + 2.05 * log(height)</p>
+<p>Because we are in log land, we can do some clever maths: We know that</p>
+<p><code>log(weight Female) - log(weight Male) = - 0.12</code></p>
+<p>(this is the treatment contrast for the intercept). We also know (please memorise) that the difference between logs is equal to the log of the ratio:</p>
+<p><code>log(weightF/weightM) = -0.12</code></p>
+<p>Finally, we can convert both sides to non-log by exponentiating:</p>
+<p><code>exp(log(weightF/weightM)) = exp(-0.12) = 0.88</code></p>
+<p>What does this mean? At any given height, female weight is 88% of a makes (12% lower).</p>
+<p>Cool! That’s one of the benefits of log-log linear relationships. The ratio of the categories in log-log land directly translates to a percent difference between the groups.</p>
+<p>It’s also worth noting that the height slope is ~2, which suggests… yes… because we are in log-land, that weight scales with <span class="math inline">\(height^2\)</span>.</p>
+<p>One way to ‘test’ this is to ask whether estimating the log(weight) slope improve the fit of the model compared to fixing it at 2. Here are ways: ‘by hand’ and by a function in the <code>car</code> package.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># by hand</span></span>
+<span><span class="co"># we use the offset function to fix the slope of height at 2</span></span>
+<span><span class="va">mod_Davis_offset</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span>  <span class="va">sex</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/stats/offset.html">offset</a></span><span class="op">(</span><span class="fl">2</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span><span class="op">)</span>, data<span class="op">=</span><span class="va">Davis</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># then compare it to the model where we estimate it freely.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span>, <span class="va">mod_Davis_offset</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: log(weight) ~ log(height) + sex
+## Model 2: log(weight) ~ sex + offset(2 * log(height))
+##   Res.Df    RSS Df  Sum of Sq     F Pr(&gt;F)
+## 1    197 2.5718                           
+## 2    198 2.5726 -1 -0.0007962 0.061 0.8052</code></pre>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># by car package</span></span>
+<span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/linearHypothesis.html">linearHypothesis</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span>, <span class="st">"log(height) = 2"</span><span class="op">)</span> <span class="co"># the estimate IS 2</span></span></code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## log(height) = 2
+## 
+## Model 1: restricted model
+## Model 2: log(weight) ~ log(height) + sex
+## 
+##   Res.Df    RSS Df Sum of Sq     F Pr(&gt;F)
+## 1    198 2.5726                          
+## 2    197 2.5718  1 0.0007962 0.061 0.8052</code></pre>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">car</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/car/man/linearHypothesis.html">linearHypothesis</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span>, <span class="st">"log(height) = 0"</span><span class="op">)</span> <span class="co"># the estimate IS NOT 0.</span></span></code></pre></div>
+<pre><code>## Linear hypothesis test
+## 
+## Hypothesis:
+## log(height) = 0
+## 
+## Model 1: restricted model
+## Model 2: log(weight) ~ log(height) + sex
+## 
+##   Res.Df    RSS Df Sum of Sq      F   Pr(&gt;F)    
+## 1    198 3.6131                                 
+## 2    197 2.5718  1    1.0413 79.768 2.99e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<div id="some-general-principles" class="section level2" number="7.4">
+<h2>
+<span class="header-section-number">7.4</span> Some General Principles<a class="anchor" aria-label="anchor" href="#some-general-principles"><i class="fas fa-link"></i></a>
+</h2>
+<div id="ancova-always-tests-the-interaction-against-the-additive-model" class="section level3" number="7.4.1">
+<h3>
+<span class="header-section-number">7.4.1</span> ANCOVA always tests the interaction against the additive model<a class="anchor" aria-label="anchor" href="#ancova-always-tests-the-interaction-against-the-additive-model"><i class="fas fa-link"></i></a>
+</h3>
+<p>This figure highlights the various models and interpretations associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.</p>
+<p>Note that just because your data looks like a particular pattern doesn’t mean you should use that model. Your statistical model should be driven by your question and original design.</p>
+<div class="figure">
+<span style="display:block;" id="fig:unnamed-chunk-48"></span>
+<img src="images/GSwithR_Grid.png" alt="From Getting Started with R, 2nd Edition, OUP" width="740"><p class="caption">
+Figure 7.1: From Getting Started with R, 2nd Edition, OUP
+</p>
+</div>
+<p>For example, if you design a study with an ANCOVA question in mind, you are always starting your analysis with the question of whether the effect of X on Y varies by Z. Thus, ANCOVA always starts with comparing the interaction (model E) against the additive model (model D).</p>
+<blockquote>
+<p>Proof: If we compare the additive model and the model with the interaction, we are specifically testing for whether allowing the slopes to vary by sex <em>explains additional variation</em> above and beyond the main, additive effects of height and sex. To do this, we use <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> but pass it two models. This does what is called a Liklihood Ratio Test.
+Compare the result of the first test to the last line of the second. This proves that when we fit model E, the test for the interaction is a comparison with model D!</p>
+</blockquote>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span>, <span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: log(weight) ~ log(height) * sex
+## Model 2: log(weight) ~ log(height) + sex
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1    196 2.5574                           
+## 2    197 2.5718 -1 -0.014402 1.1038 0.2947</code></pre>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">Anova</span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Anova Table (Type II tests)
+## 
+## Response: log(weight)
+##                  Sum Sq  Df F value    Pr(&gt;F)    
+## log(height)     1.04135   1 79.8099 3.024e-16 ***
+## sex             0.34461   1 26.4115 6.647e-07 ***
+## log(height):sex 0.01440   1  1.1038    0.2947    
+## Residuals       2.55738 196                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div id="specifying-models-in-r" class="section level3" number="7.4.2">
+<h3>
+<span class="header-section-number">7.4.2</span> Specifying models in R<a class="anchor" aria-label="anchor" href="#specifying-models-in-r"><i class="fas fa-link"></i></a>
+</h3>
+<p>We can add terms
+<code>weight ~ sex + height</code></p>
+<p>Have crossed terms
+<code>weight ~ sex * height</code> which is <code>weight ~ sex +  height + sex : height</code></p>
+<p>Remove terms
+<code>weight ~ sex * height – sex : height</code> which is <code>weight~ sex +  height</code></p>
+<p>Include all interactions up to order k
+<code>weight~ (sex + height + age)^2</code> which is <code>sex + height + age + sex : height + sex : age + age : height</code></p>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#introducing-the-ancova---the-analysis-of-covariance"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></li>
+<li><a class="nav-link" href="#setting-up-the-various-ideas."><span class="header-section-number">7.1</span> Setting up the various ideas.</a></li>
+<li>
+<a class="nav-link" href="#working-through-and-example."><span class="header-section-number">7.2</span> Working through and example.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#get-the-data-and-make-your-picture"><span class="header-section-number">7.2.1</span> Get the data and make your picture</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#building-the-model-and-understanding-it"><span class="header-section-number">7.3</span> Building the model (and understanding it)</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dealing-with-some-issues-with-residuals."><span class="header-section-number">7.3.1</span> Dealing with some issues with residuals.</a></li>
+<li><a class="nav-link" href="#making-inference-on-the-ancova"><span class="header-section-number">7.3.2</span> Making inference on the ANCOVA</a></li>
+<li><a class="nav-link" href="#the-summary-table-and-making-sense-of-the-log-stuff."><span class="header-section-number">7.3.3</span> The summary table and making sense of the log stuff.</a></li>
+<li><a class="nav-link" href="#the-equations-supported-by-the-model."><span class="header-section-number">7.3.4</span> The equations supported by the model.</a></li>
+<li><a class="nav-link" href="#making-even-more-inference-and-drawing-the-picture"><span class="header-section-number">7.3.5</span> Making even more inference and drawing the picture</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#some-general-principles"><span class="header-section-number">7.4</span> Some General Principles</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ancova-always-tests-the-interaction-against-the-additive-model"><span class="header-section-number">7.4.1</span> ANCOVA always tests the interaction against the additive model</a></li>
+<li><a class="nav-link" href="#specifying-models-in-r"><span class="header-section-number">7.4.2</span> Specifying models in R</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

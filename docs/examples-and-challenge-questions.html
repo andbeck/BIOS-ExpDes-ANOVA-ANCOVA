@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 4 Examples and Challenge Questions | An Introduction to Experimental Design ANOVA and ANCOVA</title>
+<meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
+<meta name="description" content="In this section, we will review a field based experimental design example. There are challenge questions to answer. We will also introduce tools to generate randomised experimental designs - this...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 4 Examples and Challenge Questions | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta property="og:type" content="book">
+<meta property="og:description" content="In this section, we will review a field based experimental design example. There are challenge questions to answer. We will also introduce tools to generate randomised experimental designs - this...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 4 Examples and Challenge Questions | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta name="twitter:description" content="In this section, we will review a field based experimental design example. There are challenge questions to answer. We will also introduce tools to generate randomised experimental designs - this...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">An Introduction to Experimental Design ANOVA and ANCOVA</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></li>
+<li><a class="" href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></li>
+<li><a class="active" href="examples-and-challenge-questions.html"><span class="header-section-number">4</span> Examples and Challenge Questions</a></li>
+<li><a class="" href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></li>
+<li><a class="" href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></li>
+<li><a class="" href="introducing-the-ancova---the-analysis-of-covariance.html"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="examples-and-challenge-questions" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Examples and Challenge Questions<a class="anchor" aria-label="anchor" href="#examples-and-challenge-questions"><i class="fas fa-link"></i></a>
+</h1>
+<p>In this section, we will review a field based experimental design example. There are challenge questions to answer.</p>
+<p>We will also introduce tools to generate randomised experimental designs - this is a good trick to have up your sleeves!</p>
+<div id="designing-your-first-experiment" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Designing your first experiment<a class="anchor" aria-label="anchor" href="#designing-your-first-experiment"><i class="fas fa-link"></i></a>
+</h2>
+<p>You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased CO2 impacts on plant growth.</p>
+<p>Context: an arctic tundra study
+Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
+Increasing atmospheric CO2 (+CO2) from anthropogenic emissions
+For plants: +UV-B potentially harmful, +CO2 potentially beneficial</p>
+<p>Hypotheses
+Elevated (+) UV-B radiation will reduce the growth of arctic plants
+Elevated (+) <span class="math inline">\(CO_{2}\)</span> will increase the growth of arctic plants</p>
+<div class="inline-figure"><img src="images/ArcticPlants.png" width="241"></div>
+<p>The resources available to you are constrained. The arctic research station has given permission for 16 plots (each 2m x 2m) in the natural vegetation nearby.</p>
+<p>One +UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)
+One <span class="math inline">\(+CO_{2}\)</span> plot (2m x 2m) costs £6000 (this provides a CO2 release system, CO2 control and covers CO2 purchase costs, wooden walkways around the plots)
+One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)</p>
+<p>You have a budget of £61,000</p>
+<p>Design an experiment to test the hypotheses (i.e. the design of the plots and treatments including replication, not what measurements you will take - which will be plant growth rates….). Think hard about this. How many treatments do you have? How many plots/treatment would you like to allocate? Is this possible? Will this be a balanced design, given your max budget? If it isn’t, what rule can you use to allocate them replicates to treatments?</p>
+<p>Write an answer down, before moving to the next section. We’ll provide the answer separately!</p>
+
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></div>
+<div class="next"><a href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#examples-and-challenge-questions"><span class="header-section-number">4</span> Examples and Challenge Questions</a></li>
+<li><a class="nav-link" href="#designing-your-first-experiment"><span class="header-section-number">4.1</span> Designing your first experiment</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

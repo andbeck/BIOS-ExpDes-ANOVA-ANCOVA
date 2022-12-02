@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Designs for testing for interactions: factorial designs. | An Introduction to Experimental Design ANOVA and ANCOVA</title>
+<meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
+<meta name="description" content="6.1 Introducing Interactions Before jumping into an example, let’s introduce a simple statement that forms the core of both asking and interpreting interactions. If there is an interaction between...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Designs for testing for interactions: factorial designs. | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta property="og:type" content="book">
+<meta property="og:description" content="6.1 Introducing Interactions Before jumping into an example, let’s introduce a simple statement that forms the core of both asking and interpreting interactions. If there is an interaction between...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Designs for testing for interactions: factorial designs. | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta name="twitter:description" content="6.1 Introducing Interactions Before jumping into an example, let’s introduce a simple statement that forms the core of both asking and interpreting interactions. If there is an interaction between...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">An Introduction to Experimental Design ANOVA and ANCOVA</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></li>
+<li><a class="" href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></li>
+<li><a class="" href="examples-and-challenge-questions.html"><span class="header-section-number">4</span> Examples and Challenge Questions</a></li>
+<li><a class="" href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></li>
+<li><a class="active" href="designs-for-testing-for-interactions-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: factorial designs.</a></li>
+<li><a class="" href="introducing-the-ancova---the-analysis-of-covariance.html"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="designs-for-testing-for-interactions-factorial-designs." class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Designs for testing for interactions: factorial designs.<a class="anchor" aria-label="anchor" href="#designs-for-testing-for-interactions-factorial-designs."><i class="fas fa-link"></i></a>
+</h1>
+<div id="introducing-interactions" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Introducing Interactions<a class="anchor" aria-label="anchor" href="#introducing-interactions"><i class="fas fa-link"></i></a>
+</h2>
+<p>Before jumping into an example, let’s introduce a simple statement that forms the core of both asking and interpreting <em>interactions</em>.</p>
+<p>If there is an interaction between two explanatory variables, X and Z, on our response variable Y, then:</p>
+<blockquote>
+<p>The effect of X on Y varies by Z. <strong>OR</strong> The effect of X on Y depends on Z.</p>
+</blockquote>
+<p>This use of <em>varies by</em> <strong>OR</strong> <em>depends on</em> defines context dependency and that’s what defines interactions.</p>
+<p>Now, let’s return to our CO2 and UV-B solar radiation experiment in the Arctic Tundra example to introduce the idea of an interaction again.</p>
+<p>Context: an arctic tundra study
+Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
+Increasing atmospheric CO2 (+CO2) from anthropogenic emissions
+For plants: UV-B potentially harmful, +CO2 potentially beneficial
+Therefore +CO2 could alleviate UV-B damage impacts.</p>
+<p>Hypotheses
++UV-B radiation will reduce the growth of arctic plants
++CO2 will increase the growth of arctic plants
++UV-B radiation impacts will be less under +CO2</p>
+<p>What is unique about these context and hypotheses? It’s the presentation of CO2 and UVB in the same statement and the use of words like “the effect of X will alleviate the impacts of Y” and words like “the effects of X will be less under Y”. These words and phrases reflect the context dependency of the effects of treatment levels.</p>
+<p>Thus, to restate what we introduced above…. when we talk about interactions, we can rely on a very simple vocabulary that is independent of the actual treatment levels: we can always describe an interaction like this:</p>
+<blockquote>
+<p>The effect of X on Y depends on Z.</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p>The effect of X on Y varies by Z.</p>
+</blockquote>
+<p>In this ‘rubric’, Y is the response variable, and X and Z are explanatory, independent variables. So, in our example above,</p>
+<blockquote>
+<p>the effect of CO2 on plant biomass yield depends on UV-B radiation levels.</p>
+</blockquote>
+<p>OR</p>
+<blockquote>
+<p>the effect of CO2 on plant biomass yield varies with UV-B radiation levels.</p>
+</blockquote>
+<p>This simple phrasing describes any interaction.</p>
+<p>Here are some numerical examples to drive home the point.</p>
+<p>Control = 20g Yield
+UV-B = 10g Yield
+C02 = 29g Yield</p>
+<p>ADDITIVE RESULT: C02 + UV-B = 39g Yield
+SYNERGISTIC RESULT: C02 + UV-B = 60g Yield
+ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
+<div id="lets-design-an-experiment-again" class="section level3" number="6.1.1">
+<h3>
+<span class="header-section-number">6.1.1</span> Let’s design an experiment, again…<a class="anchor" aria-label="anchor" href="#lets-design-an-experiment-again"><i class="fas fa-link"></i></a>
+</h3>
+<p>Your resources:</p>
+<p>The arctic research station has given permission for 16 plots (each 2m x 2m) in the natural vegetation nearby.
+- One UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)
+- One CO2 plot (2m x 2m) costs £6000 (this provides a CO2 release system, CO2 control and covers CO2 purchase costs, wooden walkways around the plots)
+- One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)
+- Yes, the CO2 supply system does fit underneath the UV-B lamps.</p>
+<p>You have a budget of £86,000</p>
+<p>Design an experiment to test the hypotheses. (An answer is on the BB Site)</p>
+</div>
+<div id="the-factorial-design-how-and-why-study-interactions" class="section level3" number="6.1.2">
+<h3>
+<span class="header-section-number">6.1.2</span> The Factorial Design: How and Why Study Interactions?<a class="anchor" aria-label="anchor" href="#the-factorial-design-how-and-why-study-interactions"><i class="fas fa-link"></i></a>
+</h3>
+<p>The UV-B and C02 experiment could be thought of as two experiments – a Control vs UV-B and a Control vs C02 experiment. If we combine these we get a Factorial Experiment where the treatments are</p>
+<ul>
+<li>Control</li>
+<li>UV-B</li>
+<li>C02</li>
+<li>UV-B + C02</li>
+</ul>
+<p>So we have all combinations of treatments.</p>
+<p>But do we treat each of these as unique treatments (e.g. the one-way ANOVA example)? No, we don’t. We design and analyse the data we collect in a two-way analysis - a factorial design. Two-way ANOVA (and ANCOVA - see later), are the toolboxes.</p>
+<p>Factorial treatments have two main advantages. When factors <em>DO interact</em> – so the effect of C02 depends on UV-B – then we can estimate the interaction - the dependency. <em>One-way designs</em> cannot do this, and can lead to serious misunderstandings (because we are assuming that the effect of one thing DOES NOT depend on the other).</p>
+<p>Furthermore, when factors <em>DON’T interact</em>, <em>factorial designs</em> are more precise (smaller error variance) at estimating the main (non-interacting effects) than one-way designs experiments.</p>
+<p>Hence ALWAYS use factorial designs when your experimental design contains the interaction!</p>
+</div>
+</div>
+<div id="a-factorial-design-and-the-two-way-anova" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> A Factorial Design and the Two-Way ANOVA<a class="anchor" aria-label="anchor" href="#a-factorial-design-and-the-two-way-anova"><i class="fas fa-link"></i></a>
+</h2>
+<p>I’d recommend a new script now for this section. It’s a pretty distinct example. Don’t forget to use library() at the top to get all those packages working for this script. And don’t forget, this script can live in the same R Project as the other one(s).</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Nreps</span> <span class="op">&lt;-</span> <span class="fl">4</span> <span class="co"># 4 replicates per treatment level</span></span>
+<span><span class="va">trt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span> <span class="co"># sets out the 2-way design</span></span>
+<span><span class="va">design</span> <span class="op">&lt;-</span> <span class="fu">design.ab</span><span class="op">(</span><span class="va">trt</span>, r<span class="op">=</span><span class="va">Nreps</span>, serie<span class="op">=</span><span class="fl">0</span>, design<span class="op">=</span><span class="st">"crd"</span><span class="op">)</span><span class="op">$</span><span class="va">book</span></span>
+<span></span>
+<span><span class="co"># look at it.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">design</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   plots r A B
+## 1     1 1 2 1
+## 2     2 1 1 2
+## 3     3 1 1 1
+## 4     4 1 2 2
+## 5     5 2 2 2
+## 6     6 2 2 1</code></pre>
+<p>So, the <code>design.ab</code> function generates a nice picture, but uses numbers instead of words for the various treatments and has set Letters as the treatments.</p>
+<p>We don’t support this approach of using numbers to <em>code for</em> the actual treatment level names - you WILL forget what the numbers and letters mean. So let’s change these <em>codes</em> to represent the words “CO2” and “UVB” which are our reality.</p>
+<p>We’ll use <code>fct_recode</code> from the tidyverse package called <code>forcats</code> (for categories, but we like cats) - this is part of the tidyverse, so if you’re using that, it’s just there!</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">design</span> <span class="op">&lt;-</span> <span class="va">design</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">rename</span><span class="op">(</span>UVB <span class="op">=</span> <span class="va">A</span>, CO2 <span class="op">=</span> <span class="va">B</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>UVB <span class="op">=</span> <span class="fu">fct_recode</span><span class="op">(</span><span class="va">UVB</span>, <span class="st">"Con"</span> <span class="op">=</span> <span class="st">"1"</span>, <span class="st">"UVB+"</span> <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span>,</span>
+<span>         CO2 <span class="op">=</span> <span class="fu">fct_recode</span><span class="op">(</span><span class="va">CO2</span>, <span class="st">"Con"</span> <span class="op">=</span> <span class="st">"1"</span>,<span class="st">"CO2+"</span> <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">design</span>, <span class="fl">10</span><span class="op">)</span> <span class="co"># is this what you expect</span></span></code></pre></div>
+<pre><code>##    plots r  UVB  CO2
+## 1      1 1 UVB+  Con
+## 2      2 1  Con CO2+
+## 3      3 1  Con  Con
+## 4      4 1 UVB+ CO2+
+## 5      5 2 UVB+ CO2+
+## 6      6 2 UVB+  Con
+## 7      7 3 UVB+ CO2+
+## 8      8 2  Con  Con
+## 9      9 3  Con  Con
+## 10    10 4  Con  Con</code></pre>
+<blockquote>
+<p>NOTE 1: this is using the <code>fct_recode</code> function from the <em>forcats</em> package in the <em>tidyverse</em> collection.</p>
+</blockquote>
+<blockquote>
+<p>NOTE 2: we used the design = “crd” argument to specify a completely randomised, 2-way factorial design… you could make this a block design with the “rcbd”…. see the help file for <code>design.ab</code></p>
+</blockquote>
+<div id="build-the-data" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Build the Data<a class="anchor" aria-label="anchor" href="#build-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Here we will build two sources of data - one that has NO INTERACTION, and one that DOES.</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#Sample Sizes and errors</span></span>
+<span><span class="va">Total.units</span> <span class="op">&lt;-</span> <span class="fl">2</span> <span class="op">*</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">Nreps</span> <span class="co"># make sure you understand the 2*2 !!</span></span>
+<span><span class="va">error</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="va">Total.units</span>,<span class="fl">0</span>,<span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Here we make to sets of observations - obs and obs2</span></span>
+<span></span>
+<span><span class="co"># the data with no interaction (obs)</span></span>
+<span><span class="va">design</span><span class="op">$</span><span class="va">obs</span> <span class="op">&lt;-</span> <span class="fl">20</span> <span class="op">-</span> </span>
+<span>  <span class="op">(</span><span class="va">design</span><span class="op">$</span><span class="st">"UVB"</span><span class="op">==</span><span class="st">"UVB+"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span> <span class="op">+</span> </span>
+<span>  <span class="op">(</span><span class="va">design</span><span class="op">$</span><span class="st">"CO2"</span> <span class="op">==</span> <span class="st">"CO2+"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">9</span> <span class="op">+</span> </span>
+<span>  <span class="va">error</span></span>
+<span></span>
+<span><span class="co"># the data with interaction (obs2)</span></span>
+<span><span class="va">design</span><span class="op">$</span><span class="va">obs2</span> <span class="op">&lt;-</span> <span class="fl">20</span> <span class="op">-</span> </span>
+<span>  <span class="op">(</span><span class="va">design</span><span class="op">$</span><span class="st">"UVB"</span><span class="op">==</span><span class="st">"UVB+"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10</span> <span class="op">+</span> </span>
+<span>  <span class="op">(</span><span class="va">design</span><span class="op">$</span><span class="st">"CO2"</span> <span class="op">==</span> <span class="st">"CO2+"</span><span class="op">)</span> <span class="op">*</span> <span class="fl">9</span> <span class="op">+</span> </span>
+<span>  <span class="co"># when both are together add 8 more (synergy)</span></span>
+<span>  <span class="co"># this is the interaction.  the effect of UVB now depends on CO2.</span></span>
+<span>  <span class="op">(</span><span class="op">(</span><span class="va">design</span><span class="op">$</span><span class="st">"UVB"</span><span class="op">==</span><span class="st">"UVB+"</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="va">design</span><span class="op">$</span><span class="st">"CO2"</span> <span class="op">==</span> <span class="st">"CO2+"</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span> <span class="fl">8</span> <span class="op">+</span></span>
+<span>  <span class="co"># add the variation</span></span>
+<span>  <span class="va">error</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">design</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##   plots r  UVB  CO2      obs     obs2
+## 1     1 1 UVB+  Con 12.82805 12.82805
+## 2     2 1  Con CO2+ 25.38908 25.38908
+## 3     3 1  Con  Con 19.17974 19.17974
+## 4     4 1 UVB+ CO2+ 25.85980 33.85980
+## 5     5 2 UVB+ CO2+ 15.92984 23.92984
+## 6     6 2 UVB+  Con  7.75704  7.75704</code></pre>
+</div>
+<div id="plot-the-data" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> Plot the data!<a class="anchor" aria-label="anchor" href="#plot-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>Here we combine some dplyr magic (calcuating means in each group - there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts.</p>
+<p>Our goal here is to plot the data that does not have the interaction next to a plot of the data that does have the interaction.</p>
+<p>Don’t forget to check that you’ve got all of the <code><a href="https://rdrr.io/r/base/library.html">library()</a></code> calls at the top of your script, and that you ran them!</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># No interaction summary</span></span>
+<span><span class="va">sumDat1</span> <span class="op">&lt;-</span> <span class="va">design</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">UVB</span>, <span class="va">CO2</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    obs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">obs</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># with interaction summary</span></span>
+<span><span class="va">sumDat2</span> <span class="op">&lt;-</span> <span class="va">design</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">UVB</span>, <span class="va">CO2</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">summarise</span><span class="op">(</span></span>
+<span>    obs2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">obs2</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The two plots.</span></span>
+<span><span class="co"># no interaction</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">design</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">UVB</span>, y <span class="op">=</span> <span class="va">obs</span>, colour <span class="op">=</span> <span class="va">CO2</span>, shape <span class="op">=</span> <span class="va">CO2</span>, group <span class="op">=</span> <span class="va">CO2</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span>data <span class="op">=</span> <span class="va">sumDat1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># with interaction</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu">ggplot</span><span class="op">(</span><span class="va">design</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">UVB</span>, y <span class="op">=</span> <span class="va">obs2</span>, colour <span class="op">=</span> <span class="va">CO2</span>, shape <span class="op">=</span> <span class="va">CO2</span>, group <span class="op">=</span> <span class="va">CO2</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_point</span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
+<span>  <span class="fu">geom_line</span><span class="op">(</span>data <span class="op">=</span> <span class="va">sumDat2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># use patchwork to put them side-by-side.</span></span>
+<span><span class="va">p1</span><span class="op">+</span><span class="va">p2</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-32-1.png" width="672"></div>
+<p>What you see above on the left, is a pattern that suggest that the effect of ______ on ________ does not vary by ________. In contrast, on the right the pattern suggests that the effect of ______ on ________ ________ by ________:</p>
+</div>
+<div id="analyse-the-data" class="section level3" number="6.2.3">
+<h3>
+<span class="header-section-number">6.2.3</span> Analyse the data<a class="anchor" aria-label="anchor" href="#analyse-the-data"><i class="fas fa-link"></i></a>
+</h3>
+<p>As with the plotting, we now analyse each data set.<br>
+We also make a mistake of analysing the data that has an interaction with a model that does not specify this interaction. This mod3 is incorrect, but fitting it helps illuminate why you should fit the interaction if your design contains the potential for an interaction (a factorial design).</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># model with no interaction</span></span>
+<span><span class="va">int_mod_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">obs</span> <span class="op">~</span> <span class="va">CO2</span><span class="op">*</span><span class="va">UVB</span>, data <span class="op">=</span> <span class="va">design</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># model with interaction</span></span>
+<span><span class="va">int_mod_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">obs2</span> <span class="op">~</span> <span class="va">CO2</span><span class="op">*</span><span class="va">UVB</span>, data <span class="op">=</span> <span class="va">design</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># model with interaction, but specified incorrectly.</span></span>
+<span><span class="va">int_mod_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">obs2</span> <span class="op">~</span> <span class="va">CO2</span> <span class="op">+</span> <span class="va">UVB</span>, data <span class="op">=</span> <span class="va">design</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_1</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: obs
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## CO2        1 321.00  321.00  33.469 8.671e-05 ***
+## UVB        1 241.27  241.27  25.156 0.0003013 ***
+## CO2:UVB    1   1.13    1.13   0.118 0.7371854    
+## Residuals 12 115.09    9.59                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_2</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: obs2
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## CO2        1 671.67  671.67 70.0311 2.364e-06 ***
+## UVB        1  56.75   56.75  5.9165   0.03159 *  
+## CO2:UVB    1  82.15   82.15  8.5654   0.01268 *  
+## Residuals 12 115.09    9.59                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_3</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: obs2
+##           Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## CO2        1 671.67  671.67  44.269 1.58e-05 ***
+## UVB        1  56.75   56.75   3.740  0.07519 .  
+## Residuals 13 197.24   15.17                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>Note the differences in the outputs. Note what we infer if we model the interaction data incorrectly. There is no free lunch. You must understand your data and your question and you must fit the model that correctly matches your design!</p>
+</div>
+<div id="final-figuring" class="section level3" number="6.2.4">
+<h3>
+<span class="header-section-number">6.2.4</span> final figuring<a class="anchor" aria-label="anchor" href="#final-figuring"><i class="fas fa-link"></i></a>
+</h3>
+<p>Don’t forget that the correct standard error for the ‘result’ is the residuals mean squared. You can use the dplyr+ggplot2 method, or visreg.</p>
+<p>Here we use visreg and put the figure next to our original ggplot for the interaction data.</p>
+<p>We plot the correct model for the interaction data.</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">visreg</span><span class="op">(</span><span class="va">int_mod_2</span>,<span class="st">"CO2"</span>,by<span class="op">=</span><span class="st">"UVB"</span>,gg<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p2</span><span class="op">+</span><span class="va">p3</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-34-1.png" width="672"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></div>
+<div class="next"><a href="introducing-the-ancova---the-analysis-of-covariance.html"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#designs-for-testing-for-interactions-factorial-designs."><span class="header-section-number">6</span> Designs for testing for interactions: factorial designs.</a></li>
+<li>
+<a class="nav-link" href="#introducing-interactions"><span class="header-section-number">6.1</span> Introducing Interactions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#lets-design-an-experiment-again"><span class="header-section-number">6.1.1</span> Let’s design an experiment, again…</a></li>
+<li><a class="nav-link" href="#the-factorial-design-how-and-why-study-interactions"><span class="header-section-number">6.1.2</span> The Factorial Design: How and Why Study Interactions?</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#a-factorial-design-and-the-two-way-anova"><span class="header-section-number">6.2</span> A Factorial Design and the Two-Way ANOVA</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#build-the-data"><span class="header-section-number">6.2.1</span> Build the Data</a></li>
+<li><a class="nav-link" href="#plot-the-data"><span class="header-section-number">6.2.2</span> Plot the data!</a></li>
+<li><a class="nav-link" href="#analyse-the-data"><span class="header-section-number">6.2.3</span> Analyse the data</a></li>
+<li><a class="nav-link" href="#final-figuring"><span class="header-section-number">6.2.4</span> final figuring</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

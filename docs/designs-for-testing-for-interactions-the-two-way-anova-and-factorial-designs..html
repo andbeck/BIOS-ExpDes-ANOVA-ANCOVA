@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 6 Designs for testing for interactions: the two-way ANOVA and factorial designs. | An Introduction to Experimental Design ANOVA and ANCOVA</title>
+<meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
+<meta name="description" content="6.1 Introducing Interactions In the previous sections, and the 1-way ANOVA module in week 7, we have focused on a single explanatory variable. In week 7, it was the parasite factor. In the...">
+<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta property="og:title" content="Chapter 6 Designs for testing for interactions: the two-way ANOVA and factorial designs. | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta property="og:type" content="book">
+<meta property="og:description" content="6.1 Introducing Interactions In the previous sections, and the 1-way ANOVA module in week 7, we have focused on a single explanatory variable. In week 7, it was the parasite factor. In the...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 6 Designs for testing for interactions: the two-way ANOVA and factorial designs. | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta name="twitter:description" content="6.1 Introducing Interactions In the previous sections, and the 1-way ANOVA module in week 7, we have focused on a single explanatory variable. In week 7, it was the parasite factor. In the...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">An Introduction to Experimental Design ANOVA and ANCOVA</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
+<li><a class="" href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></li>
+<li><a class="" href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></li>
+<li><a class="" href="examples-and-challenge-questions.html"><span class="header-section-number">4</span> Examples and Challenge Questions</a></li>
+<li><a class="" href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></li>
+<li><a class="active" href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></li>
+<li><a class="" href="introducing-the-ancova---the-analysis-of-covariance.html"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs." class="section level1" number="6">
+<h1>
+<span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.<a class="anchor" aria-label="anchor" href="#designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs."><i class="fas fa-link"></i></a>
+</h1>
+<div id="introducing-interactions" class="section level2" number="6.1">
+<h2>
+<span class="header-section-number">6.1</span> Introducing Interactions<a class="anchor" aria-label="anchor" href="#introducing-interactions"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the previous sections, and the 1-way ANOVA module in week 7, we have focused on a single explanatory variable. In week 7, it was the <code>parasite</code> factor. In the previous chapters focusing on yield, it was the <code>herbicide</code> treatment. In these cases, the question we are asking is about a single, main effect. However, there are many cases where we design experiments that might have two variables. For example, we may be interesting in the effect of <code>parasite</code> on growth but also whether this effect varies by the amount of food available. Or we might be interested in the yeild of a crop as a function of the herbicide, but also of soil water content. Or we might be interested in the rate of cell division as a function of a growth hormon, but also of whether this varies by the presence of a calcium blocker. In all of these cases we are asking a question about whether the effect of one treatment varies by the level of another. Thus, our question here is about an <em>interaction</em>.</p>
+<p>Before jumping into an example, let’s introduce a simple statement that forms the core of both asking and interpreting <em>interactions</em>.</p>
+<p>If there is an interaction between two explanatory variables, X and Z, on our response variable Y, then:</p>
+<blockquote>
+<p>The effect of X on Y varies by Z. <strong>OR</strong> The effect of X on Y depends on Z.</p>
+</blockquote>
+<p>This use of <em>varies by</em> <strong>OR</strong> <em>depends on</em> defines context dependency and that’s what defines interactions.</p>
+<div id="an-example-with-co2-and-uv-b-solar-radiation-impact-on-plant-growth-in-the-artic." class="section level3" number="6.1.1">
+<h3>
+<span class="header-section-number">6.1.1</span> An Example with CO2 and UV-B solar radiation impact on plant growth in the artic.<a class="anchor" aria-label="anchor" href="#an-example-with-co2-and-uv-b-solar-radiation-impact-on-plant-growth-in-the-artic."><i class="fas fa-link"></i></a>
+</h3>
+<p>Context: an arctic tundra study
+Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
+Increasing atmospheric CO2 (+CO2) from anthropogenic emissions
+For plants: UV-B potentially harmful, +CO2 potentially beneficial
+Therefore +CO2 could alleviate UV-B damage impacts.</p>
+<p><em>Hypothesis</em></p>
+<p>The effect of UV-B radiation on growth will depend on levels of CO2</p>
+<p><em>Predictions</em>:</p>
+<p>+UV-B radiation will reduce the growth of arctic plants
++CO2 will increase the growth of arctic plants
++UV-B radiation impacts will be less under +CO2</p>
+<p>What is unique about this context, hypothesis, and predictions?</p>
+<p>It’s the presentation of CO2 and UVB in the same statement and the use of words like “the effect of X will alleviate the impacts of Y” and words like “the effects of X will be less under Y”. These words and phrases reflect the <em>context dependency</em> of the effects of treatment levels.</p>
+<p>Thus, to restate what we introduced above…. when we talk about <em>interactions</em>, we can rely on a very simple vocabulary that is independent of the actual treatment levels: we can always describe an interaction like this:</p>
+<blockquote>
+<p>The effect of X on Y depends on Z.</p>
+</blockquote>
+<p>or</p>
+<blockquote>
+<p>The effect of X on Y varies by Z.</p>
+</blockquote>
+<p>In this ‘rubric’, Y is the response variable, and X and Z are explanatory, independent variables. So, in our example above,</p>
+<blockquote>
+<p>the effect of CO2 on plant biomass yield depends on UV-B radiation levels.</p>
+</blockquote>
+<p>OR</p>
+<blockquote>
+<p>the effect of CO2 on plant biomass yield varies with UV-B radiation levels.</p>
+</blockquote>
+<p>This simple phrasing describes any interaction.</p>
+<div id="numerical-example-for-emphasis" class="section level4" number="6.1.1.1">
+<h4>
+<span class="header-section-number">6.1.1.1</span> Numerical example for emphasis<a class="anchor" aria-label="anchor" href="#numerical-example-for-emphasis"><i class="fas fa-link"></i></a>
+</h4>
+<p>Let’s imagine the following situation. The folowing three numbers are what we call <em>Main Effects</em>:</p>
+<p>Control = 20g Yield
+UV-B = 10g Yield
+C02 = 29g Yield</p>
+<p>These numbers allow us to calculate the <em>Additive Effect</em>, where the effect of both CO2 and UV-B is simply estimated by adding the two independent effects together:</p>
+<p>ADDITIVE RESULT: C02 + UV-B = 39g Yield</p>
+<p>However, this additive outcome may not be what happens. Imagine if there were Synergy - the effects are more than the sum of the independent effects - or Antagonism - the effects are less than expected because one offsets the other.</p>
+<p>SYNERGISTIC RESULT: C02 + UV-B = 60g Yield
+ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
+</div>
+<div id="the-factorial-design-why-study-interactions" class="section level4" number="6.1.1.2">
+<h4>
+<span class="header-section-number">6.1.1.2</span> The Factorial Design: Why Study Interactions?<a class="anchor" aria-label="anchor" href="#the-factorial-design-why-study-interactions"><i class="fas fa-link"></i></a>
+</h4>
+<p>The UV-B and C02 experiment could be thought of as two experiments – a Control vs UV-B and a Control vs C02 experiment. If we combine these we get a Factorial Experiment where we can actually estimate whether there is an interaction, and whether it is synergy or antagonism. In the factorial design for this example, there are four treatment levels and all combinations of all treatments.</p>
+<ul>
+<li>Control</li>
+<li>UV-B</li>
+<li>C02</li>
+<li>UV-B + C02</li>
+</ul>
+<p>Some of you may be thinking that we could simply treat each of these treatment levels indepdently, as unique treatments levels - e.g. the one-way ANOVA. But we don’t. We design and analyse the data we collect in a two-way analysis - a factorial design. Two-way ANOVA is the design</p>
+<p>Factorial treatments have two main advantages over the 1-way approach.</p>
+<p>When factors <em>DO interact</em> – so the effect of C02 depends on UV-B – then we can estimate the interaction - the dependency. <em>One-way designs</em> cannot do this, and can lead to serious misunderstandings (because we are assuming that the effect of one thing DOES NOT depend on the other).</p>
+<p>Furthermore, when factors <em>DON’T interact</em>, <em>factorial designs</em> are more precise (smaller error variance) at estimating the main (non-interacting effects) than one-way designs experiments.</p>
+<p>Hence ALWAYS use factorial designs when your experimental design contains the interaction (when you are asking the question that includes the word(s) <em>depends</em> or <em>varies by</em>!</p>
+</div>
+</div>
+</div>
+<div id="a-factorial-design-and-the-two-way-anova" class="section level2" number="6.2">
+<h2>
+<span class="header-section-number">6.2</span> A Factorial Design and the Two-Way ANOVA<a class="anchor" aria-label="anchor" href="#a-factorial-design-and-the-two-way-anova"><i class="fas fa-link"></i></a>
+</h2>
+<p>The following dataset <code>plantYield_factorial</code> contains two observation columns - <code>yield_ind</code> are data where there is NO INTERACTION. <code>yield_int</code> are data where there are an interaction. We will use both of these to showcase how to work the 2-way ANOVA and the analysis of a factorial design.</p>
+<p>We note that these data have replication and randomisation. There are <em>four</em> replicate plants/plots allocated randomly to each of the four treatment combinations.</p>
+<p>Here is the evidence of the factorial design</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span><span class="op">(</span><span class="op">~</span><span class="va">UVB</span><span class="op">+</span><span class="va">CO2</span>, data <span class="op">=</span> <span class="va">plantYield_factorial</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##       CO2
+## UVB    Con CO2+
+##   Con    4    4
+##   UVB+   4    4</code></pre>
+<div id="plot-the-factorial-design" class="section level3" number="6.2.1">
+<h3>
+<span class="header-section-number">6.2.1</span> Plot the factorial design!<a class="anchor" aria-label="anchor" href="#plot-the-factorial-design"><i class="fas fa-link"></i></a>
+</h3>
+<p>Here we combine some dplyr magic (calculating means in each group - there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts.</p>
+<p>Our goal here is to plot the data that does not have the interaction next to a plot of the data that does have the interaction.</p>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-31-1.png" width="672"></div>
+<p>Given what you’ve read above, you should be able to fill in these blanks:</p>
+<p>What you see above on the left, is a pattern that suggest that the effect of ______ on ________ does not vary by ________.</p>
+<p>In contrast, on the right the pattern suggests that the effect of ______ on ________ ________ by ________:</p>
+</div>
+<div id="how-to-analyse-and-interpret-the-factorial-design" class="section level3" number="6.2.2">
+<h3>
+<span class="header-section-number">6.2.2</span> How to analyse and interpret the factorial design<a class="anchor" aria-label="anchor" href="#how-to-analyse-and-interpret-the-factorial-design"><i class="fas fa-link"></i></a>
+</h3>
+<p>As with the plotting, we now analyse each data set.</p>
+<p>We also make a mistake of analysing the data that has an interaction with a model that does not specify this interaction.</p>
+<p>We are thus making three models. A model of the no interaction data without specifying and interaction, a model of the interaction data without specifying and interaction and a model of the interaction data with and interaction specified. This second model is incorrect, but fitting it helps illuminate why you should fit the interaction if your design contains the potential for an interaction (a factorial design).</p>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># A Correct model with no interaction on data with no interaction</span></span>
+<span><span class="va">int_mod_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield_ind</span> <span class="op">~</span> <span class="va">CO2</span> <span class="op">+</span> <span class="va">UVB</span>, data <span class="op">=</span> <span class="va">plantYield_factorial</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># A Correct model with interaction where the should be an interaction</span></span>
+<span><span class="va">int_mod_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield_int</span> <span class="op">~</span> <span class="va">CO2</span> <span class="op">*</span> <span class="va">UVB</span>, data <span class="op">=</span> <span class="va">plantYield_factorial</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># THE WRONG MODEL: model without interaction, on data that should use the interaction</span></span>
+<span><span class="va">int_mod_3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield_int</span> <span class="op">~</span> <span class="va">CO2</span> <span class="op">+</span> <span class="va">UVB</span>, data <span class="op">=</span> <span class="va">plantYield_factorial</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_1</span><span class="op">)</span> <span class="co"># Good model, no interaction in the data and none in the model</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: yield_ind
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## CO2        1 321.00  321.00  35.905 4.504e-05 ***
+## UVB        1 241.27  241.27  26.987 0.0001726 ***
+## Residuals 13 116.22    8.94                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_2</span><span class="op">)</span> <span class="co"># Good model, interaction in the data and interaction in the model</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: yield_int
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## CO2        1 671.67  671.67 70.0311 2.364e-06 ***
+## UVB        1  56.75   56.75  5.9165   0.03159 *  
+## CO2:UVB    1  82.15   82.15  8.5654   0.01268 *  
+## Residuals 12 115.09    9.59                      
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_3</span><span class="op">)</span> <span class="co"># Bad model, interaction in the data, but failure to specify in the model</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: yield_int
+##           Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## CO2        1 671.67  671.67  44.269 1.58e-05 ***
+## UVB        1  56.75   56.75   3.740  0.07519 .  
+## Residuals 13 197.24   15.17                     
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+<p>Let’s focus on model 2 and how we interpret this. The ANOVA table now has multiple rows. We saw this before with the block design. The important thing to note here is that the table is now read <em>sequentially</em>. We first note that CO2 explains <span class="math inline">\(507.19\)</span> units of variation (Mean Sq) in plant Yield. Having captured this variation, we then note that UVB captures <span class="math inline">\(216.29\)</span> additional units. Then, having capture the variation caused directly by CO2 and UVB, we now see that the interaction - asking whether the effect of CO2 varies by UVB - explains an additional <span class="math inline">\(127.72\)</span> units. And… there are <span class="math inline">\(11.11\)</span> units of unexplained variation.</p>
+<p>Great. So, remember as well how we calculate the F-value. In the ANOVA (categorial variable) framework, the F-value is the ratio of variance explained by the factor relative to the residual variation. So that’s where the F values come from…. And recall that BIG F-values indicate that more variation is allocated to the treatment levels, versus what’s left over. The bigger the numerator value relative to the residual denominator, the more variation this term has explained.</p>
+<p>In this experimental design, and any like it, one must remember that there is actually a single question, and it does not related to the independent main effects.It relates only to the interaction term: we designed this experiment to test the hypothesis that the effect of CO2 on yield varies by UVB. There is only a single choice of answer - yes or no. In this case, having captured variation with each independent effect, there is still a large amount of variation captured by ‘allowing’ the effects of each to vary by the other. Under a null hypothesis that these two variables to not interact (do not depend on each other), getting a Mean square estimate of <span class="math inline">\(127.72\)</span> relative to the residual of <span class="math inline">\(11.11\)</span> is very unlikely. So we reject the null!</p>
+<p>Spend some time investigating what has happened with model 2 and model 3 and recall that ONLY ONE OF THEM IS CORRECT, regardless of whether the data look like the left or right panel above. Note the differences in the outputs. Note what we infer if we model the interaction data incorrectly.</p>
+<p>There is no free lunch.</p>
+<p>You must understand your data and your question and you must fit the model that correctly matches your design! In this case, there really is only one model you should fit. It is model 2. EVEN if the data look like the left panel, with no interaction, this experiment was designed to test the hypothesis that the effect of CO2 varies by UVB. You can only accept or reject the null hypothesis of no interaction by fitting model 2. You can not guess the right model from the picture. The design dictates the model. But, you can guess the answer….</p>
+</div>
+<div id="visreg-and-the-2-way-anova" class="section level3" number="6.2.3">
+<h3>
+<span class="header-section-number">6.2.3</span> visreg and the 2-way ANOVA<a class="anchor" aria-label="anchor" href="#visreg-and-the-2-way-anova"><i class="fas fa-link"></i></a>
+</h3>
+<p>Don’t forget that the correct standard error for the ‘result’ is the residuals mean squared. You can use the dplyr + ggplot2 method, or visreg to estimate these. Here we use visreg and put the figure next to our original ggplot for the interaction data. Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and quesion (model 2).</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">visreg</span><span class="op">(</span><span class="va">int_mod_2</span>,<span class="st">"CO2"</span>,by<span class="op">=</span><span class="st">"UVB"</span>, gg<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p2</span><span class="op">+</span><span class="va">p3</span></span></code></pre></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-33-1.png" width="672"></div>
+
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></div>
+<div class="next"><a href="introducing-the-ancova---the-analysis-of-covariance.html"><span class="header-section-number">7</span> Introducing the ANCOVA - the analysis of covariance</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs."><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></li>
+<li>
+<a class="nav-link" href="#introducing-interactions"><span class="header-section-number">6.1</span> Introducing Interactions</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#an-example-with-co2-and-uv-b-solar-radiation-impact-on-plant-growth-in-the-artic."><span class="header-section-number">6.1.1</span> An Example with CO2 and UV-B solar radiation impact on plant growth in the artic.</a></li></ul>
+</li>
+<li>
+<a class="nav-link" href="#a-factorial-design-and-the-two-way-anova"><span class="header-section-number">6.2</span> A Factorial Design and the Two-Way ANOVA</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#plot-the-factorial-design"><span class="header-section-number">6.2.1</span> Plot the factorial design!</a></li>
+<li><a class="nav-link" href="#how-to-analyse-and-interpret-the-factorial-design"><span class="header-section-number">6.2.2</span> How to analyse and interpret the factorial design</a></li>
+<li><a class="nav-link" href="#visreg-and-the-2-way-anova"><span class="header-section-number">6.2.3</span> visreg and the 2-way ANOVA</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-02.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
