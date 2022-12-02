@@ -40,7 +40,7 @@ Before we get started, it's vital that you understand that there are some very b
 - **Replication**: the repetition of a treatment within an experiment, to quantify the natural variation between experimental units and increase accuracy of estimated effects.
 - **Reduce noise:** by controlling as much as possible the conditions in the experiment, e.g. by grouping of similar experimental units in blocks.
 
-As we develop our understanding of experimental design, you should come back to these core definitions and see if your understanding of them has improved.  We work on these concepts in the next chapter of the book.
+At this point, you may want to revisit, again, the following section of the APS 240 book [on Randomisation](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#randomisation)
 
 ## The General Linear Model
 
@@ -179,6 +179,12 @@ An experiment has _treatments, experimental units, responses, and a method to as
 
 Not all experimental designs are created equal. A good experimental design must adhere to the 3Rs. It should reveal consistency, responsiveness and mechanism.  The way this happens is by avoiding systematic error in measuring things, and allow estimation of error in measurements with precision.  
 
+## The holy grail of a control
+
+At this point, it would be good to revisit the APS 240 sections [on controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#experimental-control) and [procedural controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#EXPT-DESIGN-PROCEDURAL-CONTROLS)
+
+## So what does a good experimental design do?
+
 In short, a good experimental design must:
 
 - Avoid systematic error
@@ -218,11 +224,15 @@ This is despite the fact that we know that Yorkshire will be better.... (that's 
 
 A common source of difficulty in designing experiments is the distinction between experimental units and measurement units.  We need to know the experimental units, as this is the key value used to generate our inference. 
 
+Now is a good time to re-look at the short section on [Jargon Busting](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#jargon-busting) from the APS 240 book.
+
+### Experimental and measurement units: an example
+
 Consider an educational study, with six classrooms of 25 pupils. Each classroom of students is then assigned, at random, to one of two different reading programmes.  
 
 At the end of a six-week term, all the students are evaluated via a common reading exam.
 
-### The challenge question
+#### The challenge question
 
 > Are there six experimental units (the classrooms) or 150 (25*6; the students)?  We measured the reading ability of the students... but they were in classroom sets of 25....
 
@@ -240,6 +250,9 @@ However, you are right - we don’t _measure_ how a classroom reads; we measure 
 
 Confusing these two things can lead to **pseudo-replication**. Treating measurement units as experimental usually leads to overoptimistic analysis — we will reject null hypotheses more often than we should, and our confidence intervals will be too narrow. The usual way around this is to determine a single response for each experimental unit. 
 
+There is additional information on [Independence and Pseudoreplication](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#independence) in the the APS 240 book.
+
+#### Independence: and example
 Consider an experiment with two growth chambers each containing 100 plants. One of the chambers received enhanced C02. One night after collecting data you leave the door open on the C02 chamber and the temperature drops and so the plants grow more slowly. When you come to analyze the data you get a highly significant effect of slow growth.  However, that C02 results in reduced plant growth not what you expect (CO2 is good for photosynthesis...). 
 
 This is an entirely plausible outcome caused by misallocating plants as the experimental unit - it was really the CO2 chamber... to avoid such problems, one needs many chambers.
@@ -250,7 +263,7 @@ Consider a second experiment where you have 200 growth chambers and randomly all
 
 Proper **randomization** and **replication** is very different from **pseudo-replication**.
 
-### Randomization properly with Replication protects against Confounding
+### Randomization with Replication protects against Confounding
 
 An experiment is properly randomized if the method for assigning treatments to units involves a known, well-understood probabilistic scheme. The probabilistic scheme is called a randomization.
 
@@ -307,7 +320,7 @@ We will also introduce tools to generate randomised experimental designs - this 
 
 ## Designing your first experiment
 
-You are challenged to design an Arctic field manipulation experiment to evalauate UV-B radiation and increased CO2 impacts on plant growth.
+You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased CO2 impacts on plant growth.
 
 Context: an arctic tundra study 
 Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
@@ -334,92 +347,49 @@ Design an experiment to test the hypotheses (i.e. the design of the plots and tr
 
 Write an answer down, before moving to the next section.  We'll provide the answer separately!
 
-## Using R to generate Experimental Designs
-
-This is the place to stop for a moment and organise your R-course life.  My suggestion is to do the following.
-
-Create an Experimental Design folder on your computer.  Put a data folder inside that.  Use RStudio to create an RStudio Project file inside the Experimental Design folder.  This will be the only place you need to focus for this mini-module.
-
-Now, let's set up a script to do build this experimental design and actually generate soome data and do an analysis. 
-
-As with every script last semester, we start with a preamble and some libraries
-
-```{r, warning = FALSE, message=FALSE}
-# Designing experiments with R: and introduction
-# MY NAME
-# DATE
-
-#libraries I need
-
-library(tidyverse)
-library(ggfortify)
-library(agricolae)
-library(car)
-library(gmodels)
-library(visreg)
-```
-
-That's alot of packages, but you'll see how we use them for designing and then analysing data.
-
-To design and experiment, we are going to use the `design.csd` function from the _agricolae_ package, which we used last term to help with the tukey tests.  It does WAY MORE!
-
-This package has a great online help resource: https://myaseen208.github.io/agricolae/articles/Intro_agricolae.html
-
-```{r}
-# use this to make sure the random allocation pattern created for the design is the same for you and me
-set.seed(123)
-
-# define the treatments
-treatments <- c("Control","UVB","CO2")
-
-# define the design (this does some randomisation for you!)
-design <- design.crd(treatments, r = c(6,5,5), serie = 0)
-
-# view the design - note that the actual data are in $book
-glimpse(design)
-
-# grab that book
-use_design <- design$book
-
-# show the design
-use_design
-```
-
-Great scott!  So, we have 16 plots and we've randomly allocated the set of treatments to these plots, with 6 controls, and 5 of the non-control treatments.  This is just what we wanted.
-
-Time to move on to the next chapter, but stick with this script!  We will come back to this example later.
-
-
-
-
-<!--chapter:end:04-Some_Examples_and_a_Challenge.Rmd-->
+<!--chapter:end:03-A_Design_Challenge.Rmd-->
 
 # Design and Analysis of Experiments
 
-In this section, we will design and experiment, make up data for the experiment, and analyse the experiment.
+In this section we are going to learn about how to implement two experimental designs:
 
-This is a very good process to go through - you will understand more fully how to generate randomisation in your experiments, and you will better understand how data that you collect is _structured_ - from where does variation come in your measurements.  
+- CRD: the completely randomised design
+- CRBD: the completely randomised block design.
 
-Another way to think about this is to consider that we are learning how statistics looks at data you've collected.  We are going to make up data, where we know the answer to the question.  Then we are going to plot these data, and analyse them.
+These two designs are valuable in dealing with two things that make it hard to make strong inference from experiments: _noise_ and _counfounding effects_.
 
-## Example one
-We are now going to cheat by generating artificial data we we don’t have time to go run the experiment.
+These unwated sources of variation comes in two forms (see [APS 240 reading](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#confounded-and-noisy-experiments))
 
-The experiment is about plant biomass yield under several herbicide treatments: a control and two herbicides, and a third treatment that is a placebo - applied water but no herbicide.  The hypothesis is....?
+1. The first is _confounding variation_. This occurs when there are one or more other sources of variation that work in parallel to the factor we are investigating and make it hard, or impossible, to unambiguously attribute any effects we see to a single cause. Confounding variation is particularly problematic in observational studies because, by definition, we don’t manipulate the factors we’re interested in.
 
-Start a new section of your script (some hashes) called Herbicide Example.
+2. The second is _noise_. This describes variation that is unrelated to the factor we are investigating but adds variability to the results so that it is harder to see, and detect statistically, any effect of that factor. As noted above, much of experimental design is about improving our ability to account for noise in a statistical analysis.
 
-Now, enter the following code in your script file, then run it. 
+We will consider these together, as some of the techniques for dealing with them are be applicable to both.  The primary tools for dealing with them are
+
+1. randomisation
+2. blocking
+3. appropriate controls
+4. additional treatments.
+
+In the following sections, we are going to focus on the first three.  In doing so, we will also revisit how we make inference from 1-way ANOVA experiments and introduce a more generalised approach to making _contrasts_ we want.  If you recall from the 1-way ANOVA work you did in the previous module (Week 7), we learned about _treatment contrasts_, the default comparison of means to a reference level, and then the _Tukey test_, which makes all pairwise comparisons.  Here will will find an intermediate zone.
+
+## A CRD (Completely Randomised Design) Example
+
+The experiment is about plant crop biomass yield under several herbicide treatments - the herbicide targets weeds and not our target plant (e.g. Glyphosate): a control and two herbicides, and a third treatment that is a placebo - applied water but no herbicide.  
+
+The data for this example are called `plantYield.csv`.
+
+For each treatment, we have n = 30 plants in separate pots in standarised conditions.
+
+Can you explain why we are using the placebo?  Do you know the measurement and experimental unit?  As this is a 1-way ANOVA, what is the baseline hypothesis?  Given that there is a control and two herbicides, are there alternative hypotheses you might test?
 
 ```{r, echo = FALSE, warning = FALSE, message=FALSE}
 library(tidyverse)
 library(agricolae)
 library(ggfortify)
 library(gmodels)
-```
+library(visreg)
 
-
-```{r}
 # set the random seed - this will ensure that your results and mine here are the same.
 set.seed(123)
 
@@ -435,28 +405,31 @@ Total.units <- Nreps * length(treat)
 #Our completely randomized design
 # not the trick of adding the $book at the end of the code
 design <- design.crd(treat, Nreps, serie = 0)$book
-
-# check it out (the first 10 rows)
-head(design, 10)
 ```
 
-### Making up data
+Let's look at the structure of the design. As hoped, we have 30 replicates of each treatment.  The second view reveals that the replicates are allocated randomly among the replicate plants.  There is no order to the values in the `treat` column.
 
-Right, lets make up some artificial data so we know the right answers – this is a very good way of checking you understand what’s going on.
+```{r, echo = FALSE}
+# check it out
+xtabs(~treat, data = design)
+head(design,10)
+```
 
-First, lets define some randon variation centred around 0 with a standard deviation of 3:
+We have now added data to this design in order to start doing statistics.  The _TRUTH_ of these data are that on average, the controls have a yield of 20, Herbicide 1 increases yield by 5, Herbicide 2 by 6 and the placebo by 1 unit.  These data are also quite variable.  The standard deviation around the yields is large.  We are going to analyse these data and
 
-```{r}
+1. see if we can recover these estimates of 'known' yield.
+2. test the null hypothesis.
+3. test the hypothesis that herbicides, on average, increase yield.
+4. test whether the two herbicides are different.
+5. test whether the placebo is different from the control.
+
+And there is the answer to one of the questions above!
+
+```{r, echo = FALSE}
 #Our experimental errors, normal distribution mean = 0, standard deviation = 3
 # rnorm is random normal distribution - the bell curve!
 error <- rnorm(Total.units, mean=0, sd=3)
-```
 
-Now we need to actually generate a response variable.  The thing we 'measured'.  For this experiment we are _measuring_ yield - the grams of dry biomass at the end of the experimental season.
-
-To do this, we have to think about the mean of the yield (we'll set it to 20), the deviation caused by Herbicide 1 (+5 average yield), the deviation caused by Herbicide 2 (+6 average yield) and the deviation caused by the placebo (nothing) and the error among observations (error).  If this works, there should be Controls and Placebos with values around 20, and Herbicide values around ±25-26.  But keep in mind... we have a standard deviation of 3 in the error... what will that do?  Let's see.
-
-```{r}
 #the observations of yield
 design$obs <- 
   # mean yield Control
@@ -468,29 +441,44 @@ design$obs <-
   error
 
 # look at it
-design$obs
+# design$obs
 
-# look at the design now.
-head(design)
+plantYield <- design
 ```
 
-### Into the dplyr and ggplot pipeline.
+```{r}
+# look at the design now.
+head(plantYield)
+```
 
-Great stuff.  Now we can move to our standard data management and visualisation pipeline.
+### The dplyr and ggplot pipeline for inference.
 
-1. review the data
+Now we can move to our standard data management and visualisation pipeline.
+
+1. review the data (the `plantYield.csv` file contains the data)
 2. sumamrise the data with dplyr - generate means and se's for the treatments
 3. visualise with ggplot2
 
 ```{r}
 # check the data
-glimpse(design)
+# note
+# obs == yield
+# treat == treatment
+# r = replicate (there are 30 of each treatment)
+
+glimpse(plantYield)
+
+# let's force treat to be a factor.  This will make life easier later...
+plantYield <- plantYield %>% 
+  mutate(treat = factor(treat))
 
 # summarise to get means and ses
-sumDat <- design %>% 
+sumDat <- plantYield %>% 
   group_by(treat) %>% 
   summarise(
+    # calculate the means
     meanYield = mean(obs),
+    # calculate the se
     seYield = sd(obs)/sqrt(n())
   )
 
@@ -505,11 +493,12 @@ ggplot(sumDat, aes(x = treat, y = meanYield))+
 
 A few things to notice.  
 
-1. The data are quite variable and the means of the herbicide treatments are roughly 5 and 6 units higher. This is as we expected....
-2. The standard errors are quite small!  Why is that!?
+1. The data are quite variable and the means of the herbicide treatments are roughly 5 and 6 units higher than the control. GOOD.  This is as we expected....
+2. The standard errors are quite small, even though the variation is large!  Why is that!?
+3. The two herbicides don't look very different, especially given the variation around each treatment.  Neither do the placebo and control.  We need some stats. 
 3. For those of you interested in some extra reading and thinking, the 95% Confidence Interval around the means can be calculated using `1.96*SE` == `1.96*sd(obs)/sqrt(n())`.  Go ahead and do that and look into that if you want... 
 
-## The One-Way ANOVA.  
+### The One-Way ANOVA.  
 
 If you've been paying attention, we've essentially designed and plotted the data for a 1-way ANOVA.  These data are very similar to the daphnia parasite data we finished semester 1 with.  
 
@@ -517,7 +506,7 @@ To analyse these data, we use the `lm()` function to build the model, check assu
 
 ```{r}
 # the model
-modYield <- lm(obs ~ treat, data = design)
+modYield <- lm(obs ~ treat, data = plantYield)
 
 # assumptions
 autoplot(modYield)
@@ -535,66 +524,87 @@ Lets walks through things very discretely.
 
 1. Our graph suggests that herbicide treatments have an effect of increasing yield.
 2. Our model is designed to test this hypothesis - are any of the differences among means non-zero?
-3. Our hypothesis is probably really about whether the herbicide and placebos are differnt than the controls
-4. Our diagnostics are fantistic... the best you've ever seen.
+3. Our hypothesis is probably really about whether the herbicide and placebos are different than the controls.  All Hail the _treatment contrast_!
+4. Our diagnostics are fantastic... the best you've ever seen.
 5. The Anova Table confirms that there are differences - we can reject the null hypothesis
 6. The summary table confirms that Herb1 and Herb2 are both larger than controls and the Placebo is not.
 
-How do we interpret even more?  The estimate associated with Control is 20!  Just where it should be.  
+How do we interpret even more?  
+
+The estimate associated with Control is 20!  Just where it should be.  
 
 The estimates associated with Herb1, Herb2 and Placebo are the differences between the mean of these treatments and the control (the reference level!).  These differences are positive for Herb1 and Herb2, close to 5 and 6 respectively (as expected) and this positive difference is not 0 via the statistical test.  
 
-However, the differnce for Placebo is close to 0 and therefore we can not reject the null hypothesis test that it differs from control.  GENUIS!
+However, the difference for Placebo is close to 0 and therefore we can not reject the null hypothesis test that it differs from control.  GENUIS!
 
 ## A priori vs. Post-Hoc Contrasts
 
-In the semester 1, we introduced how to do a Tukey Test.
+As we discussed above, there are likely several other questions we might have wanted to answer when designing this experiment.  For example, are the two herbicides different in their effects?
 
-This is known as an _a posteriori_ test – testing the significance of things suggested by the experiment, also known as data snooping or data dredging. These are multiple comparison methods (Bonferroni, Scheffe method, Tukey honest significant difference, Duncan’s multiple range test) which try to control the chance of getting a significant result by chance.
+### Custom contrasts versus the Tukey Test
+
+In the semester 1, we introduced how to do a Tukey Test. This is known as an _a posteriori_ test – testing the significance of things suggested by the experiment, also known as data snooping or data dredging. These are multiple comparison methods (Bonferroni, Scheffe method, Tukey honest significant difference, Duncan’s multiple range test) which try to control the chance of getting a significant result by chance.
 
 To understand the risks of these, consider this experimental design.  We have 7 treatments.  With 7 treatments, there are 21 pairwise comparisons. With p-value threshold of $0.05$ we expect 1/20 (5/100) tests to be significant.  So with this 7 treatment and 21 comparison design, would you expect a signficant result by chance?  You betyja.
 
-This is why, unless a priori (in advance) you can justify ALL pairwise comparisons, a tukey test may not be appropriate.
+This is why, unless a priori (in advance) you can justify ALL pairwise comparisons, a Tukey Test may not be appropriate.
 
-Some statisticians really don’t like them “In my view multiple comparison methods have no place at all in the interpretation of data” Nelder (very well respected statistician).
+Some statisticians really don’t like them:
 
-### The more appropriate approach.
+> “In my view multiple comparison methods have no place at all in the interpretation of data” -Nelder (a very very very well respected statistician).
 
-The classical approach is to specify a priori (before experiment) a set of hypotheses then test them using contrasts.  For our experiment, as noted above, we were probably interested in what our treatment contrasts provided - tests of difference with the control.
+#### The more appropriate approach - custom contrasts
 
-Specifying specific contrasts is easy once you get your head around the 'structure' of the syntax.  Lets have a go with specifying a comparison JUST between Herbicide 1 and the control.
+The _more appropriate_ approach is to specify _a priori_ (before the experiment) a set of hypotheses you want to test, and then test them using contrasts.  
+
+For our experiment, as noted above, we were probably interested in what our treatment contrasts provided - tests of difference with the control.  But we had a few others too.
+
+Specifying specific contrasts is easy once you get your head around the 'structure' of the syntax.  
+
+Lets have a go with specifying a comparison JUST between Herbicide 1 and the control. Remember that your model is called `modYield` and your data is called `design`.
 
 ```{r}
 # check the levels and ORDERING of the treatments
-levels(design$treat)
+# this function, levels(), tells you this
+# note the ORDER: it is alphabetical, and control comes first
+# the words fill in four slots c(X,X,X,X). 
+# we will use these slots....
+levels(plantYield$treat)
 
 # define the contrast you want using -1, 1 and 0's
 # this says compare control with herbicide 1.... and ignore the Herb2 and Placebo
-# we give the reference -1 and the 'other' 1.
+# we give the reference -1 to the control slot
+# and the reference 1 to the Herbicide 1 slot.
 contrast <- c(-1,1,0,0)
 
 # use the fit.contrast function from gmodels
 fit.contrast(modYield, "treat", contrast)
+```
 
+So, this says that the difference between the control and Herbicide 1 is ~5 and that this is different from 0.  Does that number `4.16` look familiar?  It should.  It is the same number from the `summary()` table of the full model.  This is because we just specified one of the three treatment contrasts that `summary()` uses.
+
+```{r}
 # remind ourselves of the contrast from the summary table
 summary(modYield)
 ```
 
-> Notice that the results are the same from the summary(modYield) and the fit.contrast.
+#### A different contrast - Herbicide 1 vs Herbicide 2.
 
 If we want to compare the two herbicides we can use this approach.  Note in advance that this contrast DOES NOT exist in the summary table!
 
 ```{r}
 # define the contrast you want using -1, 1 and 0's
 # this says compare herb1 with herb2, ignoring the control and placebo.
-# we give the reference -1 and the 'other' 1.
+# we give the slot for herbicide 1 a "-1" and the slot for herbicide 2 a "1".
 contrast <- c(0,-1,1,0)
 
 # use the fit.contrast function from gmodels
 fit.contrast(modYield, "treat", contrast)
 ```
 
-Isn't this cool?  Note that the difference reported is the difference between the two means: 
+Isn't this cool?  And quite surprising, right?  We did not expect this. This says that despite the difference we created of ~1 unit of yield between Herb1 and Herb2, and even with the big variation, the statistics detect a significant difference.
+
+Note that the difference reported is the difference between the two means that we calcuated from the sumDat calculation above!: 
 
 ```{r}
 # check our summary data
@@ -603,23 +613,23 @@ sumDat
 
 Here it is: $26.2 - 24.2 = 2$
 
-This says that despite the difference we created of ~1 unit of yield between Herb1 and Herb2, when we defined error and generated the data, it created a significant difference detectable with statistics.
+#### A more complex contrast: comparing the average of the herbicide effect with the control.
 
-### comparing the average of the herbicide effect with the control.
-
-This might be a comparison you intended to make also... the average effect of herbicides in general.  To do this, we expand the idea of -1,1 and 0's to include 1/2s (and yes, 1/3's and more are possible):
+This might be a comparison you intended to make also... the average effect of herbicides in general.  To do this, we expand the idea of -1,1 and 0's to include 1/2s (yes, 1/3's and more are possible):
 
 ```{r}
 # define the contrast you want using -1, 1 and 0's
 # this says compare control with the average of herbicide 1 and 2, ignoring the placebo
-# we give the reference -1 and the 'other two' a 1/2 each.
-contrast <- c(-1,1/2,1/2,0)
+# we give the control slot a -1 and the two herbicide slots a 1/2 each.
+contrast <- c(-1, 1/2, 1/2, 0)
 
 # use the fit.contrast function from gmodels
 fit.contrast(modYield, "treat", contrast)
 ```
 
-Again, checking sumDat
+How very cool.  This custom contrast delivers the inference that herbicides on average increase yield by five units.
+
+Again, checking sumDat, we can see where this result comes from.
 
 ```{r}
 sumDat
@@ -627,40 +637,41 @@ sumDat
 
 $(24.2+26.2)/2 = 25.2$ --> $25.2 - 20 = 5.2$
 
-### writing this up...
+### The Write Up using contrasts.
 
 Fill in these blanks using the various contrasts you made above!
 
 >We conclude that herbicides on average cause an _____ gram increase in yield (t = ___ , p = ___ ). We also note that there was a significant difference of _____ grams between the herbicides (t = _____  p = ______). The additional placebo treatment had no effect on yield (t = _______  p = __________).
 
+### Coming Back to Randomisation
 
+We have worked here with a CRD where the measurement units are completely randomised to the experimental treatments.  This simple effort is super valuable.  As you've read.
 
+> Randomisation guards against a variety of possible biases and confounding effects, including the inadvertent biases that might be introduced simply in the process of setting up an experiment.... Randomisation is a critical method for guarding against confounding effects. It is the best insurance we have against unwittingly getting some other factor working in parallel to a treatment. 
 
+But what if we know there is a gradient, or a feature of the environment or lab system that we KNOW could confound the design.  Is there any way we can remove this known pattern? Yes.... of course there is.
 
+## THE RCBD - The Randomised Complete Block Design
 
+Blocking allows us to reduce known experimental error.
 
-<!--chapter:end:05-Design_and_Analysis_of_a_CRD.Rmd-->
+A block is a group of experimental units that are homogeneous in some sense – in the same place, or measured at the same time, or by the same person.  They may experience a similar temperature, or hormone concentration.  They may simply be a position in the incubator where light varies from front to back.
 
-```{r, echo = FALSE}
-library(tidyverse)
-library(agricolae)
-library(visreg)
-library(gmodels)
-```
+So when constructing blocks we try and select experimental units that are homogeneous within blocks but where the blocks, and thus units within them, may be dissimilar.
 
-# Randomized Complete Block design (RCB)
+Why block? When we use a completely randomised design, the location or timing of our treatment 'plots' (patches with different N or soil-moisture, incubators, locations in a 96 well plate) can generate _heterogeneity_ in experimental error (variation).  
 
-Blocking allows us to reduce the experimental error.
-
-A block is a group of experimental units that are homogeneous in some sense – in the same place, or measured at the same time, or by the same person.  So when constructing blocks we try and select experimental units that are homogeneous within blocks but units in different blocks may be dissimilar.
-
-Why block? When we use a completely randomised design, the location or timing of our treatment 'plots' (patches, incubators, locations in a 96 well plate) can generate heterogeneity in experimental error (variation).  As the variance of the Experimental Error increases, confidence intervals get wider and the power of our analysis decreases - it's harder to detect effects of our treatments against the background noise.  Ideally we would like to use experimental units that are homogeneous so the experimental error will be small.  Blocking does this.
+This has consequences for our ability to detect effects.  As the variance of the Experimental Error increases, confidence intervals get wider and the power of our analysis decreases - it's harder to detect effects of our treatments against the background noise.  Ideally we would like to use experimental units that are homogeneous so the experimental error will be small.  Blocking does this.
 
 The simplest blocked design is the **Randomized Complete Block design (RCB)**
 
-We have one complete set of treatments in each block. Say you have g Treatments and r Blocks then the total number of experimental units is?
+We have one complete set of treatments in each block. For the sake of example, lets imagine we identify three 'blocks' - soil moisture zones.  In the design above, we would allocate 10/30 replicates of each treatment to each block.
 
-In the first block, we randomly assign the g treatments to the n units; we do an independent randomization, assigning treatments to units in each of the other blocks. This is the RCB design.
+In the first block, we randomly assign the 10 treatments to n locations in the block. We do an _independent randomization_ in each block. This is the RCB design.
+
+For example, consider the following matrix: the rows are the blocks, the letters the different treatments.  In each block, each treatment is represented, but it is in a different location in the block (randomisation of the g treatments in the n units).  The blocks are in a sequence - left to right - this could be different days, different locations or different positions on a hillside, for example representing an elevation or soil moisture gradient.  
+
+The Blocks are designed to 'capture' that underlying source of variability and allow us to detect among treatment differences more effectively.
 
 For example, consider the following matrix: the rows are the blocks, the letters the different treatments.  In each block, each treatment is represented, but it is in a different location in the block (randomisation of the g treatments in the n units).  The blocks are in a sequence - left to right - this could be different days, different locations or different positions on a hillside, for example representing an elevation or soil moisture gradient.  
 
@@ -693,11 +704,10 @@ In general, any source of variation that you think may influence the response an
 
 ## An example of the RCBD
 
-Lets modify our previous example to including blocking.  Start another section with some ## and call it Blocking Example.
+Lets modify our previous example to including blocking.  If you wish to replicate the analysis, the data are `plantYield_Blocked.csv`. In these data, the means are similar to `plantYield` above, but Herbicide 1 is 10 units higher than the control and Herbicide 2 is 9 units higher.  Furthermore, block 1 is supposed to be ~10 units higher than blocks 2,3,4 while block 5 is ~10 units lower.
 
-Of course, if you want to start another script, you can, but make sure you include all of the library()'s again!
 
-```{r}
+```{r, echo = FALSE}
 #Randomised Complete Block Design
 
 # ensure allocation is the same
@@ -713,18 +723,13 @@ Nblocks <- 5
 Total.units <- Nblocks * length(treat)
 
 # build the design
-design <- design.rcbd(treat, Nblocks, serie = 0)$book
+design2 <- design.rcbd(treat, Nblocks, serie = 0)$book
 
 # look at it
-design
-
+#design2
 ```
 
-This is like the matrix above, but in tidy format!  Excellent.  This is how a block design looks in tidy-land.
-
-Now, lets generate some data again.
-
-```{r}
+```{r, echo = FALSE}
 # set seed again ... 
 set.seed(123)
 
@@ -734,34 +739,36 @@ error <- rnorm(Total.units, mean = 0, sd = 1) # is this more or less variation t
 # generate the observations
 # note that we are now generating larger differences (10 and 9) among treatments
 # e.g. Herb1 is 10 units larger than the control.
-design$obs <- 20 + 
-  (design$treat=="Herb1") * 10 + 
-  (design$treat == "Herb2") * 9 + 
-  (design$treat == "Placebo") * 1 + 
+design2$obs <- 20 + 
+  (design2$treat=="Herb1") * 10 + 
+  (design2$treat == "Herb2") * 9 + 
+  (design2$treat == "Placebo") * 1 + 
   # note that we are defining variation among blocks here
   # block 1 is on average 10 units higher.... and block 5 is now 10 units lower...
-  (design$block==1) * 10 - 
-  (design$block==5) * 10 + 
+  (design2$block==1) * 10 - 
+  (design2$block==5) * 10 + 
   # now add the error variation
   error
 
-head(design, 10)
+head(design2, 10)
+
+plantYield_Block <- design2
 ```
 
 ## Analysing the CRBD
 
-I'll leave it to you now to generate the following plot of the means ± standard errors.  
+I'll leave it to you now to generate the following plot of the means ± standard errors from the `plantYield_Blocked.csv` file.  
 
 This requires thinking hard about the use of dplyr tools (`group_by()` and `summarise()`) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data).  You need to make a _sumDat_ object for the means and se's.  Then you need to plot the raw data, and overlay the mean±se info from the sumDat.
 
-Can you see the variation we generated between block 1 and 5?  Block 2-4 are all similar.... Block 1 is 10 units more, and Block 5 is 10 units less.
+Can you see the variation between block 1 and 5?  Block 2-4 are all similar.... Block 1 is 10 units more, and Block 5 is 10 units less.
 
 ```{r, echo = FALSE}
 # check the data
-glimpse(design)
+#glimpse(plantYield_Block)
 
 # summarise to get means and ses
-sumDat <- design %>% 
+sumDat <- plantYield_Block %>% 
   group_by(treat) %>% 
   summarise(
     meanYield = mean(obs),
@@ -774,27 +781,30 @@ ggplot(sumDat, aes(x = treat, y = meanYield))+
   geom_point(size = 3)+
   geom_errorbar(data = sumDat, aes(ymin = meanYield - seYield, ymax = meanYield+seYield),
                 width = 0.1)+
-  geom_point(data = design, aes(x = treat, y = obs, colour = block), alpha = 0.5, size = 5)
+  geom_point(data = plantYield_Block, aes(x = treat, y = obs, colour = block), alpha = 0.5, size = 5)
 
 ```
 
 ### Building the model
 
-In order to understand what's going on with blocking, and it's importance, lets build the naive model that ignores block - treating this as a CRB - and the correct model, letting block absorb some of the variation.
+In order to understand what's going on with blocking, and it's importance, lets build two models.  This is a good trick and a good process to learn.  The first model is a _naive_ model that ignores block - treating this as a CRB.  The second model is the _correct_ model, letting block absorb the variation we can see among the blocks 1, 2-4 and 5.
 
 ```{r}
 # models
-naive_model <- lm(obs ~ treat, design)
-block_model <- lm(obs ~ block + treat, design) # note the order is important
+naive_model <- lm(obs ~ treat, plantYield_Block)
+# note the order of these factors is important
+# put block first.... so we can absorb this variation first
+# the anova() table is a SEQUENTIAL table!
+block_model <- lm(obs ~ block + treat, plantYield_Block) 
 
 # anova tables
 anova(naive_model)
 anova(block_model)
 ```
 
-The first important thing to focus on here is the difference in the Mean Sq Residual Errors - in the `naive_model`, it is $55.52$.  In the `block_model`, it is $0.94$.
+The first important thing to focus on here is the difference in the Mean Sq Residual Errors - in the `naive_model`, it is $55.52$.  In the `block_model`, it is $0.94$.  Wow....  a massive reduction in the residual error....  where has it gone?
 
-The second important thing to notice is that haveing allocated variation to block in the `block_model`, and thus reducing the error variation, the _treatment_ effect shifts from being insignificant to significant.
+The second important thing to notice is that having allocated variation to block in the `block_model`, and thus reducing the error variation, the _treatment_ effect shifts from being insignificant to significant.  At this point you should try and recall how F-tests are generated (what is the equation!) to really understand how blocking has made such a different.
 
 ### Are the estimates of the parameters what we expect?
 
@@ -806,25 +816,27 @@ Let's remember that, for example, the mean of Herb1 is expected to be 10 units h
 summary(block_model)
 ```
 
-In this table, the _INTERCEPT_ is specifying the **FIRST BLOCK** and the **CONTROL TREATMENT LEVEL** - we know this because it's these words that are missing from the rest of the table, and they are each the first alphanumerially in the list of blocks and treatments.
+In this table, the _INTERCEPT_ is specifying the **FIRST BLOCK** and the **CONTROL TREATMENT LEVEL**. We know this because it's these words that are missing from the rest of the table, and they are each the first alpha-numerially in the list of blocks and treatments.  Make sure you understand this.  It's tricky, but once you get it, it becomes obvious.... look for what is missing from the rest of the table!
 
-The value of the control, block 1 is approximately 30!  Which is 20+10, which is what we expected.
-The value of Herb1 is ~10 units higher than this (remember, the value 9.84 is the DIFFERENCE between the control and treatment)
-And the value of block 5 is reported as 20 unites lower than block 1 control.  This too is correct because, as above, block 1 control is 10 units higher than the control mean (20+10) and block 5 is 10 units lower....  
+- The value of the control, block 1 is approximately 30!  Which is 20+10, which is what we expected.
+- The value of Herb1 is ~10 units higher than this (remember, the value 9.84 is the DIFFERENCE between the control and treatment).
+- And the value of block 5 is reported as 20 unites lower than block 1 control.  This too is correct because, as above, block 1 control is 10 units higher than the control mean (20+10) and block 5 is 10 units lower....  
 
 _Make sure you get this logic!_
 
-The take home message here is that these numbers from the model make complete sense with respect to the data that we simulated.  Furthermore, controlling for the among block variation gave us more power to detect a treatment effect, something we would have missed had we not estimated the block source of variation.
+The take home message here is that these numbers from the model make complete sense with respect to the actual data.  Furthermore, controlling for the among block variation *gave us more power to detect a treatment effect*, something we would have missed had we not estimated the block source of variation.
 
 ### Correct Standard Errors for a Figure
 
-When we made our initial plot above, we calculated the standard error based on all observations among blocks.  However, the variation we really wish to represent is the variation after having controlled for the blocking effects.
-
-This means that the standard deviation we should probably use is of the error variance from the correct model: $0.94$.
+When we made our initial plot above, we calculated the standard error based on all observations among blocks.  However, the variation we really wish to represent is the variation after having controlled for the blocking effects. This means that the standard deviation we should probably use is of the error variance from the correct model: $0.94$.  Can you see where this comes from?  The `Mean Sq` column and `Residuals` row from the `anova()` table.
 
 The standard deviation is the $\sqrt{Var}$ and thus, our correct standard errors from the model are $\sqrt{0.94}$
 
-There is a very nice plotting function in the package _visreg_ that delivers these proper standard errors in a nice ggplot framework.  It presents points that are the partial residuals (deviation from the mean for each replicate), lines depicting the means, and shaded area as a 95% confidence interval, calculated as 1.96*SE, where the SE is estimated from the model error variance (just above). Compare this to your first graph.
+#### `visreg` - a helpful package for automating this.
+
+There is a very nice plotting function in the package _visreg_ that delivers these proper standard errors in a nice ggplot framework.  
+
+It presents points that are the partial residuals (deviation from the mean for each replicate), lines depicting the means, and shaded area as a 95% confidence interval, calculated as $1.96*SE$, where _the SE is estimated from the model error variance_ (just above). Compare this to your first graph.
 
 ```{r}
 visreg(block_model, "treat", gg=TRUE)+
@@ -832,13 +844,13 @@ visreg(block_model, "treat", gg=TRUE)+
   xlab("Treatment") 
 ```
 
-### Making inference: confidence intervals and contrasts
+### Making inference in a blocked model: confidence intervals and contrasts
 
 We are now in a very strong position to make inference.
 
-Let's start with a rule of thumb linked to the 95% confidence interval. If the CIs don't overlap, they are different; if they do, they are not.  This indicates that Cont and Placebo are not significantly different (95% confidence intervals overlap). Herb1 and Herb 2 are significantly different from these, but not each other.
+Let's start with a rule of thumb linked to the 95% confidence interval (CI). If the CIs in the figure above don't overlap, they are different; if they do, they are not.  This indicates that Cont and Placebo are not significantly different (95% confidence intervals overlap). Herb1 and Herb 2 are significantly different from these, but not each other.
 
-This is OK.  But it's not robust.  Let's revisit our _post-hoc_ and _a priori_ methods for evaluating differnces among treatments.  We can apply a tukey test and calculate all pairwise differences.  This is not a good idea, but let's do it.
+This is OK.  But it is not robust.  Instead, let's revisit our _post-hoc_ and _a priori_ methods for evaluating differences among treatments.  We can apply a tukey test and calculate all pairwise differences.  This is not a good idea, but let's do it, using _agricolae_ and the `HSD.test()` function.  Living large!
 
 ```{r}
 # use agricolae HSD.test()
@@ -849,22 +861,19 @@ tukey_out$groups
 
 This confirms our intuition and 95% Confidence Interval insights.  But is it correct?  
 
-Let's make a formal test of one of the pairwise tests that looks obvious - between Herb1 and Herb2
+Let's make a formal test, using the `contrast()` and `fit.contrast()` functions for of one of the pairwise tests that looks obvious - between Herb1 and Herb2.  Even with block in the model, the second argument for `fit.contrast()` is the treatment for which the contrast is made.
 
 ```{r}
 # fit.contrast from gmodels package
+# see that even with the block in the model
 contrast <- c(0,-1,1,0)
 fit.contrast(block_model, "treat", contrast)
 ```
 
-Amazing.  The contrast defining a specific test provides a different answer than the post-hoc Tukey test and our guess based on the 95% CIs.  Why is that?  Which is right?
-
-Of course the contrast is the correct and most reliable result.  While both _fit.contrast_ and _HSD.test_ both manage the model complexity and variance estimates properly, only the contrast reduces the probability of finding a significant difference by chance or failing to find one.
+Amazing.  The contrast defining a specific test provides a different answer than the post-hoc Tukey test.  This is important... the Tukey Test makes lots of tests and they are penalised for so many tests.  But, the contrast is the correct and most reliable result.  While both _fit.contrast_ and _HSD.test_ both manage the model complexity and variance estimates properly, only the contrast reduces the probability of finding a significant difference by chance or failing to find one.
 
 
-
-
-<!--chapter:end:06-The_Randomised_Block_Design.Rmd-->
+<!--chapter:end:04-Complete_and_Blocked_Designs.Rmd-->
 
 # Designs for testing for interactions: factorial designs.
 
