@@ -48,7 +48,7 @@ This section of the course is focused on a class of model called the General Lin
 
 The general linear model is, as we learned in the past few weeks, a model fit in R with the `lm()` function.  It includes regression, ANOVA, ANCOVA and variations of these.  
 
-There are a few key characterstics to remember about these models. The general linear model has the following form:
+There are a few key characteristics to remember about these models. The general linear model has the following form:
 
 $y = \beta_{0}+\beta_{1}*X_{1}+\beta_{2}*X_{2}+\epsilon$
 

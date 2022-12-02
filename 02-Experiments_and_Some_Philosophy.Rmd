@@ -1,4 +1,4 @@
-# Introduction To Experimental Design {#intro}
+# Introduction To Experimental Design
 
 Experiments help us answer questions, but there are also non-experimental techniques. What is so special about experiments? 
 
