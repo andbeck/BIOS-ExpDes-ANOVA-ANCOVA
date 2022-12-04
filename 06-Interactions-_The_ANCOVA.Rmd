@@ -21,6 +21,14 @@ What is very important to understand is that our core statement about interactio
 
 When written like this, the previous statements about slopes should be even more clear.  The effect of body size (continuous) on egg production is a regression and we estimate a slope.  The  effect of the mutagen concentration on tumour formation is a regression and we estimate a slope. We then can ask whether this slope is different between seasons or fly-type.
 
+## What this chapter covers.
+
+This chapter will focus on the ANCOVA, but it also touches on additional concepts.  The primary foci are thus:
+
+1. The ANCOVA model
+2. transformations
+3. 
+
 ## Setting up the various ideas.
 
 Let's start by looking at an example where the effect of Height on Weight varies by Sex.  This is a classic set of data from numerous organisms....  it captures biologically the question about sexual dimorphism - does the relationship between Height and Weight (a regression with the continuous variable Weight) vary by Sex (the categorical variable [e.g. ANOVA], in this case M/F but it can be more depending on organism)?
@@ -192,24 +200,25 @@ The scale-location plot is definitely flatter - you can tell by the range on the
 
 ### Making inference on the ANCOVA
 
-The next step is to use review the ANOVA table - yes, we use the same Anova function to build an anova table to explore the results of an ANCOVA.
+The next step is to use the detail in the ANOVA table - yes, we use the same `anova()` function to build an anova table to explore the results of an ANCOVA.
 
 Let's revisit our initial guesses and work through what the model is telling us:
 
 1. Males are heavier than females (what is the difference in the intercepts?)
 2. The effect of height on weight is positive (the slope(s) are positive, not negative)
 3. There might be a difference in slopes - the Male line is steeper.
-`
+
+Together, the graph and these guesses lead to a feeling that _the effect of height on weight varies by sex_.
 
 ```{r}
 anova(mod_Davis_log)
 ```
 
-The table tells us that there is no evidence for an interaction.  The last line of this table contains the p-value for the interaction.  It is testing the null hypothesis that the slopes are the same.  We can not reject this null hypothesis.  There is no evidence that allowing the slopes for Males and Females be different is supported.  That's the answer to guess 3 above. It is also the answer to our question: does the effect of Height on Weight vary by Sex.  Nope.
+Howwever.... The table tells us that there is _no evidence for an interaction_.  The last line of this table contains the p-value for the interaction.  It is testing the null hypothesis that the slopes are the same.  We can not reject this null hypothesis.  There is no evidence that allowing the slopes for Males and Females be different is supported.  That's the answer to guess 3 above. It is also the answer to our question: does the effect of Height on Weight vary by Sex.  *Nope.*
 
 However, we do detect _main effects_ of height and sex.  This means that each of these DOES have an effect - but we say the effects are additive.
 
-Great.  What this means is that the data actually conform to picture in the lower left.
+Great.  What this means is that the data, despite the pattern our eye sees, can not be distinguished from the pattern in the picture in the lower left.
 
 ```{r, echo = FALSE}
 knitr::include_graphics("images/ANCOVA_1.png")
@@ -219,13 +228,15 @@ There is a slope associated with Height (we don't know whether it's positive or 
 
 > The effect of height on weight did not vary by sex (F = 1.01, df = 1,196, p = 0.29).  The effect of sex (F, df, p) and height (F, df, p) are thus additive on Weight.
 
-Another way to read this is the following:
+Let's work sequentially to read the table now:
 
-When we allow for a common slope associated with logHeight, we capture 4.66 units of variation in weight, which when compared to the 0.013 units of variation left over (residual MSE), is alot.  The F is thus BIG and the p-value small.  When we allow for an effect of Sex to define different average weights, this too is important as it captures 0.344 units of variation in weight, which comparied to the 0.013 units in the residual, is also big (Big F, small P).  However, when we allow for the slopes caused by height to vary with sex, this captures very little variation with respect to the residual variation (0.014 comprared to 0.013) hence a small F and a large P.
+When we allow for a common slope associated with `log(Height)`, we capture $4.66$ units of variation in `log(weight)`, which when compared to the $0.013$ units of variation left over (residual MSE), is a lot.  The F-value is thus BIG and the p-value small.  When we allow for an effect of Sex to define different average `log(weight)`, this too is important as it captures $0.344$ units of variation, which comparied to the $0.013$ units in the residual, is also big (Big F, small P).  
 
-###  The summary table and making sense of the log stuff.
+However, when we allow for the slopes caused by `log(height)` to vary with `sex`, this captures very little additional variation with respect to the residual variation ($0.014$ comprared to $0.013$) hence a small F and a large P for this term.
 
-Let's start investigating the actual details via the `summary` table:
+###  The summary table, the actual slopes and making sense of the log stuff.
+
+Let's start investigating the details via the `summary` table:
 
 ```{r}
 summary(mod_Davis_log)
@@ -233,7 +244,7 @@ summary(mod_Davis_log)
 
 This table reports on the _treatment contrasts_ we introduced earlier this semester.  Let's walk through the details.
 
-The first two rows correspond to one of the sexes.  Can you identify which one?  The hint is looking at the other rows.  They have an M after them.  M comes after F.  So the first two rows correspond to the intercept and slope of the Females.
+The first two rows correspond to one of the sexes.  Can you identify which one?  The hint is looking at the other rows.  They have an M after them.  M comes after F (F is first in the alphabet).  So the first two rows correspond to _the intercept and slope of the Females_.
 
 You may be asking why the intercept is a negative number.  A simple look back at the range of the x-axis should answer this... the y intercept occurs at x = 0, right?
 
@@ -245,67 +256,74 @@ OK... let's interpret what the next two lines mean.  The third line is labelled 
 
 One trick, again, is to recognise the syntax -> the presence of the `:` is indicative of the interaction which is the thing that lets slopes vary.  So, `SexM` is about intercepts and `logHeight:SexM` is about slopes.  But what are they?
 
-Please recall from previous work that treatment contrasts are about DIFFERENCES.  Thus, the `sexM` term is a difference between the female and make intercept and the `logHeight:SexM` is about the difference between the female and make slopes. 
+Recall from previous work that _treatment contrasts are about DIFFERENCES_.  Thus, the `sexM` term is a difference between the female and male intercept!  The `logHeight:SexM` is about the difference between the female and male slopes! 
 
-This allows the following maths....
+This allows the following maths to be worked out ....
 
 `log(weightF) = -5.31 + 1.82*log(heightF)`
 
 `log(weightM) = (-5.31-2.37) + (1.82+0.48)*(log(heightF))`
 
-However, we know that the 0.48 increase in the slope is not siginficant, and as a result, the -2.37 increase in the intercept is also not correct.
+However, we know that the $0.48$ increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept is also not correct.
 
 ###  The equations supported by the model.
 
-In order to identify the equations supported by the model, we can refit the model to reflect the ADDITIVE effects only.
+In order to identify the equations supported by the model - e.g. the equations associated with the estimation of 2 lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the `*` with the `+`.
 
 ```{r}
 mod_Davis_log2 <- lm(log(weight) ~ log(height) + sex, data = Davis)
 summary(mod_Davis_log2)
 ```
 
-Right, now we get our expected pattern:
+Right, now we get our expected pattern where the intercepts are different but the slope is the same:
 
 `log(weightF) = -6.46 + 2.05*log(heightF)`
 
 `log(weightM) = (-6.46 + 0.12) + 2.05*log(heightF)`
 
-We can see the common slope and the slightly higher average weight (0.12 units!) of males.
+We can see the common slope and the slightly higher average weight ($0.12$ units!) of males.
 
 ### Making even more inference and drawing the picture
 
-OK, lets use some plotting tricks and get a nice picture:
+OK, lets use a variation on our plotting tricks from the regression module (week 6) to get a nice picture.  
 
 ```{r}
+# first create a data frame to use that combines the raw data
+# with the predictions from the model.
 
-# first create a data frame to use that combines the raw data 
-# with the predictions from the model
 # note that the model is the ADDITIVE model, for plotting
-plotThis <- Davis %>% 
-  mutate(preds = predict(mod_Davis_log2))
+# first, make a copy of the raw data, and add to it....
+plotThis <- Davis %>%
+  # ... a column of numbers of predicted weight using the model
+  mutate(predWeight = predict(mod_Davis_log2))
 
+head(plotThis)
+```
+
+You can see we have a fourth column now.... these are predictions of `log(weight)` as a function of `log(height)` using the additive model, at each of the originally measured height values in the data frame.  
+
+We can actually use this dataframe to generate the picture that represents the output of the statistical model.
+
+```{r}
 # now, make lines with the model predictions
 # and add the points as the raw data
 # pay attention to where we are using log()!
-ggplot(plotThis, aes(x = log(height), y = preds, col = sex))+
+ggplot(plotThis, aes(x = log(height), y = predWeight, col = sex))+
   geom_line()+
-  geom_point(aes(y = log(weight)))
+  # now add the raw data note
+  geom_point(aes(x = log(height), y = log(weight)))
 ```
 
-Great.  Now we can see that the full model (mod_Davis_log) told us.  The lines are parallel.  There is no interaction.
+Great.  Now we can see that the full model (mod_Davis_log) told us.  The lines are parallel.  There is no interaction. In fact, we can do a bit more here. Remember that the model says
 
-In fact, we can do a bit more here.
-
-Remember that the model says
-
-For women log(weight)= -6.46 + 2.05 * log(height)
-For men   log(weight)= (-6.46 + 0.12) + 2.05 * log(height)
+For women $log(weight)= -6.46 + 2.05 * log(height)$
+For men   $log(weight)= (-6.46 + 0.12) + 2.05 * log(height)$
 
 Because we are in log land, we can do some clever maths: We know that 
 
 `log(weight Female) - log(weight Male) = - 0.12`
 
-(this is the treatment contrast for the intercept).  We also know (please memorise) that the difference between logs is equal to the log of the ratio:
+(this is the treatment contrast for the intercept).  We also know (please memorise) that the _difference between logs is equal to the log of the ratio_:
 
 `log(weightF/weightM) = -0.12`
 
@@ -313,27 +331,7 @@ Finally, we can convert both sides to non-log by exponentiating:
 
 `exp(log(weightF/weightM)) = exp(-0.12) = 0.88`
 
-What does this mean?  At any given height, female weight is 88% of a makes (12% lower).
-
-Cool!  That's one of the benefits of log-log linear relationships.  The ratio of the categories in log-log land directly translates to a percent difference between the groups.
-
-It's also worth noting that the height slope is ~2, which suggests... yes... because we are in log-land, that weight scales with $height^2$.
-
-One way to 'test' this is to ask whether estimating the log(weight) slope improve the fit of the model compared to fixing it at 2.  Here are ways: 'by hand' and by a function in the `car` package.
-
-```{r}
-# by hand
-# we use the offset function to fix the slope of height at 2
-mod_Davis_offset <-lm(log(weight) ~  sex + offset(2*log(height)), data=Davis)
-
-# then compare it to the model where we estimate it freely.
-anova(mod_Davis_log2, mod_Davis_offset)
-
-# by car package
-car::linearHypothesis(mod_Davis_log2, "log(height) = 2") # the estimate IS 2
-car::linearHypothesis(mod_Davis_log2, "log(height) = 0") # the estimate IS NOT 0.
-```
-
+What does this mean?  At any given height, female weight is 88% of a males (e.g. 12% lower). Cool!  That's one of the benefits of log-log linear relationships.  _The ratio of the categories in log-log land directly translates to a percent difference between the groups_. It's also worth noting that the height slope is ~2, which suggests... yes... because we are in log-land, that weight scales with $height^2$.
 
 ## Some General Principles
 
@@ -341,7 +339,7 @@ car::linearHypothesis(mod_Davis_log2, "log(height) = 0") # the estimate IS NOT 0
 
 This figure highlights the various models and interpretations associated with the pieces of an ANCOVA dataset.  This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.
 
-Note that just because your data looks like a particular pattern doesn't mean you should use that model.  Your statistical model should be driven by your question and original design.
+> Note that just because your data looks like a particular pattern doesn't mean you should use that model.  Your statistical model should be driven by your question and original design.
 
 ```{r, echo = FALSE, fig.cap = "From Getting Started with R, 2nd Edition, OUP"}
 knitr::include_graphics("images/GSwithR_Grid.png")
@@ -354,10 +352,10 @@ Compare the result of the first test to the last line of the second.  This prove
 
 ```{r}
 anova(mod_Davis_log, mod_Davis_log2)
-Anova(mod_Davis_log)
+anova(mod_Davis_log)
 ```
 
-### Specifying models in R
+## A few parting tricks about specifying models in R
 
 We can add terms
 `weight ~ sex + height`
