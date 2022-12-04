@@ -206,6 +206,8 @@ We also make a mistake of analysing the data that has an interaction with a mode
 
 We are thus making three models.  A model of the no interaction data without specifying and interaction, a model of the interaction data without specifying and interaction and a model of the interaction data with and interaction specified.  This second model is incorrect, but fitting it helps illuminate why you should fit the interaction if your design contains the potential for an interaction (a factorial design).
 
+> An  Important Note on what + and * mean in models.  In the below model specification, you will see CO2 + UVB and CO2 * UVB.  Using the vocabulary from above, CO2 + UVB is specifying independent additive effects. In the ANOVA table produced by anova(), there will be three lines: one for CO2, one for UVB and one for residuals. In contrast, CO2 * UVB produces four lines of output in the ANOVA table.  We say that CO2 * UVB expands to include the main, independent effects of CO2 and UVB, but also the interaction between them.  So CO2 * UVB == CO2 + UVB + CO2:UVB where the last term is the interaction.  Thus, there are four lines reported: one for CO2, one for UVB, one for the interaction and one for residuals.
+
 ```{r}
 # A Correct model with no interaction on data with no interaction
 int_mod_1 <- lm(yield_ind ~ CO2 + UVB, data = plantYield_factorial)

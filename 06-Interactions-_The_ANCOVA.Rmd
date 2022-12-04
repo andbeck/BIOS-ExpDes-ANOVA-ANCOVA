@@ -1,4 +1,4 @@
-# Introducing the ANCOVA - the analysis of covariance    
+# Interactions Part 2: Introducing the ANCOVA (analysis of covariance)
 
 ```{r, echo = FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -12,19 +12,19 @@ library(patchwork)
 
 In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA.  In these models, the explanatory variables are categorical (they are factors).  This means explanatory variable has distinct, discrete categories or _levels_.
 
-In many of our experiments, however, we might combine these categorical variables with a continuous variable.  For example, we might estimate eggs produced as a function of body size and season or we might estimate the effect on plant growth rates of soil moisture in high versus low Nitrogen (N) conditions.
+In many of our experiments, however, we might combine a categorical variable with a continuous variable.  For example, we might estimate eggs produced as a function of body size (continuous) and season (categorical).  Or we might estimate the effect of a mutagen (continuous) on tumour formation in wild type vs. genetically modified (catagorical) fruit flies.
 
-These simple examples describe an ANCOVA, where the one explanatory variable is continuous (e.g. body size or soil moisture) and the other is categorical (e.g. season or N-level).  When this is the case, we are essentially combining the ANOVA with the Regression.  If we recall that regression is largely about estimatinge slopes and intercepts, we might think, hey, COOL, so in an ANCOVA, we can ask if the categorical variable alters the slope or not.....
+These simple examples describe an ANCOVA, where the one explanatory variable is continuous (e.g. body size or mutagen) and the other is categorical (e.g. season or fly-type).  When this is the case, we are essentially combining the ANOVA with the Regression model!  If we recall that regression is largely about estimating slopes and intercepts, we might think, hey, COOL, so in an ANCOVA, we can ask if the categorical variable alters the slope or not..... and that'd be correct.
 
-What's very important to understand is that our core statement about interactions does not change.
+What is very important to understand is that our core statement about interactions does not change.
 
-> The effect of X on Y varies by Z, translates to a) The effect of body size on egg production varies by season; or b) the effect of soil moisture on growth rate varies by N-level
+> The effect of X on Y varies by Z, translates to a) The effect of body size on egg production varies by season; or b) the effect of mutagen on tumour formation varies by fly-type.
 
-When written like this, the previous statements about slopes should be even more clear.  The effect of body size (continuous) on egg production is a regression and we estimate a slope.  We then can ask whether this slope is different between seasons.
+When written like this, the previous statements about slopes should be even more clear.  The effect of body size (continuous) on egg production is a regression and we estimate a slope.  The  effect of the mutagen concentration on tumour formation is a regression and we estimate a slope. We then can ask whether this slope is different between seasons or fly-type.
 
 ## Setting up the various ideas.
 
-Let's start by looking at an example where the effect of Height on Weight varies by Sex.  This is a classic set of data from numerous organisms....  it captures biologically the question about sexual dimorphism - does the relationship between Height and Weight (a regression) vary by Sex (ANOVA)?
+Let's start by looking at an example where the effect of Height on Weight varies by Sex.  This is a classic set of data from numerous organisms....  it captures biologically the question about sexual dimorphism - does the relationship between Height and Weight (a regression with the continuous variable Weight) vary by Sex (the categorical variable [e.g. ANOVA], in this case M/F but it can be more depending on organism)?
 
 This relationship can take on many patterns.
 
@@ -37,15 +37,17 @@ knitr::include_graphics("images/ANCOVA_1.png")
 - In the lower left, we might argue that there is a positive relationship between Weight and Height, that the relationship between Weight and Height does not vary (the slope is the same) and that Males are heavier (the red dots are mostly above the blue)
 - In the lower right, we see evidence of an interaction - the effect of Height on Weight (the slopes), varies by Sex.
 
-It's quite important to recognise that each of patterns is possible outcome to testing the SAMEa hypothesis. The key thing to remember is that we have an a priori (in advance hypothesis).  Regardless of the pattern, we should specify the appropriate model to test your the hypothesis and answer the question that motivated the design of the experiment and data collection.
+It's quite important to recognise that each of these patterns (predictions) is possible outcome to testing the SAME null hypothesis. The key thing to remember is that we have an a priori (in advance hypothesis) that there is no difference between the slopes for males and females. Regardless of the pattern, we should specify the appropriate model to test your the hypothesis and answer the question that motivated the design of the experiment and data collection.
 
-For example, in these data, we fundamentally start with the question - does the effect of Height on Weight vary by Sex.  The data might look like any of the above patterns.  But as we started with that, we have to try and answer that question.  And there is only one model syntax in the above figure that does this: `Weight ~ Height * Sex`.  We'll expand on what this means as we work through the example.
+Let's be super clear: in these data we start with the fundamental question that uses the same vocabulary that we used in the previous chapter - does the effect of Height on Weight vary by Sex.  The data might look like any of the above patterns.  There is only one model syntax in the above figure that tests the null hypothesis and gives us a chance to evaluate the predictions: `lm(Weight ~ Height * Sex, data = data.frame.name)`.  
+
+> If you need a refresher on what the * symbol means, pop back to chapter 5 where we explain this when we fit the models.
 
 ## Working through and example.
 
 Let's work with a built in dataset in R - the Davis Study, which is exactly these data.  The associated assignment is another example.
 
-The process of doing this will follow a tried and true approach to analysing data.  You should embed this workflow in your head:
+The process of doing this will follow a tried and true approach to analysing data.  You should have this workflow fully embedded in your head now:
 
 1) PLOT the Data
 2) Build the model to test the hypothesis
