@@ -5,7 +5,6 @@ library(tidyverse)
 library(ggfortify)
 library(agricolae)
 library(car)
-library(gmodels)
 library(visreg)
 library(patchwork)
 ```
@@ -43,6 +42,14 @@ Let's be super clear: in these data we start with the fundamental question that 
 
 > If you need a refresher on what the * symbol means, pop back to chapter 5 where we explain this when we fit the models.
 
+Let us also revisit the sequential nature of the ANOVA table output....  with an ANCOVA, we will see first an estimate of variation explained by the continuous variable, then the categorical variable and finally, after seeing the report on both of those, an estimate of the variation attributable to the interaction.  Another way to think of this is as follows (explore the figures above along with this):
+
+What is the estimate of the intercept and slope, ignoring the different categories, and how much variation does this explain.
+What happens if we let there be two lines, one for each category, but with the same slope (e.g. different intercepts, but same slope).  Does this explain more variation?
+Finally, what if we let there be two lines, and different slopes (the interaction exists) - does this explain additional variation?
+
+If we get to the last scenario, and the answer is yes, after all the other options, the _different slopes_ does capture variation in our response, we have evidence of an interaction.
+
 ## Working through and example.
 
 Let's work with a built in dataset in R - the Davis Study, which is exactly these data.  The associated assignment is another example.
@@ -57,9 +64,16 @@ The process of doing this will follow a tried and true approach to analysing dat
 
 ### Get the data and make your picture
 
-The data are built into R, but embedded in the `carData` package, which was installed with the `car` package.
+The data are built into R, but embedded in the `carData` package, which is installed with the `car` package - download and install this and they you can use the following code (don't forget the `tidyverse`, `agricolae`, `ggfortify`, `visreg` etc).
 
 ```{r}
+library(tidyverse)
+library(ggfortify)
+library(visreg)
+library(patchwork)
+library(agricolae)
+
+
 Davis <- carData::Davis
 
 glimpse(Davis)
@@ -68,9 +82,7 @@ ggplot(Davis, aes(x = height, y = weight, col = sex))+
   geom_point()
 ```
 
-Ahh.... first hurdle.... what's going on here?  Well, always plot your data is totally justified, because it looks like one of the data points has the Height and Weight data entered incorrectly.
-
-Let's fix that.  Lets find the row, and make the change
+Ahh.... first hurdle.... what's going on here?  Well, _"always plot your data"_ is totally justified here: it looks like one of the data points has the Height and Weight data entered incorrectly, the wrong way around.  This is a 'feature' of this dataset.  Of course you could go back to your spreadsheet master and make the change, but let's see how to do this using R.  Let's fix that.  Lets find the row, and make the change
 
 ```{r}
 #which row? 12
@@ -80,7 +92,7 @@ Davis %>% filter(height < 100)
 Davis$weight[12]
 Davis$height[12]
 
-# BASE R syntax to change them
+# BASE R syntax to change the specific values in the specific row
 Davis$weight[12] <- 57
 Davis$height[12] <- 166
 
@@ -91,7 +103,8 @@ ggplot(Davis, aes(x = height, y = weight, col = sex))+
 
 Excellent.  Lets look at this picture and ask ourselves whether the effect of Height on Weight appears to vary by Sex?  What do you think?
 
-We can actually get a bit of help here.  We can use some ggplot magic to help us make this GUESS. 
+We can actually get a bit of help here.  We can use some ggplot magic to help us make this GUESS. Let's use `geom_smooth()` to help us guess the answer.
+
 > NOTE: this is not doing statistics.  This is using graphics to help guide our expectation of the outcome of doing the statistical test of our hypothesis.
 
 ```{r}
@@ -107,13 +120,13 @@ Again, we have not 'proven' anything or tested our hypothesis.  What we have is 
 2. The effect of height on weight is positive (the slope(s) are positive, not negative)
 3. There might be a difference in slopes - the Male line is steeper.
 
-We might even go as far to estimate by eye the slope assuming that there is no effect of Sex.  Recalling that the slope is the rise/run or the change in y over the change in x, we can guess that the slope is ~ (100-40)/(200-140) = (60/60) = 1.  We are not expecting much variation around that.  But if we see the statistics returning a value 10x more or less than this, we should be concerned!
+We might even go as far to estimate by eye the slope assuming that there is no effect of Sex.  Recalling that the slope is the rise/run or the change in y over the change in x, we can guess that the slope is ~ $(100-40)/(200-140) = (60/60) = 1$.  We are not expecting much variation around that.  But if we see the statistics returning a value 10x more or less than this, we should be concerned!  Can you guess for each Sex?
 
 ## Building the model (and understanding it)
 
 The next step is to build the model to test our hypothesis.  As we declared above, the model to test the interaction is `lm(weight ~ height * sex, data = Davis)`.  Let's discuss this a bit.
 
-First, this model expands to the following full description:
+First, as described above, and in Chapter 5, this model with the `*` expands to the following full description:
 
 `lm(weight ~ height + sex + height:sex, data = Davis)`
 
@@ -128,7 +141,7 @@ mod_Davis <- lm(weight ~ height + sex + height:sex, data = Davis)
 
 That's it.  We've got the model. But before we make any attempts at actually evaluating our test of the hypothesis, we have to check the assumptions!  
 
-To do this, we use the autplot function from the ggfortify package.  
+To do this, we use the `autoplot` function from the `ggfortify` package.  
 
 ```{r}
 autoplot(mod_Davis)
@@ -144,16 +157,30 @@ In the lower left, we are evalauting the assumption of a constant mean-variance 
 
 ### Dealing with some issues with residuals.
 
-The above issue is one we can deal with via a _transformation_.  Let's start with the facts....  When the variance increases with the mean, one transformation that can work is the logarithm of the continuous variables.
+The above issue is one we can deal with via a _transformation_.  
 
-ADD DYLANS STUFF FROM MEE PAPERS and Mean - VARIANCE
+Let's start with the facts....  When the _variance increases with the mean_, a transformation that can work is the _logarithm of the continuous variables_.
+
+There is a short section in the (APS 240 reading)[https://dzchilds.github.io/stats-for-bio/data-transformations.html#trans-types] to explore.  Please do read this summary about transformations, and bookmark it.
+
+A question that routinely comes up is whether transformations are 'changing the data'.  Rather than focusing on this, we offer the following interpretation.  Linear models fit by `lm()` carry a set of assumptions (our focus on the three panels using autoplot).  If these are not met, we can not trust our inference (F-testing). 
+
+> Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that t-tests, ANOVAs and regressions are generally quite robust—they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances change a lot across groups  - from (APS 240)[https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction].
+
+But if there are real problems, we can use transformations.  They do not 'change the data'  instead, they retain the relationships between the data points, but put everything on a difference scale so that we can use the power of the linear model to answer the question.  The tricky thing is how do we report our insights to the reader back on the original 'response' scale.  We'll get to that.  But rest assured, transformations don't change the data.
+
+So, here are the data where we transform both continuous variables - the response and the continuous explanatory.
 
 ```{r}
 # re-plot with log-log
 ggplot(data = Davis, aes(x = log(height), y = log(weight), col = sex))+
   geom_point()+
   geom_smooth(method = lm, se = FALSE)
+```
 
+OK.  The patterns are still there.  And let's see what happens with the model and assumptions now!
+
+```{r}
 # fit the model - note we can specify the transformation RIGHT IN THE MODEL
 mod_Davis_log <- lm(log(weight) ~ log(height) * sex, data = Davis)
 
@@ -161,13 +188,11 @@ mod_Davis_log <- lm(log(weight) ~ log(height) * sex, data = Davis)
 autoplot(mod_Davis_log)
 ```
 
-This is definitely flatter - you can tell by the range on the y-axis of the scale-location plot.
-
-So, we can now move to evaluating the model.  You are probably thinking about what it means to analyse the data on the log-log axis.... we will come to that shortly.
+The scale-location plot is definitely flatter - you can tell by the range on the y-axis of the scale-location plot.  So, with this transformation, we can now move to evaluating the model.  You are probably thinking about what it means to analyse the data on the log-log axis.... we will come to that shortly.
 
 ### Making inference on the ANCOVA
 
-OK.  So, the next step is to use review the ANOVA table - yes, we use the same Anova function to build an anova table to explore the results of an ANCOVA.
+The next step is to use review the ANOVA table - yes, we use the same Anova function to build an anova table to explore the results of an ANCOVA.
 
 Let's revisit our initial guesses and work through what the model is telling us:
 

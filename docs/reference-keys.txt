@@ -67,3 +67,5 @@ making-even-more-inference-and-drawing-the-picture
 some-general-principles
 ancova-always-tests-the-interaction-against-the-additive-model
 specifying-models-in-r
+fig:unnamed-chunk-15
+interactions-part-2-introducing-the-ancova-analysis-of-covariance
