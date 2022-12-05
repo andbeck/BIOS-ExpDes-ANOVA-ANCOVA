@@ -123,7 +123,9 @@
 <p>Linear models are perfectly capable of being used to estimate non-linear relationships!</p>
 <p>Here is the code to make that figure.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># set x range</span></span>
+<code class="sourceCode R"><span><span class="co"># because we are using random numbers</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span><span class="co"># set x range</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">100</span><span class="op">:</span><span class="fl">100</span></span>
 <span><span class="co"># define y without error</span></span>
 <span><span class="va">y_det</span> <span class="op">&lt;-</span> <span class="fl">0.01</span><span class="op">+</span><span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
