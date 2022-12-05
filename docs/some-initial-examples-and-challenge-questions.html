@@ -4,16 +4,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Page not found | An Introduction to Experimental Design ANOVA and ANCOVA</title>
+<title>Chapter 4 Some initial examples and challenge questions | An Introduction to Experimental Design ANOVA and ANCOVA</title>
 <meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
-<meta name="description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
+<meta name="description" content="In this section, we will review a field based experimental design example. There are challenge questions to answer. We will also introduce tools to generate randomised experimental designs - this...">
 <meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Page not found | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta property="og:title" content="Chapter 4 Some initial examples and challenge questions | An Introduction to Experimental Design ANOVA and ANCOVA">
 <meta property="og:type" content="book">
-<meta property="og:description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
+<meta property="og:description" content="In this section, we will review a field based experimental design example. There are challenge questions to answer. We will also introduce tools to generate randomised experimental designs - this...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Page not found | An Introduction to Experimental Design ANOVA and ANCOVA">
-<meta name="twitter:description" content="The page you requested cannot be found (perhaps it was moved or renamed). You may want to try searching to find the page's new location, or use the table of contents to find the page you are...">
+<meta name="twitter:title" content="Chapter 4 Some initial examples and challenge questions | An Introduction to Experimental Design ANOVA and ANCOVA">
+<meta name="twitter:description" content="In this section, we will review a field based experimental design example. There are challenge questions to answer. We will also introduce tools to generate randomised experimental designs - this...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
@@ -45,7 +45,7 @@
 <li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
 <li><a class="" href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></li>
 <li><a class="" href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></li>
-<li><a class="" href="some-initial-examples-and-challenge-questions.html"><span class="header-section-number">4</span> Some initial examples and challenge questions</a></li>
+<li><a class="active" href="some-initial-examples-and-challenge-questions.html"><span class="header-section-number">4</span> Some initial examples and challenge questions</a></li>
 <li><a class="" href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></li>
 <li><a class="" href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></li>
 <li><a class="" href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><span class="header-section-number">7</span> Interactions Part 2: Introducing the ANCOVA (analysis of covariance)</a></li>
@@ -56,18 +56,58 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="page-not-found" class="section level1">
-<h1>Page not found<a class="anchor" aria-label="anchor" href="#page-not-found"><i class="fas fa-link"></i></a>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="some-initial-examples-and-challenge-questions" class="section level1" number="4">
+<h1>
+<span class="header-section-number">4</span> Some initial examples and challenge questions<a class="anchor" aria-label="anchor" href="#some-initial-examples-and-challenge-questions"><i class="fas fa-link"></i></a>
 </h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<p>In this section, we will review a field based experimental design example. There are challenge questions to answer.</p>
+<p>We will also introduce tools to generate randomised experimental designs - this is a good trick to have up your sleeves!</p>
+<div id="designing-your-first-experiment" class="section level2" number="4.1">
+<h2>
+<span class="header-section-number">4.1</span> Designing your first experiment<a class="anchor" aria-label="anchor" href="#designing-your-first-experiment"><i class="fas fa-link"></i></a>
+</h2>
+<p>You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased <span class="math inline">\(CO_{2}\)</span> impacts on plant growth.</p>
+<p>Context: an arctic tundra study</p>
+<ul>
+<li>Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)</li>
+<li>Increasing atmospheric <span class="math inline">\(CO_{2}\)</span> (<span class="math inline">\(+CO_{2}\)</span>) from anthropogenic emissions</li>
+<li>For plants: +UV-B potentially harmful, +CO2 potentially beneficial</li>
+</ul>
+<p>Hypotheses</p>
+<ul>
+<li>Elevated (+) UV-B radiation will reduce the growth of arctic plants</li>
+<li>Elevated (+) <span class="math inline">\(CO_{2}\)</span> will increase the growth of arctic plants</li>
+</ul>
+<div class="inline-figure"><img src="images/ArcticPlants.png" width="241"></div>
+<p>The resources available to you are constrained. The arctic research station has given permission for 16 plots (each 2m x 2m) in the natural vegetation nearby.</p>
+<ul>
+<li>One +UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)</li>
+<li>One <span class="math inline">\(+CO_{2}\)</span> plot (2m x 2m) costs £6000 (this provides a <span class="math inline">\(CO_{2}\)</span> release system, <span class="math inline">\(CO_{2}\)</span> control and covers <span class="math inline">\(CO_{2}\)</span> purchase costs, wooden walkways around the plots)</li>
+<li>One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)</li>
+</ul>
+<p>You have a budget of £61,000</p>
+<p>Design an experiment to test the hypotheses (i.e. the design of the plots and treatments including replication, not what measurements you will take - which will be plant growth rates….). Think hard about this. How many treatments do you have? How many plots/treatment would you like to allocate? Is this possible? Will this be a balanced design, given your max budget? If it isn’t, what rule can you use to allocate them replicates to treatments?</p>
+<p>Write an answer down, before moving to the next section (this is part of the DO THIS package of challenges). We’ll provide the answer separately!</p>
+
+</div>
 </div>
   <div class="chapter-nav">
-<div class="empty"></div>
-<div class="empty"></div>
+<div class="prev"><a href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></div>
+<div class="next"><a href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    </div>
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#some-initial-examples-and-challenge-questions"><span class="header-section-number">4</span> Some initial examples and challenge questions</a></li>
+<li><a class="nav-link" href="#designing-your-first-experiment"><span class="header-section-number">4.1</span> Designing your first experiment</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
 
 </div>
 </div> <!-- .container -->

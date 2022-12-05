@@ -284,8 +284,6 @@ Please install these packages, if you have not already, using the install packag
 \item
   \texttt{car}
 \item
-  \texttt{gmodels}
-\item
   \texttt{visreg}
 \item
   \texttt{patchwork}
@@ -351,9 +349,9 @@ An experiment has \emph{treatments, experimental units, responses, and a method 
 Not all experimental designs are created equal. A good experimental design must adhere to the 3Rs. It should reveal consistency, responsiveness and mechanism. The way this happens is by avoiding systematic error in measuring things, and allow estimation of error in measurements with precision.
 
 \hypertarget{the-holy-grail-of-a-control}{%
-\section{The holy grail of a control}\label{the-holy-grail-of-a-control}}
+\subsection{The holy grail of a control}\label{the-holy-grail-of-a-control}}
 
-At this point, it would be good to revisit the APS 240 sections \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#experimental-control}{on controls} and \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#EXPT-DESIGN-PROCEDURAL-CONTROLS}{procedural controls}
+At this point, it would be very good to revisit the APS 240 sections \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#experimental-control}{on controls} and \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#EXPT-DESIGN-PROCEDURAL-CONTROLS}{procedural controls}
 
 \hypertarget{so-what-does-a-good-experimental-design-do}{%
 \section{So what does a good experimental design do?}\label{so-what-does-a-good-experimental-design-do}}
@@ -421,8 +419,7 @@ Consider an educational study, with six classrooms of 25 pupils. Each classroom 
 
 At the end of a six-week term, all the students are evaluated via a common reading exam.
 
-\hypertarget{the-challenge-question}{%
-\subsubsection{The challenge question}\label{the-challenge-question}}
+\emph{The challenge question}
 
 \begin{quote}
 Are there six experimental units (the classrooms) or 150 (25*6; the students)? We measured the reading ability of the students\ldots{} but they were in classroom sets of 25\ldots.
@@ -446,8 +443,8 @@ Confusing these two things can lead to \textbf{pseudo-replication}. Treating mea
 
 There is additional information on \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#independence}{Independence and Pseudoreplication} in the the APS 240 book.
 
-\hypertarget{independence-and-example}{%
-\subsubsection{Independence: and example}\label{independence-and-example}}
+\hypertarget{independence-an-example}{%
+\subsubsection{Independence: an example}\label{independence-an-example}}
 
 Consider an experiment with two growth chambers each containing 100 plants. One of the chambers received enhanced C02. One night after collecting data you leave the door open on the C02 chamber and the temperature drops and so the plants grow more slowly. When you come to analyze the data you get a highly significant effect of slow growth. However, that C02 results in reduced plant growth not what you expect (CO2 is good for photosynthesis\ldots).
 
@@ -477,7 +474,7 @@ Recall our example above of considering sex and age of subjects and imagine a tr
 The beauty of randomization is that it helps prevent \emph{confounding}, even for factors that we do not know are important.
 
 \hypertarget{haphazard-is-not-randomized---beware-the-non-randomized-experiment}{%
-\subsection{\texorpdfstring{\textbf{haphazard} is NOT randomized - beware the non-randomized experiment --}{haphazard is NOT randomized - beware the non-randomized experiment --}}\label{haphazard-is-not-randomized---beware-the-non-randomized-experiment}}
+\subsection{\texorpdfstring{\textbf{Haphazard} is NOT randomized - beware the non-randomized experiment}{Haphazard is NOT randomized - beware the non-randomized experiment}}\label{haphazard-is-not-randomized---beware-the-non-randomized-experiment}}
 
 A company is evaluating two different word processing packages for use by its clerical staff. Part of the evaluation is how quickly a test document can be entered correctly using the two programs. We have 20 test secretaries, and each secretary will enter the document twice, using each programme once.
 
@@ -527,8 +524,8 @@ There is a really common question that people ask. How many replicates do I need
 
 There is, however, a set of tools that can help with estimating sample sizes. It's called power analysis and requires that you have some a priori estimate of the expected variation in your response variable.
 
-\hypertarget{examples-and-challenge-questions}{%
-\chapter{Examples and Challenge Questions}\label{examples-and-challenge-questions}}
+\hypertarget{some-initial-examples-and-challenge-questions}{%
+\chapter{Some initial examples and challenge questions}\label{some-initial-examples-and-challenge-questions}}
 
 In this section, we will review a field based experimental design example. There are challenge questions to answer.
 
@@ -537,30 +534,49 @@ We will also introduce tools to generate randomised experimental designs - this 
 \hypertarget{designing-your-first-experiment}{%
 \section{Designing your first experiment}\label{designing-your-first-experiment}}
 
-You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased CO2 impacts on plant growth.
+You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased \(CO_{2}\) impacts on plant growth.
 
 Context: an arctic tundra study
-Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
-Increasing atmospheric CO2 (+CO2) from anthropogenic emissions
-For plants: +UV-B potentially harmful, +CO2 potentially beneficial
+
+\begin{itemize}
+\tightlist
+\item
+  Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
+\item
+  Increasing atmospheric \(CO_{2}\) (\(+CO_{2}\)) from anthropogenic emissions
+\item
+  For plants: +UV-B potentially harmful, +CO2 potentially beneficial
+\end{itemize}
 
 Hypotheses
-Elevated (+) UV-B radiation will reduce the growth of arctic plants
-Elevated (+) \(CO_{2}\) will increase the growth of arctic plants
+
+\begin{itemize}
+\tightlist
+\item
+  Elevated (+) UV-B radiation will reduce the growth of arctic plants
+\item
+  Elevated (+) \(CO_{2}\) will increase the growth of arctic plants
+\end{itemize}
 
 \includegraphics[width=6.69in]{images/ArcticPlants}
 
 The resources available to you are constrained. The arctic research station has given permission for 16 plots (each 2m x 2m) in the natural vegetation nearby.
 
-One +UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)
-One \(+CO_{2}\) plot (2m x 2m) costs £6000 (this provides a CO2 release system, CO2 control and covers CO2 purchase costs, wooden walkways around the plots)
-One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)
+\begin{itemize}
+\tightlist
+\item
+  One +UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)
+\item
+  One \(+CO_{2}\) plot (2m x 2m) costs £6000 (this provides a \(CO_{2}\) release system, \(CO_{2}\) control and covers \(CO_{2}\) purchase costs, wooden walkways around the plots)
+\item
+  One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)
+\end{itemize}
 
 You have a budget of £61,000
 
 Design an experiment to test the hypotheses (i.e.~the design of the plots and treatments including replication, not what measurements you will take - which will be plant growth rates\ldots.). Think hard about this. How many treatments do you have? How many plots/treatment would you like to allocate? Is this possible? Will this be a balanced design, given your max budget? If it isn't, what rule can you use to allocate them replicates to treatments?
 
-Write an answer down, before moving to the next section. We'll provide the answer separately!
+Write an answer down, before moving to the next section (this is part of the DO THIS package of challenges). We'll provide the answer separately!
 
 \hypertarget{design-and-analysis-of-experiments}{%
 \chapter{Design and Analysis of Experiments}\label{design-and-analysis-of-experiments}}

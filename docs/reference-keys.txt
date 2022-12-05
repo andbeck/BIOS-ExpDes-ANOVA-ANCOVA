@@ -15,15 +15,14 @@ placebos
 confounders
 experimental-vs.-measurement-units
 experimental-and-measurement-units-an-example
-the-challenge-question
 identifying-the-experimental-unit---an-example-of-pseudo-replication
 psudo-replication
-independence-and-example
+independence-an-example
 randomization-with-replication-protects-against-confounding
 haphazard-is-not-randomized---beware-the-non-randomized-experiment
 mini-quiz
 replication-how-many
-examples-and-challenge-questions
+some-initial-examples-and-challenge-questions
 designing-your-first-experiment
 design-and-analysis-of-experiments
 a-crd-completely-randomised-design-example
