@@ -11,7 +11,7 @@ library(patchwork)
 
 In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA.  In these models, the explanatory variables are categorical (they are factors).  This means explanatory variable has distinct, discrete categories or _levels_.
 
-In many of our experiments, however, we might combine a categorical variable with a continuous variable.  For example, we might estimate eggs produced as a function of body size (continuous) and season (categorical).  Or we might estimate the effect of a mutagen (continuous) on tumour formation in wild type vs. genetically modified (catagorical) fruit flies.
+In many of our experiments, however, we might combine a categorical variable with a continuous variable.  For example, we might estimate eggs produced as a function of body size (continuous) and season (categorical).  Or we might estimate the effect of a mutagen (continuous) on tumour formation in wild type vs. genetically modified (categorical) fruit flies.
 
 These simple examples describe an ANCOVA, where the one explanatory variable is continuous (e.g. body size or mutagen) and the other is categorical (e.g. season or fly-type).  When this is the case, we are essentially combining the ANOVA with the Regression model!  If we recall that regression is largely about estimating slopes and intercepts, we might think, hey, COOL, so in an ANCOVA, we can ask if the categorical variable alters the slope or not..... and that'd be correct.
 
@@ -27,7 +27,7 @@ This chapter will focus on the ANCOVA, but it also touches on additional concept
 
 1. The ANCOVA model
 2. transformations
-3. 
+3. plotting model results when you've made transformations.
 
 ## Setting up the various ideas.
 
@@ -44,13 +44,15 @@ knitr::include_graphics("images/ANCOVA_1.png")
 - In the lower left, we might argue that there is a positive relationship between Weight and Height, that the relationship between Weight and Height does not vary (the slope is the same) and that Males are heavier (the red dots are mostly above the blue)
 - In the lower right, we see evidence of an interaction - the effect of Height on Weight (the slopes), varies by Sex.
 
-It's quite important to recognise that each of these patterns (predictions) is possible outcome to testing the SAME null hypothesis. The key thing to remember is that we have an a priori (in advance hypothesis) that there is no difference between the slopes for males and females. Regardless of the pattern, we should specify the appropriate model to test your the hypothesis and answer the question that motivated the design of the experiment and data collection.
+It's quite important to recognise that each of these patterns (predictions) is possible outcome to testing the SAME null hypothesis. The key thing to remember is that we have an _a priori_ (in advance hypothesis) that there is no difference between the slopes for males and females. Regardless of the pattern, we should specify the appropriate model to test your the hypothesis and answer the question that motivated the design of the experiment and data collection.
 
-Let's be super clear: in these data we start with the fundamental question that uses the same vocabulary that we used in the previous chapter - does the effect of Height on Weight vary by Sex.  The data might look like any of the above patterns.  There is only one model syntax in the above figure that tests the null hypothesis and gives us a chance to evaluate the predictions: `lm(Weight ~ Height * Sex, data = data.frame.name)`.  
+Let's be super clear: in these data we start with the fundamental question that uses the same vocabulary that we used in the previous chapter - does the effect of Height on Weight vary by Sex.  The data might look like any one of the above patterns.  BUT, there is only one model syntax in the above figure that tests the null hypothesis and gives us a chance to evaluate the predictions: `lm(Weight ~ Height * Sex, data = data.frame.name)`.  
 
-> If you need a refresher on what the * symbol means, pop back to chapter 5 where we explain this when we fit the models.
+> If you need a refresher on what the * symbol means, pop back to chapter 5 where we explain this when we fit the models; we also review this below.
 
-Let us also revisit the sequential nature of the ANOVA table output....  with an ANCOVA, we will see first an estimate of variation explained by the continuous variable, then the categorical variable and finally, after seeing the report on both of those, an estimate of the variation attributable to the interaction.  Another way to think of this is as follows (explore the figures above along with this):
+### Anticipating the ANOVA table for an ANCOVA model
+
+Let us also recall the sequential nature of the ANOVA table output. This is about what we expect to see, having fit a model, which we will do below.  In contrast to the ANOVA, with an ANCOVA, we will see first an estimate of variation explained by the continuous variable, then the categorical variable and finally, after seeing the report on both of those, an estimate of the variation attributable to the interaction.  Another way to think of this is as follows (explore the figures above along with this):
 
 What is the estimate of the intercept and slope, ignoring the different categories, and how much variation does this explain.
 What happens if we let there be two lines, one for each category, but with the same slope (e.g. different intercepts, but same slope).  Does this explain more variation?
@@ -58,7 +60,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 
 If we get to the last scenario, and the answer is yes, after all the other options, the _different slopes_ does capture variation in our response, we have evidence of an interaction.
 
-## Working through and example.
+## Working through an ANCOVA example.
 
 Let's work with a built in dataset in R - the Davis Study, which is exactly these data.  The associated assignment is another example.
 
@@ -70,27 +72,34 @@ The process of doing this will follow a tried and true approach to analysing dat
 4) Make Inference
 5) Update the Figure for Publication
 
-### Get the data and make your picture
+### Organise the packages and get the data and make your picture
 
-The data are built into R, but embedded in the `carData` package, which is installed with the `car` package - download and install this and they you can use the following code (don't forget the `tidyverse`, `agricolae`, `ggfortify`, `visreg` etc).
+The data we are using is an example dataset built into R, but embedded in the `carData` package, which is installed with the `car` package - download and install this and they you can use the following code (don't forget the `tidyverse`, `agricolae`, `ggfortify`, `visreg` etc).  
+
+> These data ARE NOT on the blackboard site.
+
+Note also that if you are building your own script, you need the following packages: `tidyverse`, `ggfortify`, `visreg`, `patchwork`
 
 ```{r}
 library(tidyverse)
 library(ggfortify)
 library(visreg)
 library(patchwork)
-library(agricolae)
 
-
+# this creates a working version of the davis data for you.
+# the carData:: syntax is a way to use this package without using
+# the library() function.
 Davis <- carData::Davis
 
+# check it out
 glimpse(Davis)
 
+# make the most basic of exploratory plots.
 ggplot(Davis, aes(x = height, y = weight, col = sex))+
   geom_point()
 ```
 
-Ahh.... first hurdle.... what's going on here?  Well, _"always plot your data"_ is totally justified here: it looks like one of the data points has the Height and Weight data entered incorrectly, the wrong way around.  This is a 'feature' of this dataset.  Of course you could go back to your spreadsheet master and make the change, but let's see how to do this using R.  Let's fix that.  Lets find the row, and make the change
+Whoa!... what's going on here?  Well,here is a massive justification of why we say _"always plot your data"_ before you do anything. It looks like one of the data points has the height and weight data entered incorrectly, the wrong way around.  This is a 'feature' of this dataset.  Of course you could go back to your master spreadsheet and make the corretion, which is a good idea in real life, but let's see how to fix this using R.  Let's fix that.  Lets find the row with the mistake by looking for height values <100, and then make the switch.
 
 ```{r}
 #which row? 12
@@ -109,11 +118,11 @@ ggplot(Davis, aes(x = height, y = weight, col = sex))+
   geom_point()
 ```
 
-Excellent.  Lets look at this picture and ask ourselves whether the effect of Height on Weight appears to vary by Sex?  What do you think?
+Excellent. Let's look at this picture and ask ourselves the null hypothesis question: does the effect of Height on Weight vary by Sex?  What do you think?
 
 We can actually get a bit of help here.  We can use some ggplot magic to help us make this GUESS. Let's use `geom_smooth()` to help us guess the answer.
 
-> NOTE: this is not doing statistics.  This is using graphics to help guide our expectation of the outcome of doing the statistical test of our hypothesis.
+> NOTE: this is not doing statistics.  This is using graphics to help guide insight and our expectation of the outcome before doing the statistical test of our hypothesis.
 
 ```{r}
 ggplot(Davis, aes(x = height, y = weight, col = sex))+
@@ -126,25 +135,25 @@ Again, we have not 'proven' anything or tested our hypothesis.  What we have is 
 
 1. Males are heavier than females (what is the difference in the intercepts?)
 2. The effect of height on weight is positive (the slope(s) are positive, not negative)
-3. There might be a difference in slopes - the Male line is steeper.
+3. There _might_ be a difference in slopes - the Male line looks steeper.
 
-We might even go as far to estimate by eye the slope assuming that there is no effect of Sex.  Recalling that the slope is the rise/run or the change in y over the change in x, we can guess that the slope is ~ $(100-40)/(200-140) = (60/60) = 1$.  We are not expecting much variation around that.  But if we see the statistics returning a value 10x more or less than this, we should be concerned!  Can you guess for each Sex?
+We might even go as far to estimate by eye the overall slope, assuming that there is no effect of Sex.  Recalling that the slope is the rise over run or the change in y over the change in x, we can guess that the slope is ~ $(100-40)/(200-140) = (60/60) = 1$.  Can you guess a slope for each Sex?
 
 ## Building the model (and understanding it)
 
 The next step is to build the model to test our hypothesis.  As we declared above, the model to test the interaction is `lm(weight ~ height * sex, data = Davis)`.  Let's discuss this a bit.
 
-First, as described above, and in Chapter 5, this model with the `*` expands to the following full description:
+First, as described above, and in Chapter 5, this model with the `*` expands to the following full model of two main effects and an interaction:
 
 `lm(weight ~ height + sex + height:sex, data = Davis)`
 
-This reads as "Weight is a function of the effect of Height (slope), Sex (intercept) and the interaction between Height and Sex (do the slopes vary?).  The `Height * Sex` syntax always expands to this _full  model_ - the model containing the main effects and the interaction.
+This reads as "weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?).  The `Height * Sex` syntax always expands to this _full  model_ - the model containing the main effects and the interaction.
 
 OK.  Let's fit the model
 
 ```{r}
 # we call the model mod_Davis.
-mod_Davis <- lm(weight ~ height + sex + height:sex, data = Davis)
+mod_Davis <- lm(weight ~ height*sex, data = Davis)
 ```
 
 That's it.  We've got the model. But before we make any attempts at actually evaluating our test of the hypothesis, we have to check the assumptions!  
@@ -157,19 +166,19 @@ autoplot(mod_Davis)
 
 OK.  Let's walk through the three core diagnostics.
 
-In the upper left, we are evaluating the systematic part of the model - are there any systematic departures from the linear model we've speficied?  Are there interactions missing or specific nonlinearities?  Nope.
+In the upper left, we are evaluating the systematic part of the model - are there any systematic departures from the linear model we've speficied?  Are there interactions missing or specific non-linearities?  Nope.
 
-In the upper right, we are evaluating the normality of the residuals.  These too look pretty good.
+In the upper right, we are evaluating the normality of the residuals.  These too look pretty good.  If you notice, event though there are some deviations, but the pattern is that the deviations move away from the line but 'come back' at the very ends.  This is typical of normally distributed residuals.
 
-In the lower left, we are evalauting the assumption of a constant mean-variance relationship.  Oops.
+In the lower left, we are evaluating the assumption of a constant mean-variance relationship.  Oops.  Remember, we are expecting something that does not show a trend at all.  Even without the panic lines, this looks like the variance (y-axis) is increasing with the mean (x-axis).
 
-### Dealing with some issues with residuals.
+### Dealing with the mean-variance breakdown.
 
 The above issue is one we can deal with via a _transformation_.  
 
 Let's start with the facts....  When the _variance increases with the mean_, a transformation that can work is the _logarithm of the continuous variables_.
 
-There is a short section in the (APS 240 reading)[https://dzchilds.github.io/stats-for-bio/data-transformations.html#trans-types] to explore.  Please do read this summary about transformations, and bookmark it.
+There is a short section in the (APS 240 reading)[https://dzchilds.github.io/stats-for-bio/data-transformations.html#trans-types] to explore.  Please do read this summary about transformations, and bookmark it for the future.  It is very handy.
 
 A question that routinely comes up is whether transformations are 'changing the data'.  Rather than focusing on this, we offer the following interpretation.  Linear models fit by `lm()` carry a set of assumptions (our focus on the three panels using autoplot).  If these are not met, we can not trust our inference (F-testing). 
 
