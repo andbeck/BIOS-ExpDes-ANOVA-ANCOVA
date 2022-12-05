@@ -40,9 +40,9 @@ An experiment has _treatments, experimental units, responses, and a method to as
 
 Not all experimental designs are created equal. A good experimental design must adhere to the 3Rs. It should reveal consistency, responsiveness and mechanism.  The way this happens is by avoiding systematic error in measuring things, and allow estimation of error in measurements with precision.  
 
-## The holy grail of a control
+### The holy grail of a control
 
-At this point, it would be good to revisit the APS 240 sections [on controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#experimental-control) and [procedural controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#EXPT-DESIGN-PROCEDURAL-CONTROLS)
+At this point, it would be very good to revisit the APS 240 sections [on controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#experimental-control) and [procedural controls](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#EXPT-DESIGN-PROCEDURAL-CONTROLS)
 
 ## So what does a good experimental design do?
 
@@ -93,7 +93,7 @@ Consider an educational study, with six classrooms of 25 pupils. Each classroom 
 
 At the end of a six-week term, all the students are evaluated via a common reading exam.
 
-#### The challenge question
+*The challenge question*
 
 > Are there six experimental units (the classrooms) or 150 (25*6; the students)?  We measured the reading ability of the students... but they were in classroom sets of 25....
 
@@ -113,7 +113,7 @@ Confusing these two things can lead to **pseudo-replication**. Treating measurem
 
 There is additional information on [Independence and Pseudoreplication](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#independence) in the the APS 240 book.
 
-#### Independence: and example
+#### Independence: an example
 Consider an experiment with two growth chambers each containing 100 plants. One of the chambers received enhanced C02. One night after collecting data you leave the door open on the C02 chamber and the temperature drops and so the plants grow more slowly. When you come to analyze the data you get a highly significant effect of slow growth.  However, that C02 results in reduced plant growth not what you expect (CO2 is good for photosynthesis...). 
 
 This is an entirely plausible outcome caused by misallocating plants as the experimental unit - it was really the CO2 chamber... to avoid such problems, one needs many chambers.
@@ -136,7 +136,7 @@ Recall our example above of considering sex and age of subjects and imagine a tr
 
 The beauty of randomization is that it helps prevent *confounding*, even for factors that we do not know are important.
 
-### **haphazard** is NOT randomized - beware the non-randomized experiment –
+### **Haphazard** is NOT randomized - beware the non-randomized experiment
 
 A company is evaluating two different word processing packages for use by its clerical staff. Part of the evaluation is how quickly a test document can be entered correctly using the two programs. We have 20 test secretaries, and each secretary will enter the document twice, using each programme once.
 

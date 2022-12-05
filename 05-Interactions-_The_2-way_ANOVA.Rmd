@@ -237,7 +237,7 @@ You must understand your data and your question and you must fit the model that 
 
 ### visreg and the 2-way ANOVA
 
-Don't forget that the correct standard error for the 'result' is the residuals mean squared.  You can use the dplyr + ggplot2 method, or visreg to estimate these.  Here we use visreg and put the figure next to our original ggplot for the interaction data.  Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and quesion (model 2).
+Don't forget that the correct standard error for the 'result' is the residuals mean squared.  You can use the dplyr + ggplot2 method, or visreg to estimate these.  Here we use the `visreg` package and put the figure next to our original ggplot for the interaction data.  Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and question (model 2).
 
 ```{r}
 p3 <- visreg(int_mod_2,"CO2",by="UVB", gg=TRUE) +

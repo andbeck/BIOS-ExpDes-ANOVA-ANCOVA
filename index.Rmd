@@ -72,6 +72,8 @@ So, you hopefully can see how this _general_ linear model is capable of represen
 Finally, it is important to understand that non-linear relationships such as these data below can be modelled with a linear model:
 
 ```{r, echo = FALSE}
+# because we are using random numbers
+set.seed(123)
 # set x range
 x <- -100:100
 # define y without error
@@ -100,6 +102,8 @@ Linear models are perfectly capable of being used to estimate non-linear relatio
 Here is the code to make that figure.
 
 ```{r, eval = FALSE}
+# because we are using random numbers
+set.seed(123)
 # set x range
 x <- -100:100
 # define y without error
@@ -131,6 +135,5 @@ Please install these packages, if you have not already, using the install packag
 - `ggfortify`
 - `agricolae`
 - `car`
-- `gmodels`
 - `visreg`
 - `patchwork`

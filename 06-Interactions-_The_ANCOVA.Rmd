@@ -147,7 +147,7 @@ First, as described above, and in Chapter 5, this model with the `*` expands to 
 
 `lm(weight ~ height + sex + height:sex, data = Davis)`
 
-This reads as "weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?).  The `Height * Sex` syntax always expands to this _full  model_ - the model containing the main effects and the interaction.
+This reads as "weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?).  The `height * aex` syntax always expands to this _full  model_ - the model containing the main effects and the interaction.
 
 OK.  Let's fit the model
 
@@ -186,7 +186,7 @@ A question that routinely comes up is whether transformations are 'changing the 
 
 But if there are real problems, we can use transformations.  They do not 'change the data'  instead, they retain the relationships between the data points, but put everything on a difference scale so that we can use the power of the linear model to answer the question.  The tricky thing is how do we report our insights to the reader back on the original 'response' scale.  We'll get to that.  But rest assured, transformations don't change the data.
 
-So, here are the data where we transform both continuous variables - the response and the continuous explanatory.
+So, here are the data where we transform both continuous variables - the continuous response variable and the continuous explanatory variable.
 
 ```{r}
 # re-plot with log-log
@@ -195,7 +195,7 @@ ggplot(data = Davis, aes(x = log(height), y = log(weight), col = sex))+
   geom_smooth(method = lm, se = FALSE)
 ```
 
-OK.  The patterns are still there.  And let's see what happens with the model and assumptions now!
+OK. The patterns are still there.  And let's see what happens with the model and assumptions now!
 
 ```{r}
 # fit the model - note we can specify the transformation RIGHT IN THE MODEL
@@ -259,7 +259,7 @@ You may be asking why the intercept is a negative number.  A simple look back at
 
 You should understand, from the principles of an equation for a line, the following:
 
-> the effect of height on weight for females is `log(weightF) = -5.31 + 1.82*log(heightF)`.
+> the effect of height on weight for females is `log(weightF) = -5.32 + 1.82*log(heightF)`.
 
 OK... let's interpret what the next two lines mean.  The third line is labelled `SexM.` The fourth is labelled `logHeight:SexM`.  Any guesses as to which is associated with the slope and which the intercept?
 
@@ -269,15 +269,15 @@ Recall from previous work that _treatment contrasts are about DIFFERENCES_.  Thu
 
 This allows the following maths to be worked out ....
 
-`log(weightF) = -5.31 + 1.82*log(heightF)`
+`log(weightF) = -5.32 + 1.82*log(heightF)`
 
-`log(weightM) = (-5.31-2.37) + (1.82+0.48)*(log(heightF))`
+`log(weightM) = (-5.32-2.37) + (1.82+0.48)*(log(heightF))`
 
-However, we know that the $0.48$ increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept is also not correct.
+However, we know that the $0.48$ increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept moving from Female to Male is also not a significant change
 
-###  The equations supported by the model.
+###  Specifying the equations supported by the model.
 
-In order to identify the equations supported by the model - e.g. the equations associated with the estimation of 2 lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the `*` with the `+`.
+In order to identify the equations supported by the model - e.g. the equations associated with the estimation of teo lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the `*` with the `+`.
 
 ```{r}
 mod_Davis_log2 <- lm(log(weight) ~ log(height) + sex, data = Davis)
@@ -301,22 +301,24 @@ OK, lets use a variation on our plotting tricks from the regression module (week
 # with the predictions from the model.
 
 # note that the model is the ADDITIVE model, for plotting
-# first, make a copy of the raw data, and add to it....
+# step 1: make a copy of the raw data
+# step 2: use mutate to add the fitted values (at each value of height (x-axis) where we have measured data)
 plotThis <- Davis %>%
   # ... a column of numbers of predicted weight using the model
   mutate(predWeight = predict(mod_Davis_log2))
 
+# check it out.
 head(plotThis)
 ```
 
-You can see we have a fourth column now.... these are predictions of `log(weight)` as a function of `log(height)` using the additive model, at each of the originally measured height values in the data frame.  
+You can see we have a fourth column now.... these are predictions (also known as fitted values) of `log(weight)` as a function of `log(height)` using the additive model, _at each of the originally measured height values in the data frame_.  
 
-We can actually use this dataframe to generate the picture that represents the output of the statistical model.
+We can actually use this data frame to generate the picture that represents the output of the statistical model.
 
 ```{r}
-# now, make lines with the model predictions
-# and add the points as the raw data
-# pay attention to where we are using log()!
+# Step 3: make a figure with lines from the model predictions
+# Step 4: add the raw data points from the original dataset
+# NOTE! pay attention to where we are using log()!
 ggplot(plotThis, aes(x = log(height), y = predWeight, col = sex))+
   geom_line()+
   # now add the raw data note
@@ -330,25 +332,25 @@ For men   $log(weight)= (-6.46 + 0.12) + 2.05 * log(height)$
 
 Because we are in log land, we can do some clever maths: We know that 
 
-`log(weight Female) - log(weight Male) = - 0.12`
+$log(weight Female) - log(weight Male) = - 0.12$
 
 (this is the treatment contrast for the intercept).  We also know (please memorise) that the _difference between logs is equal to the log of the ratio_:
 
-`log(weightF/weightM) = -0.12`
+$log(weightF/weightM) = -0.12$
 
 Finally, we can convert both sides to non-log by exponentiating:
 
-`exp(log(weightF/weightM)) = exp(-0.12) = 0.88`
+$exp(log(weightF/weightM)) = exp(-0.12) = 0.88$
 
 What does this mean?  At any given height, female weight is 88% of a males (e.g. 12% lower). Cool!  That's one of the benefits of log-log linear relationships.  _The ratio of the categories in log-log land directly translates to a percent difference between the groups_. It's also worth noting that the height slope is ~2, which suggests... yes... because we are in log-land, that weight scales with $height^2$.
 
-## Some General Principles
+## Some General Principles for ANOVA and ANCOVA modelling.
 
-###  ANCOVA always tests the interaction against the additive model
+###  ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!
 
-This figure highlights the various models and interpretations associated with the pieces of an ANCOVA dataset.  This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.
+This figure highlights the various `lm()` models and their interpretations/assumptions associated with the pieces of an ANCOVA dataset.  This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.
 
-> Note that just because your data looks like a particular pattern doesn't mean you should use that model.  Your statistical model should be driven by your question and original design.
+> Note that just because your data looks like a particular pattern doesn't mean you should use that model. Your statistical model should be driven by your question and original design.
 
 ```{r, echo = FALSE, fig.cap = "From Getting Started with R, 2nd Edition, OUP"}
 knitr::include_graphics("images/GSwithR_Grid.png")
@@ -356,8 +358,7 @@ knitr::include_graphics("images/GSwithR_Grid.png")
 
 For example, if you design a study with an ANCOVA question in mind, you are always starting your analysis with the question of whether the effect of X on Y varies by Z.  Thus, ANCOVA always starts with comparing the interaction (model E) against the additive model (model D).
 
->Proof: If we compare the additive model and the model with the interaction, we are specifically testing for whether allowing the slopes to vary by sex _explains additional variation_ above and beyond the main, additive effects of height and sex.  To do this, we use `anova()` but pass it two models.  This does what is called a Liklihood Ratio Test.
-Compare the result of the first test to the last line of the second.  This proves that when we fit model E, the test for the interaction is a comparison with model D!
+>Proof: If we compare the additive model and the model with the interaction, we are *specifically* testing for whether allowing the slopes to vary by sex _explains additional variation_ above and beyond the main, additive effects of height and sex.  To do this, we use the `anova()` function, but pass it two models instead of one!  This does what is called a *Liklihood Ratio Test* comparing the two models. Remembering that the difference between the `*` model and the `+` model is just the presence/absence of the interaction term, this `anova()` comparison evaluates how much more variation is explained by the interaction, after the additive effects have been modelled.  In the follow code, compare the result of the first test to the _last line_ of the second.  This proves that when we fit model E, the test for the interaction is actually a comparison of model E with model D!
 
 ```{r}
 anova(mod_Davis_log, mod_Davis_log2)
@@ -369,11 +370,11 @@ anova(mod_Davis_log)
 We can add terms
 `weight ~ sex + height`
 
-Have crossed terms
+Have can crossed terms (interactions)
 `weight ~ sex * height` which is `weight ~ sex +  height + sex : height`
 
-Remove terms
+We can remove terms
 `weight ~ sex * height – sex : height` which is `weight~ sex +  height`
 
-Include all interactions up to order k
-`weight~ (sex + height + age)^2` which is `sex + height + age + sex : height + sex : age + age : height`
+We can specify interations of order k among 2 or more terms:
+`weight~ (sex + height + age)^2` which expands to `sex + height + age + sex : height + sex : age + age : height` (e.g. all two way interactions among the three variables)

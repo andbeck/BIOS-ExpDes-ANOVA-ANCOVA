@@ -1,4 +1,4 @@
-# Examples and Challenge Questions
+# Some initial examples and challenge questions
 
 In this section, we will review a field based experimental design example.  There are challenge questions to answer.
 
@@ -6,16 +6,18 @@ We will also introduce tools to generate randomised experimental designs - this 
 
 ## Designing your first experiment
 
-You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased CO2 impacts on plant growth.
+You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased $CO_{2}$ impacts on plant growth.
 
 Context: an arctic tundra study 
-Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
-Increasing atmospheric CO2  (+CO2) from anthropogenic emissions
-For plants: +UV-B potentially harmful, +CO2 potentially beneficial
+
+- Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
+- Increasing atmospheric $CO_{2}$  ($+CO_{2}$) from anthropogenic emissions
+- For plants: +UV-B potentially harmful, +CO2 potentially beneficial
 
 Hypotheses
-Elevated (+) UV-B radiation will reduce the growth of arctic plants
-Elevated (+) $CO_{2}$ will increase the growth of arctic plants
+
+- Elevated (+) UV-B radiation will reduce the growth of arctic plants
+- Elevated (+) $CO_{2}$ will increase the growth of arctic plants
 
 ```{r, echo = FALSE}
 knitr::include_graphics("images/ArcticPlants.png")
@@ -23,12 +25,12 @@ knitr::include_graphics("images/ArcticPlants.png")
 
 The resources available to you are constrained.  The arctic research station has given permission for 16 plots (each 2m x 2m) in the natural vegetation nearby.
 
-One +UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)
-One $+CO_{2}$ plot (2m x 2m) costs £6000 (this provides a CO2 release system, CO2 control and covers CO2 purchase costs, wooden walkways around the plots)
-One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)
+- One +UV-B plot (2m x 2m) costs £4000 (this provides the UV-B lamps, frame, power and control system, wooden walkways around the plots)
+- One $+CO_{2}$ plot (2m x 2m) costs £6000 (this provides a $CO_{2}$ release system, $CO_{2}$ control and covers $CO_{2}$ purchase costs, wooden walkways around the plots)
+- One control plot (2m x 2m) costs £200 (marking posts, wooden walkways around the plots)
 
 You have a budget of £61,000
 
 Design an experiment to test the hypotheses (i.e. the design of the plots and treatments including replication, not what measurements you will take - which will be plant growth rates....).  Think hard about this.  How many treatments do you have?  How many plots/treatment would you like to allocate?  Is this possible?  Will this be a balanced design, given your max budget?  If it isn't, what rule can you use to allocate them replicates to treatments?
 
-Write an answer down, before moving to the next section.  We'll provide the answer separately!
+Write an answer down, before moving to the next section (this is part of the DO THIS package of challenges).  We'll provide the answer separately!
