@@ -205,7 +205,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p>The next step is to build the model to test our hypothesis. As we declared above, the model to test the interaction is <code>lm(weight ~ height * sex, data = Davis)</code>. Let’s discuss this a bit.</p>
 <p>First, as described above, and in Chapter 5, this model with the <code>*</code> expands to the following full model of two main effects and an interaction:</p>
 <p><code>lm(weight ~ height + sex + height:sex, data = Davis)</code></p>
-<p>This reads as “weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?). The <code>Height * Sex</code> syntax always expands to this <em>full model</em> - the model containing the main effects and the interaction.</p>
+<p>This reads as “weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?). The <code>height * aex</code> syntax always expands to this <em>full model</em> - the model containing the main effects and the interaction.</p>
 <p>OK. Let’s fit the model</p>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we call the model mod_Davis.</span></span>
@@ -231,7 +231,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p>Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that t-tests, ANOVAs and regressions are generally quite robust—they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances change a lot across groups - from (APS 240)[<a href="https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction" class="uri">https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction</a>].</p>
 </blockquote>
 <p>But if there are real problems, we can use transformations. They do not ‘change the data’ instead, they retain the relationships between the data points, but put everything on a difference scale so that we can use the power of the linear model to answer the question. The tricky thing is how do we report our insights to the reader back on the original ‘response’ scale. We’ll get to that. But rest assured, transformations don’t change the data.</p>
-<p>So, here are the data where we transform both continuous variables - the response and the continuous explanatory.</p>
+<p>So, here are the data where we transform both continuous variables - the continuous response variable and the continuous explanatory variable.</p>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># re-plot with log-log</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
@@ -317,21 +317,21 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p>You may be asking why the intercept is a negative number. A simple look back at the range of the x-axis should answer this… the y intercept occurs at x = 0, right?</p>
 <p>You should understand, from the principles of an equation for a line, the following:</p>
 <blockquote>
-<p>the effect of height on weight for females is <code>log(weightF) = -5.31 + 1.82*log(heightF)</code>.</p>
+<p>the effect of height on weight for females is <code>log(weightF) = -5.32 + 1.82*log(heightF)</code>.</p>
 </blockquote>
 <p>OK… let’s interpret what the next two lines mean. The third line is labelled <code>SexM.</code> The fourth is labelled <code>logHeight:SexM</code>. Any guesses as to which is associated with the slope and which the intercept?</p>
 <p>One trick, again, is to recognise the syntax -&gt; the presence of the <code>:</code> is indicative of the interaction which is the thing that lets slopes vary. So, <code>SexM</code> is about intercepts and <code>logHeight:SexM</code> is about slopes. But what are they?</p>
 <p>Recall from previous work that <em>treatment contrasts are about DIFFERENCES</em>. Thus, the <code>sexM</code> term is a difference between the female and male intercept! The <code>logHeight:SexM</code> is about the difference between the female and male slopes!</p>
 <p>This allows the following maths to be worked out ….</p>
-<p><code>log(weightF) = -5.31 + 1.82*log(heightF)</code></p>
-<p><code>log(weightM) = (-5.31-2.37) + (1.82+0.48)*(log(heightF))</code></p>
-<p>However, we know that the <span class="math inline">\(0.48\)</span> increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept is also not correct.</p>
+<p><code>log(weightF) = -5.32 + 1.82*log(heightF)</code></p>
+<p><code>log(weightM) = (-5.32-2.37) + (1.82+0.48)*(log(heightF))</code></p>
+<p>However, we know that the <span class="math inline">\(0.48\)</span> increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept moving from Female to Male is also not a significant change</p>
 </div>
-<div id="the-equations-supported-by-the-model." class="section level3" number="7.4.4">
+<div id="specifying-the-equations-supported-by-the-model." class="section level3" number="7.4.4">
 <h3>
-<span class="header-section-number">7.4.4</span> The equations supported by the model.<a class="anchor" aria-label="anchor" href="#the-equations-supported-by-the-model."><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.4</span> Specifying the equations supported by the model.<a class="anchor" aria-label="anchor" href="#specifying-the-equations-supported-by-the-model."><i class="fas fa-link"></i></a>
 </h3>
-<p>In order to identify the equations supported by the model - e.g. the equations associated with the estimation of 2 lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the <code>*</code> with the <code>+</code>.</p>
+<p>In order to identify the equations supported by the model - e.g. the equations associated with the estimation of teo lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the <code>*</code> with the <code>+</code>.</p>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod_Davis_log2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">+</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
@@ -369,11 +369,13 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <span><span class="co"># with the predictions from the model.</span></span>
 <span></span>
 <span><span class="co"># note that the model is the ADDITIVE model, for plotting</span></span>
-<span><span class="co"># first, make a copy of the raw data, and add to it....</span></span>
+<span><span class="co"># step 1: make a copy of the raw data</span></span>
+<span><span class="co"># step 2: use mutate to add the fitted values (at each value of height (x-axis) where we have measured data)</span></span>
 <span><span class="va">plotThis</span> <span class="op">&lt;-</span> <span class="va">Davis</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="co"># ... a column of numbers of predicted weight using the model</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predWeight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># check it out.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">plotThis</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##   sex weight height repwt repht predWeight
 ## 1   M     77    182    77   180   4.364677
@@ -382,12 +384,12 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## 4   M     68    177    70   175   4.307379
 ## 5   F     59    157    59   155   3.936578
 ## 6   M     76    170    76   165   4.224381</code></pre>
-<p>You can see we have a fourth column now…. these are predictions of <code>log(weight)</code> as a function of <code>log(height)</code> using the additive model, at each of the originally measured height values in the data frame.</p>
-<p>We can actually use this dataframe to generate the picture that represents the output of the statistical model.</p>
+<p>You can see we have a fourth column now…. these are predictions (also known as fitted values) of <code>log(weight)</code> as a function of <code>log(height)</code> using the additive model, <em>at each of the originally measured height values in the data frame</em>.</p>
+<p>We can actually use this data frame to generate the picture that represents the output of the statistical model.</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># now, make lines with the model predictions</span></span>
-<span><span class="co"># and add the points as the raw data</span></span>
-<span><span class="co"># pay attention to where we are using log()!</span></span>
+<code class="sourceCode R"><span><span class="co"># Step 3: make a figure with lines from the model predictions</span></span>
+<span><span class="co"># Step 4: add the raw data points from the original dataset</span></span>
+<span><span class="co"># NOTE! pay attention to where we are using log()!</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plotThis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">predWeight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="co"># now add the raw data note</span></span>
@@ -397,23 +399,23 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p>For women <span class="math inline">\(log(weight)= -6.46 + 2.05 * log(height)\)</span>
 For men <span class="math inline">\(log(weight)= (-6.46 + 0.12) + 2.05 * log(height)\)</span></p>
 <p>Because we are in log land, we can do some clever maths: We know that</p>
-<p><code>log(weight Female) - log(weight Male) = - 0.12</code></p>
+<p><span class="math inline">\(log(weight Female) - log(weight Male) = - 0.12\)</span></p>
 <p>(this is the treatment contrast for the intercept). We also know (please memorise) that the <em>difference between logs is equal to the log of the ratio</em>:</p>
-<p><code>log(weightF/weightM) = -0.12</code></p>
+<p><span class="math inline">\(log(weightF/weightM) = -0.12\)</span></p>
 <p>Finally, we can convert both sides to non-log by exponentiating:</p>
-<p><code>exp(log(weightF/weightM)) = exp(-0.12) = 0.88</code></p>
+<p><span class="math inline">\(exp(log(weightF/weightM)) = exp(-0.12) = 0.88\)</span></p>
 <p>What does this mean? At any given height, female weight is 88% of a males (e.g. 12% lower). Cool! That’s one of the benefits of log-log linear relationships. <em>The ratio of the categories in log-log land directly translates to a percent difference between the groups</em>. It’s also worth noting that the height slope is ~2, which suggests… yes… because we are in log-land, that weight scales with <span class="math inline">\(height^2\)</span>.</p>
 </div>
 </div>
-<div id="some-general-principles" class="section level2" number="7.5">
+<div id="some-general-principles-for-anova-and-ancova-modelling." class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">7.5</span> Some General Principles<a class="anchor" aria-label="anchor" href="#some-general-principles"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Some General Principles for ANOVA and ANCOVA modelling.<a class="anchor" aria-label="anchor" href="#some-general-principles-for-anova-and-ancova-modelling."><i class="fas fa-link"></i></a>
 </h2>
-<div id="ancova-always-tests-the-interaction-against-the-additive-model" class="section level3" number="7.5.1">
+<div id="ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model" class="section level3" number="7.5.1">
 <h3>
-<span class="header-section-number">7.5.1</span> ANCOVA always tests the interaction against the additive model<a class="anchor" aria-label="anchor" href="#ancova-always-tests-the-interaction-against-the-additive-model"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5.1</span> ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!<a class="anchor" aria-label="anchor" href="#ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model"><i class="fas fa-link"></i></a>
 </h3>
-<p>This figure highlights the various models and interpretations associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.</p>
+<p>This figure highlights the various <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> models and their interpretations/assumptions associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.</p>
 <blockquote>
 <p>Note that just because your data looks like a particular pattern doesn’t mean you should use that model. Your statistical model should be driven by your question and original design.</p>
 </blockquote>
@@ -425,8 +427,7 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 </div>
 <p>For example, if you design a study with an ANCOVA question in mind, you are always starting your analysis with the question of whether the effect of X on Y varies by Z. Thus, ANCOVA always starts with comparing the interaction (model E) against the additive model (model D).</p>
 <blockquote>
-<p>Proof: If we compare the additive model and the model with the interaction, we are specifically testing for whether allowing the slopes to vary by sex <em>explains additional variation</em> above and beyond the main, additive effects of height and sex. To do this, we use <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> but pass it two models. This does what is called a Liklihood Ratio Test.
-Compare the result of the first test to the last line of the second. This proves that when we fit model E, the test for the interaction is a comparison with model D!</p>
+<p>Proof: If we compare the additive model and the model with the interaction, we are <em>specifically</em> testing for whether allowing the slopes to vary by sex <em>explains additional variation</em> above and beyond the main, additive effects of height and sex. To do this, we use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function, but pass it two models instead of one! This does what is called a <em>Liklihood Ratio Test</em> comparing the two models. Remembering that the difference between the <code>*</code> model and the <code>+</code> model is just the presence/absence of the interaction term, this <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> comparison evaluates how much more variation is explained by the interaction, after the additive effects have been modelled. In the follow code, compare the result of the first test to the <em>last line</em> of the second. This proves that when we fit model E, the test for the interaction is actually a comparison of model E with model D!</p>
 </blockquote>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span>, <span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
@@ -457,12 +458,12 @@ Compare the result of the first test to the last line of the second. This proves
 </h2>
 <p>We can add terms
 <code>weight ~ sex + height</code></p>
-<p>Have crossed terms
+<p>Have can crossed terms (interactions)
 <code>weight ~ sex * height</code> which is <code>weight ~ sex +  height + sex : height</code></p>
-<p>Remove terms
+<p>We can remove terms
 <code>weight ~ sex * height – sex : height</code> which is <code>weight~ sex +  height</code></p>
-<p>Include all interactions up to order k
-<code>weight~ (sex + height + age)^2</code> which is <code>sex + height + age + sex : height + sex : age + age : height</code></p>
+<p>We can specify interations of order k among 2 or more terms:
+<code>weight~ (sex + height + age)^2</code> which expands to <code>sex + height + age + sex : height + sex : age + age : height</code> (e.g. all two way interactions among the three variables)</p>
 
 </div>
 </div>
@@ -485,12 +486,12 @@ Compare the result of the first test to the last line of the second. This proves
 <li><a class="nav-link" href="#dealing-with-the-mean-variance-breakdown."><span class="header-section-number">7.4.1</span> Dealing with the mean-variance breakdown.</a></li>
 <li><a class="nav-link" href="#making-inference-on-the-ancova"><span class="header-section-number">7.4.2</span> Making inference on the ANCOVA</a></li>
 <li><a class="nav-link" href="#the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff."><span class="header-section-number">7.4.3</span> The summary table, the actual slopes and making sense of the log stuff.</a></li>
-<li><a class="nav-link" href="#the-equations-supported-by-the-model."><span class="header-section-number">7.4.4</span> The equations supported by the model.</a></li>
+<li><a class="nav-link" href="#specifying-the-equations-supported-by-the-model."><span class="header-section-number">7.4.4</span> Specifying the equations supported by the model.</a></li>
 <li><a class="nav-link" href="#making-even-more-inference-and-drawing-the-picture"><span class="header-section-number">7.4.5</span> Making even more inference and drawing the picture</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#some-general-principles"><span class="header-section-number">7.5</span> Some General Principles</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ancova-always-tests-the-interaction-against-the-additive-model"><span class="header-section-number">7.5.1</span> ANCOVA always tests the interaction against the additive model</a></li></ul>
+<a class="nav-link" href="#some-general-principles-for-anova-and-ancova-modelling."><span class="header-section-number">7.5</span> Some General Principles for ANOVA and ANCOVA modelling.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model"><span class="header-section-number">7.5.1</span> ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!</a></li></ul>
 </li>
 <li><a class="nav-link" href="#a-few-parting-tricks-about-specifying-models-in-r"><span class="header-section-number">7.6</span> A few parting tricks about specifying models in R</a></li>
 </ul>

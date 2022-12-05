@@ -748,7 +748,7 @@ A few things to notice.
 \item
   The two herbicides don't look very different, especially given the variation around each treatment. Neither do the placebo and control. We need some stats.
 \item
-  For those of you interested in some extra reading and thinking, the 95\% Confidence Interval around the means can be calculated using \texttt{1.96*SE} == \texttt{1.96*sd(obs)/sqrt(n())}. Go ahead and do that and look into that if you want\ldots{}
+  For those of you interested in some extra reading and thinking, the 95\% Confidence Interval around the means can be calculated using \(1.96*SE` == `1.96*sd(obs)/sqrt(n())\). Go ahead and do that and look into that if you want\ldots{}
 \end{enumerate}
 
 \hypertarget{the-one-way-anova.}{%
@@ -1562,7 +1562,7 @@ You must understand your data and your question and you must fit the model that 
 \hypertarget{visreg-and-the-2-way-anova}{%
 \subsection{visreg and the 2-way ANOVA}\label{visreg-and-the-2-way-anova}}
 
-Don't forget that the correct standard error for the `result' is the residuals mean squared. You can use the dplyr + ggplot2 method, or visreg to estimate these. Here we use visreg and put the figure next to our original ggplot for the interaction data. Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and quesion (model 2).
+Don't forget that the correct standard error for the `result' is the residuals mean squared. You can use the dplyr + ggplot2 method, or visreg to estimate these. Here we use the \texttt{visreg} package and put the figure next to our original ggplot for the interaction data. Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and question (model 2).
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1814,7 +1814,7 @@ First, as described above, and in Chapter 5, this model with the \texttt{*} expa
 
 \texttt{lm(weight\ \textasciitilde{}\ height\ +\ sex\ +\ height:sex,\ data\ =\ Davis)}
 
-This reads as ``weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?). The \texttt{Height\ *\ Sex} syntax always expands to this \emph{full model} - the model containing the main effects and the interaction.
+This reads as ``weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?). The \texttt{height\ *\ aex} syntax always expands to this \emph{full model} - the model containing the main effects and the interaction.
 
 OK. Let's fit the model
 
@@ -1862,7 +1862,7 @@ Most biological data are unlikely to conform perfectly to all the assumptions, b
 
 But if there are real problems, we can use transformations. They do not `change the data' instead, they retain the relationships between the data points, but put everything on a difference scale so that we can use the power of the linear model to answer the question. The tricky thing is how do we report our insights to the reader back on the original `response' scale. We'll get to that. But rest assured, transformations don't change the data.
 
-So, here are the data where we transform both continuous variables - the response and the continuous explanatory.
+So, here are the data where we transform both continuous variables - the continuous response variable and the continuous explanatory variable.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1997,7 +1997,7 @@ You may be asking why the intercept is a negative number. A simple look back at 
 You should understand, from the principles of an equation for a line, the following:
 
 \begin{quote}
-the effect of height on weight for females is \texttt{log(weightF)\ =\ -5.31\ +\ 1.82*log(heightF)}.
+the effect of height on weight for females is \texttt{log(weightF)\ =\ -5.32\ +\ 1.82*log(heightF)}.
 \end{quote}
 
 OK\ldots{} let's interpret what the next two lines mean. The third line is labelled \texttt{SexM.} The fourth is labelled \texttt{logHeight:SexM}. Any guesses as to which is associated with the slope and which the intercept?
@@ -2008,16 +2008,16 @@ Recall from previous work that \emph{treatment contrasts are about DIFFERENCES}.
 
 This allows the following maths to be worked out \ldots.
 
-\texttt{log(weightF)\ =\ -5.31\ +\ 1.82*log(heightF)}
+\texttt{log(weightF)\ =\ -5.32\ +\ 1.82*log(heightF)}
 
-\texttt{log(weightM)\ =\ (-5.31-2.37)\ +\ (1.82+0.48)*(log(heightF))}
+\texttt{log(weightM)\ =\ (-5.32-2.37)\ +\ (1.82+0.48)*(log(heightF))}
 
-However, we know that the \(0.48\) increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept is also not correct.
+However, we know that the \(0.48\) increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept moving from Female to Male is also not a significant change
 
-\hypertarget{the-equations-supported-by-the-model.}{%
-\subsection{The equations supported by the model.}\label{the-equations-supported-by-the-model.}}
+\hypertarget{specifying-the-equations-supported-by-the-model.}{%
+\subsection{Specifying the equations supported by the model.}\label{specifying-the-equations-supported-by-the-model.}}
 
-In order to identify the equations supported by the model - e.g.~the equations associated with the estimation of 2 lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the \texttt{*} with the \texttt{+}.
+In order to identify the equations supported by the model - e.g.~the equations associated with the estimation of teo lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the \texttt{*} with the \texttt{+}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2067,11 +2067,13 @@ OK, lets use a variation on our plotting tricks from the regression module (week
 \CommentTok{\# with the predictions from the model.}
 
 \CommentTok{\# note that the model is the ADDITIVE model, for plotting}
-\CommentTok{\# first, make a copy of the raw data, and add to it....}
+\CommentTok{\# step 1: make a copy of the raw data}
+\CommentTok{\# step 2: use mutate to add the fitted values (at each value of height (x{-}axis) where we have measured data)}
 \NormalTok{plotThis }\OtherTok{\textless{}{-}}\NormalTok{ Davis }\SpecialCharTok{\%\textgreater{}\%}
   \CommentTok{\# ... a column of numbers of predicted weight using the model}
   \FunctionTok{mutate}\NormalTok{(}\AttributeTok{predWeight =} \FunctionTok{predict}\NormalTok{(mod\_Davis\_log2))}
 
+\CommentTok{\# check it out.}
 \FunctionTok{head}\NormalTok{(plotThis)}
 \end{Highlighting}
 \end{Shaded}
@@ -2086,15 +2088,15 @@ OK, lets use a variation on our plotting tricks from the regression module (week
 ## 6   M     76    170    76   165   4.224381
 \end{verbatim}
 
-You can see we have a fourth column now\ldots. these are predictions of \texttt{log(weight)} as a function of \texttt{log(height)} using the additive model, at each of the originally measured height values in the data frame.
+You can see we have a fourth column now\ldots. these are predictions (also known as fitted values) of \texttt{log(weight)} as a function of \texttt{log(height)} using the additive model, \emph{at each of the originally measured height values in the data frame}.
 
-We can actually use this dataframe to generate the picture that represents the output of the statistical model.
+We can actually use this data frame to generate the picture that represents the output of the statistical model.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{\# now, make lines with the model predictions}
-\CommentTok{\# and add the points as the raw data}
-\CommentTok{\# pay attention to where we are using log()!}
+\CommentTok{\# Step 3: make a figure with lines from the model predictions}
+\CommentTok{\# Step 4: add the raw data points from the original dataset}
+\CommentTok{\# }\AlertTok{NOTE}\CommentTok{! pay attention to where we are using log()!}
 \FunctionTok{ggplot}\NormalTok{(plotThis, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =} \FunctionTok{log}\NormalTok{(height), }\AttributeTok{y =}\NormalTok{ predWeight, }\AttributeTok{col =}\NormalTok{ sex))}\SpecialCharTok{+}
   \FunctionTok{geom\_line}\NormalTok{()}\SpecialCharTok{+}
   \CommentTok{\# now add the raw data note}
@@ -2111,25 +2113,25 @@ For men \(log(weight)= (-6.46 + 0.12) + 2.05 * log(height)\)
 
 Because we are in log land, we can do some clever maths: We know that
 
-\texttt{log(weight\ Female)\ -\ log(weight\ Male)\ =\ -\ 0.12}
+\(log(weight Female) - log(weight Male) = - 0.12\)
 
 (this is the treatment contrast for the intercept). We also know (please memorise) that the \emph{difference between logs is equal to the log of the ratio}:
 
-\texttt{log(weightF/weightM)\ =\ -0.12}
+\(log(weightF/weightM) = -0.12\)
 
 Finally, we can convert both sides to non-log by exponentiating:
 
-\texttt{exp(log(weightF/weightM))\ =\ exp(-0.12)\ =\ 0.88}
+\(exp(log(weightF/weightM)) = exp(-0.12) = 0.88\)
 
 What does this mean? At any given height, female weight is 88\% of a males (e.g.~12\% lower). Cool! That's one of the benefits of log-log linear relationships. \emph{The ratio of the categories in log-log land directly translates to a percent difference between the groups}. It's also worth noting that the height slope is \textasciitilde2, which suggests\ldots{} yes\ldots{} because we are in log-land, that weight scales with \(height^2\).
 
-\hypertarget{some-general-principles}{%
-\section{Some General Principles}\label{some-general-principles}}
+\hypertarget{some-general-principles-for-anova-and-ancova-modelling.}{%
+\section{Some General Principles for ANOVA and ANCOVA modelling.}\label{some-general-principles-for-anova-and-ancova-modelling.}}
 
-\hypertarget{ancova-always-tests-the-interaction-against-the-additive-model}{%
-\subsection{ANCOVA always tests the interaction against the additive model}\label{ancova-always-tests-the-interaction-against-the-additive-model}}
+\hypertarget{ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model}{%
+\subsection{ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!}\label{ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model}}
 
-This figure highlights the various models and interpretations associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.
+This figure highlights the various \texttt{lm()} models and their interpretations/assumptions associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.
 
 \begin{quote}
 Note that just because your data looks like a particular pattern doesn't mean you should use that model. Your statistical model should be driven by your question and original design.
@@ -2142,8 +2144,7 @@ Note that just because your data looks like a particular pattern doesn't mean yo
 For example, if you design a study with an ANCOVA question in mind, you are always starting your analysis with the question of whether the effect of X on Y varies by Z. Thus, ANCOVA always starts with comparing the interaction (model E) against the additive model (model D).
 
 \begin{quote}
-Proof: If we compare the additive model and the model with the interaction, we are specifically testing for whether allowing the slopes to vary by sex \emph{explains additional variation} above and beyond the main, additive effects of height and sex. To do this, we use \texttt{anova()} but pass it two models. This does what is called a Liklihood Ratio Test.
-Compare the result of the first test to the last line of the second. This proves that when we fit model E, the test for the interaction is a comparison with model D!
+Proof: If we compare the additive model and the model with the interaction, we are \emph{specifically} testing for whether allowing the slopes to vary by sex \emph{explains additional variation} above and beyond the main, additive effects of height and sex. To do this, we use the \texttt{anova()} function, but pass it two models instead of one! This does what is called a \emph{Liklihood Ratio Test} comparing the two models. Remembering that the difference between the \texttt{*} model and the \texttt{+} model is just the presence/absence of the interaction term, this \texttt{anova()} comparison evaluates how much more variation is explained by the interaction, after the additive effects have been modelled. In the follow code, compare the result of the first test to the \emph{last line} of the second. This proves that when we fit model E, the test for the interaction is actually a comparison of model E with model D!
 \end{quote}
 
 \begin{Shaded}
@@ -2187,13 +2188,13 @@ Compare the result of the first test to the last line of the second. This proves
 We can add terms
 \texttt{weight\ \textasciitilde{}\ sex\ +\ height}
 
-Have crossed terms
+Have can crossed terms (interactions)
 \texttt{weight\ \textasciitilde{}\ sex\ *\ height} which is \texttt{weight\ \textasciitilde{}\ sex\ +\ \ height\ +\ sex\ :\ height}
 
-Remove terms
+We can remove terms
 \texttt{weight\ \textasciitilde{}\ sex\ *\ height\ –\ sex\ :\ height} which is \texttt{weight\textasciitilde{}\ sex\ +\ \ height}
 
-Include all interactions up to order k
-\texttt{weight\textasciitilde{}\ (sex\ +\ height\ +\ age)\^{}2} which is \texttt{sex\ +\ height\ +\ age\ +\ sex\ :\ height\ +\ sex\ :\ age\ +\ age\ :\ height}
+We can specify interations of order k among 2 or more terms:
+\texttt{weight\textasciitilde{}\ (sex\ +\ height\ +\ age)\^{}2} which expands to \texttt{sex\ +\ height\ +\ age\ +\ sex\ :\ height\ +\ sex\ :\ age\ +\ age\ :\ height} (e.g.~all two way interactions among the three variables)
 
 \end{document}

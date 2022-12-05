@@ -64,8 +64,8 @@ building-the-model-and-understanding-it
 dealing-with-the-mean-variance-breakdown.
 making-inference-on-the-ancova
 the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff.
-the-equations-supported-by-the-model.
+specifying-the-equations-supported-by-the-model.
 making-even-more-inference-and-drawing-the-picture
-some-general-principles
-ancova-always-tests-the-interaction-against-the-additive-model
+some-general-principles-for-anova-and-ancova-modelling.
+ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model
 a-few-parting-tricks-about-specifying-models-in-r

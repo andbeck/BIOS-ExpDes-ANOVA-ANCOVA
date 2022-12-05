@@ -226,7 +226,7 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 <h3>
 <span class="header-section-number">6.2.3</span> visreg and the 2-way ANOVA<a class="anchor" aria-label="anchor" href="#visreg-and-the-2-way-anova"><i class="fas fa-link"></i></a>
 </h3>
-<p>Don’t forget that the correct standard error for the ‘result’ is the residuals mean squared. You can use the dplyr + ggplot2 method, or visreg to estimate these. Here we use visreg and put the figure next to our original ggplot for the interaction data. Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and quesion (model 2).</p>
+<p>Don’t forget that the correct standard error for the ‘result’ is the residuals mean squared. You can use the dplyr + ggplot2 method, or visreg to estimate these. Here we use the <code>visreg</code> package and put the figure next to our original ggplot for the interaction data. Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and question (model 2).</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">visreg</span><span class="op">(</span><span class="va">int_mod_2</span>,<span class="st">"CO2"</span>,by<span class="op">=</span><span class="st">"UVB"</span>, gg<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span>
