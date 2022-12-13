@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="6.1 Introducing Interactions In the previous sections, and the 1-way ANOVA module in week 7, we have focused on a single explanatory variable. In week 7, it was the parasite factor. In the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -145,7 +145,7 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 <p>The following dataset <code>plantYield_factorial</code> contains two observation columns - <code>yield_ind</code> are data where there is NO INTERACTION. <code>yield_int</code> are data where there are an interaction. We will use both of these to showcase how to work the 2-way ANOVA and the analysis of a factorial design.</p>
 <p>We note that these data have replication and randomisation. There are <em>four</em> replicate plants/plots allocated randomly to each of the four treatment combinations.</p>
 <p>Here is the evidence of the factorial design</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/xtabs.html">xtabs</a></span><span class="op">(</span><span class="op">~</span><span class="va">UVB</span><span class="op">+</span><span class="va">CO2</span>, data <span class="op">=</span> <span class="va">plantYield_factorial</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##       CO2
 ## UVB    Con CO2+
@@ -157,7 +157,7 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 </h3>
 <p>Here we combine some dplyr magic (calculating means in each group - there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts.</p>
 <p>Our goal here is to plot the data that does not have the interaction next to a plot of the data that does have the interaction.</p>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-31-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-32-1.png" width="672"></div>
 <p>Given what you’ve read above, you should be able to fill in these blanks:</p>
 <p>What you see above on the left, is a pattern that suggest that the effect of ______ on ________ does not vary by ________.</p>
 <p>In contrast, on the right the pattern suggests that the effect of ______ on ________ ________ by ________:</p>
@@ -172,7 +172,7 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 <blockquote>
 <p>An Important Note on what + and * mean in models. In the below model specification, you will see CO2 + UVB and CO2 * UVB. Using the vocabulary from above, CO2 + UVB is specifying independent additive effects. In the ANOVA table produced by anova(), there will be three lines: one for CO2, one for UVB and one for residuals. In contrast, CO2 * UVB produces four lines of output in the ANOVA table. We say that CO2 * UVB expands to include the main, independent effects of CO2 and UVB, but also the interaction between them. So CO2 * UVB == CO2 + UVB + CO2:UVB where the last term is the interaction. Thus, there are four lines reported: one for CO2, one for UVB, one for the interaction and one for residuals.</p>
 </blockquote>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># A Correct model with no interaction on data with no interaction</span></span>
 <span><span class="va">int_mod_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">yield_ind</span> <span class="op">~</span> <span class="va">CO2</span> <span class="op">+</span> <span class="va">UVB</span>, data <span class="op">=</span> <span class="va">plantYield_factorial</span><span class="op">)</span></span>
 <span></span>
@@ -192,7 +192,7 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 ## Residuals 13 116.22    8.94                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_2</span><span class="op">)</span> <span class="co"># Good model, interaction in the data and interaction in the model</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -204,7 +204,7 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 ## Residuals 12 115.09    9.59                      
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">int_mod_3</span><span class="op">)</span> <span class="co"># Bad model, interaction in the data, but failure to specify in the model</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -227,12 +227,12 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 <span class="header-section-number">6.2.3</span> visreg and the 2-way ANOVA<a class="anchor" aria-label="anchor" href="#visreg-and-the-2-way-anova"><i class="fas fa-link"></i></a>
 </h3>
 <p>Don’t forget that the correct standard error for the ‘result’ is the residuals mean squared. You can use the dplyr + ggplot2 method, or visreg to estimate these. Here we use the <code>visreg</code> package and put the figure next to our original ggplot for the interaction data. Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and question (model 2).</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu">visreg</span><span class="op">(</span><span class="va">int_mod_2</span>,<span class="st">"CO2"</span>,by<span class="op">=</span><span class="st">"UVB"</span>, gg<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_classic</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">p2</span><span class="op">+</span><span class="va">p3</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-33-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-34-1.png" width="672"></div>
 
 </div>
 </div>
@@ -270,7 +270,7 @@ ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-12.</p>
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="In this section we are going to learn about how to implement two experimental designs: CRD: the completely randomised design CRBD: the completely randomised block design. These two designs are...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -448,15 +448,22 @@
 <span class="header-section-number">5.5</span> Analysing the CRBD<a class="anchor" aria-label="anchor" href="#analysing-the-crbd"><i class="fas fa-link"></i></a>
 </h2>
 <p>I’ll leave it to you now to generate the following plot of the means ± standard errors from the <code>plantYield_Blocked.csv</code> file.</p>
-<p>This requires thinking hard about the use of dplyr tools (<code>group_by()</code> and <code>summarise()</code>) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data). You need to make a <em>sumDat</em> object for the means and se’s. Then you need to plot the raw data, and overlay the mean±se info from the sumDat.</p>
+<blockquote>
+<p>Note that when you import the data, you need to make block a factor, as it is numeric (integer) in the raw data and would be treated as a number (continuous variable) otherwise.</p>
+</blockquote>
+<p>To do this you can use</p>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">plantYield_Block</span> <span class="op">&lt;-</span> <span class="fu">read_csv</span><span class="op">(</span><span class="st">"/data/plantYield_Block.csv"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">mutate</span><span class="op">(</span>block <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">block</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>To make this figure requires thinking hard about the use of dplyr tools (<code>group_by()</code> and <code>summarise()</code>) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data). You need to make a <em>sumDat</em> object for the means and se’s. Then you need to plot the raw data, and overlay the mean±se info from the sumDat.</p>
 <p>Can you see the variation between block 1 and 5? Block 2-4 are all similar…. Block 1 is 10 units more, and Block 5 is 10 units less.</p>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-22-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-23-1.png" width="672"></div>
 <div id="building-the-model" class="section level3" number="5.5.1">
 <h3>
 <span class="header-section-number">5.5.1</span> Building the model<a class="anchor" aria-label="anchor" href="#building-the-model"><i class="fas fa-link"></i></a>
 </h3>
 <p>In order to understand what’s going on with blocking, and it’s importance, lets build two models. This is a good trick and a good process to learn. The first model is a <em>naive</em> model that ignores block - treating this as a CRB. The second model is the <em>correct</em> model, letting block absorb the variation we can see among the blocks 1, 2-4 and 5.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># models</span></span>
 <span><span class="va">naive_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">obs</span> <span class="op">~</span> <span class="va">treat</span>, <span class="va">plantYield_Block</span><span class="op">)</span></span>
 <span><span class="co"># note the order of these factors is important</span></span>
@@ -474,7 +481,7 @@
 ## Residuals 16 888.34  55.521                  
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">block_model</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -494,7 +501,7 @@
 </h3>
 <p>Lets check that the model is estimating differences as we might have expected. We can do this using the summary table.</p>
 <p>Let’s remember that, for example, the mean of Herb1 is expected to be 10 units higher than control with a yield of 20, and block 1 is supposed to be ~10 units higher than 2,3,4.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">block_model</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -541,11 +548,11 @@
 </h4>
 <p>There is a very nice plotting function in the package <em>visreg</em> that delivers these proper standard errors in a nice ggplot framework.</p>
 <p>It presents points that are the partial residuals (deviation from the mean for each replicate), lines depicting the means, and shaded area as a 95% confidence interval, calculated as <span class="math inline">\(1.96*SE\)</span>, where <em>the SE is estimated from the model error variance</em> (just above). Compare this to your first graph.</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">visreg</span><span class="op">(</span><span class="va">block_model</span>, <span class="st">"treat"</span>, gg<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu">ylab</span><span class="op">(</span><span class="st">"Yield"</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">xlab</span><span class="op">(</span><span class="st">"Treatment"</span><span class="op">)</span> </span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-25-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-26-1.png" width="672"></div>
 </div>
 </div>
 <div id="making-inference-in-a-blocked-model-confidence-intervals-and-contrasts" class="section level3" number="5.5.4">
@@ -555,7 +562,7 @@
 <p>We are now in a very strong position to make inference.</p>
 <p>Let’s start with a rule of thumb linked to the 95% confidence interval (CI). If the CIs in the figure above don’t overlap, they are different; if they do, they are not. This indicates that Cont and Placebo are not significantly different (95% confidence intervals overlap). Herb1 and Herb 2 are significantly different from these, but not each other.</p>
 <p>This is OK. But it is not robust. Instead, let’s revisit our <em>post-hoc</em> and <em>a priori</em> methods for evaluating differences among treatments. We can apply a tukey test and calculate all pairwise differences. This is not a good idea, but let’s do it, using <em>agricolae</em> and the <code>HSD.test()</code> function. Living large!</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># use agricolae HSD.test()</span></span>
 <span></span>
 <span><span class="va">tukey_out</span> <span class="op">&lt;-</span> <span class="fu">HSD.test</span><span class="op">(</span><span class="va">block_model</span>, <span class="st">"treat"</span>, group <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -567,7 +574,7 @@
 ## Control 20.11665      b</code></pre>
 <p>This confirms our intuition and 95% Confidence Interval insights. But is it correct?</p>
 <p>Let’s make a formal test, using the <code>contrast()</code> and <code>fit.contrast()</code> functions for of one of the pairwise tests that looks obvious - between Herb1 and Herb2. Even with block in the model, the second argument for <code>fit.contrast()</code> is the treatment for which the contrast is made.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fit.contrast from gmodels package</span></span>
 <span><span class="co"># see that even with the block in the model</span></span>
 <span><span class="va">contrast</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
@@ -628,7 +635,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-12.</p>
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

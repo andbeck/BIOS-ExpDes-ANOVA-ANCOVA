@@ -124,7 +124,7 @@
 
 \title{An Introduction to Experimental Design ANOVA and ANCOVA}
 \author{Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)}
-\date{2022-12-12}
+\date{2022-12-13}
 
 \begin{document}
 \maketitle
@@ -1153,11 +1153,24 @@ Lets modify our previous example to including blocking. If you wish to replicate
 
 I'll leave it to you now to generate the following plot of the means ± standard errors from the \texttt{plantYield\_Blocked.csv} file.
 
-This requires thinking hard about the use of dplyr tools (\texttt{group\_by()} and \texttt{summarise()}) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data). You need to make a \emph{sumDat} object for the means and se's. Then you need to plot the raw data, and overlay the mean±se info from the sumDat.
+\begin{quote}
+Note that when you import the data, you need to make block a factor, as it is numeric (integer) in the raw data and would be treated as a number (continuous variable) otherwise.
+\end{quote}
+
+To do this you can use
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{plantYield\_Block }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"/data/plantYield\_Block.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{block =} \FunctionTok{factor}\NormalTok{(block))}
+\end{Highlighting}
+\end{Shaded}
+
+To make this figure requires thinking hard about the use of dplyr tools (\texttt{group\_by()} and \texttt{summarise()}) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data). You need to make a \emph{sumDat} object for the means and se's. Then you need to plot the raw data, and overlay the mean±se info from the sumDat.
 
 Can you see the variation between block 1 and 5? Block 2-4 are all similar\ldots. Block 1 is 10 units more, and Block 5 is 10 units less.
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-22-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-23-1.pdf}
 
 \hypertarget{building-the-model}{%
 \subsection{Building the model}\label{building-the-model}}
@@ -1289,7 +1302,7 @@ It presents points that are the partial residuals (deviation from the mean for e
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-25-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-26-1.pdf}
 
 \hypertarget{making-inference-in-a-blocked-model-confidence-intervals-and-contrasts}{%
 \subsection{Making inference in a blocked model: confidence intervals and contrasts}\label{making-inference-in-a-blocked-model-confidence-intervals-and-contrasts}}
@@ -1480,7 +1493,7 @@ Here we combine some dplyr magic (calculating means in each group - there are tw
 
 Our goal here is to plot the data that does not have the interaction next to a plot of the data that does have the interaction.
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-31-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-32-1.pdf}
 
 Given what you've read above, you should be able to fill in these blanks:
 
@@ -1591,7 +1604,7 @@ Don't forget that the correct standard error for the `result' is the residuals m
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-33-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-34-1.pdf}
 
 \hypertarget{interactions-part-2-introducing-the-ancova-analysis-of-covariance}{%
 \chapter{Interactions Part 2: Introducing the ANCOVA (analysis of covariance)}\label{interactions-part-2-introducing-the-ancova-analysis-of-covariance}}
@@ -1734,7 +1747,7 @@ Note also that if you are building your own script, you need the following packa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-36-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37-1.pdf}
 
 Whoa!\ldots{} what's going on here? Well,here is a massive justification of why we say \emph{``always plot your data''} before you do anything. It looks like one of the data points has the height and weight data entered incorrectly, the wrong way around. This is a `feature' of this dataset. Of course you could go back to your master spreadsheet and make the corretion, which is a good idea in real life, but let's see how to fix this using R. Let's fix that. Lets find the row with the mistake by looking for height values \textless100, and then make the switch.
 
@@ -1783,7 +1796,7 @@ Whoa!\ldots{} what's going on here? Well,here is a massive justification of why 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-38-1.pdf}
 
 Excellent. Let's look at this picture and ask ourselves the null hypothesis question: does the effect of Height on Weight vary by Sex? What do you think?
 
@@ -1803,10 +1816,10 @@ NOTE: this is not doing statistics. This is using graphics to help guide insight
 \end{Shaded}
 
 \begin{verbatim}
-## `geom_smooth()` using formula = 'y ~ x'
+## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-38-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-39-1.pdf}
 
 Again, we have not `proven' anything or tested our hypothesis. What we have is a good guess though. We can guess that
 
@@ -1853,7 +1866,7 @@ To do this, we use the \texttt{autoplot} function from the \texttt{ggfortify} pa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-40-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41-1.pdf}
 
 OK. Let's walk through the three core diagnostics.
 
@@ -1892,10 +1905,10 @@ So, here are the data where we transform both continuous variables - the continu
 \end{Shaded}
 
 \begin{verbatim}
-## `geom_smooth()` using formula = 'y ~ x'
+## `geom_smooth()` using formula 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42-1.pdf}
 
 OK. The patterns are still there. And let's see what happens with the model and assumptions now!
 
@@ -1909,7 +1922,7 @@ OK. The patterns are still there. And let's see what happens with the model and 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-43-1.pdf}
 
 The scale-location plot is definitely flatter - you can tell by the range on the y-axis of the scale-location plot. So, with this transformation, we can now move to evaluating the model. You are probably thinking about what it means to analyse the data on the log-log axis\ldots. we will come to that shortly.
 
@@ -2122,7 +2135,7 @@ We can actually use this data frame to generate the picture that represents the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-48-1.pdf}
+\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-49-1.pdf}
 
 Great. Now we can see that the full model (mod\_Davis\_log) told us. The lines are parallel. There is no interaction. In fact, we can do a bit more here. Remember that the model says
 
@@ -2156,7 +2169,7 @@ Note that just because your data looks like a particular pattern doesn't mean yo
 \end{quote}
 
 \begin{figure}
-\includegraphics[width=20.56in]{images/GSwithR_Grid} \caption{From Getting Started with R, 2nd Edition, OUP}\label{fig:unnamed-chunk-49}
+\includegraphics[width=20.56in]{images/GSwithR_Grid} \caption{From Getting Started with R, 2nd Edition, OUP}\label{fig:unnamed-chunk-50}
 \end{figure}
 
 For example, if you design a study with an ANCOVA question in mind, you are always starting your analysis with the question of whether the effect of X on Y varies by Z. Thus, ANCOVA always starts with comparing the interaction (model E) against the additive model (model D).

@@ -401,14 +401,23 @@ design2$obs <- 20 +
 
 head(design2, 10)
 
-plantYield_Block <- design2
+plantYield_Block <- tibble(design2)
 ```
 
 ## Analysing the CRBD
 
-I'll leave it to you now to generate the following plot of the means ± standard errors from the `plantYield_Blocked.csv` file.  
+I'll leave it to you now to generate the following plot of the means ± standard errors from the `plantYield_Blocked.csv` file.
 
-This requires thinking hard about the use of dplyr tools (`group_by()` and `summarise()`) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data).  You need to make a _sumDat_ object for the means and se's.  Then you need to plot the raw data, and overlay the mean±se info from the sumDat.
+> Note that when you import the data, you need to make block a factor, as it is numeric (integer) in the raw data and would be treated as a number (continuous variable) otherwise.
+
+To do this you can use
+
+```{r, eval = FALSE}
+plantYield_Block <- read_csv("/data/plantYield_Block.csv") %>% 
+  mutate(block = factor(block))
+```
+
+To make this figure requires thinking hard about the use of dplyr tools (`group_by()` and `summarise()`) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data).  You need to make a _sumDat_ object for the means and se's.  Then you need to plot the raw data, and overlay the mean±se info from the sumDat.
 
 Can you see the variation between block 1 and 5?  Block 2-4 are all similar.... Block 1 is 10 units more, and Block 5 is 10 units less.
 

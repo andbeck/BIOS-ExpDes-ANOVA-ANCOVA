@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.1/transition.js"></script><script src="libs/bs3compat-0.4.1/tabs.js"></script><script src="libs/bs3compat-0.4.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -130,7 +130,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p>These data ARE NOT on the blackboard site.</p>
 </blockquote>
 <p>Note also that if you are building your own script, you need the following packages: <code>tidyverse</code>, <code>ggfortify</code>, <code>visreg</code>, <code>patchwork</code></p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://pbreheny.github.io/visreg">visreg</a></span><span class="op">)</span></span>
@@ -150,25 +150,25 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## $ height &lt;int&gt; 182, 161, 161, 177, 157, 170, 167, 186, 178, 171, 175, 57, 161,…
 ## $ repwt  &lt;int&gt; 77, 51, 54, 70, 59, 76, 77, 73, 71, 64, 75, 56, 52, 64, 57, 66,…
 ## $ repht  &lt;int&gt; 180, 159, 158, 175, 155, 165, 165, 180, 175, 170, 174, 163, 158…</code></pre>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># make the most basic of exploratory plots.</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-36-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-37-1.png" width="672"></div>
 <p>Whoa!… what’s going on here? Well,here is a massive justification of why we say <em>“always plot your data”</em> before you do anything. It looks like one of the data points has the height and weight data entered incorrectly, the wrong way around. This is a ‘feature’ of this dataset. Of course you could go back to your master spreadsheet and make the corretion, which is a good idea in real life, but let’s see how to fix this using R. Let’s fix that. Lets find the row with the mistake by looking for height values &lt;100, and then make the switch.</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#which row? 12</span></span>
 <span><span class="va">Davis</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##    sex weight height repwt repht
 ## 12   F    166     57    56   163</code></pre>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># BASE R syntax to see each observation</span></span>
 <span><span class="va">Davis</span><span class="op">$</span><span class="va">weight</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 166</code></pre>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Davis</span><span class="op">$</span><span class="va">height</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span></code></pre></div>
 <pre><code>## [1] 57</code></pre>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># BASE R syntax to change the specific values in the specific row</span></span>
 <span><span class="va">Davis</span><span class="op">$</span><span class="va">weight</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">57</span></span>
 <span><span class="va">Davis</span><span class="op">$</span><span class="va">height</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">166</span></span>
@@ -176,19 +176,19 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <span><span class="co"># replot</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-37-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-38-1.png" width="672"></div>
 <p>Excellent. Let’s look at this picture and ask ourselves the null hypothesis question: does the effect of Height on Weight vary by Sex? What do you think?</p>
 <p>We can actually get a bit of help here. We can use some ggplot magic to help us make this GUESS. Let’s use <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> to help us guess the answer.</p>
 <blockquote>
 <p>NOTE: this is not doing statistics. This is using graphics to help guide insight and our expectation of the outcome before doing the statistical test of our hypothesis.</p>
 </blockquote>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="co"># add a best fit line to each group (the sex category)</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula = 'y ~ x'</code></pre>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-38-1.png" width="672"></div>
+<pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-39-1.png" width="672"></div>
 <p>Again, we have not ‘proven’ anything or tested our hypothesis. What we have is a good guess though. We can guess that</p>
 <ol style="list-style-type: decimal">
 <li>Males are heavier than females (what is the difference in the intercepts?)</li>
@@ -207,14 +207,14 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p><code>lm(weight ~ height + sex + height:sex, data = Davis)</code></p>
 <p>This reads as “weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?). The <code>height * aex</code> syntax always expands to this <em>full model</em> - the model containing the main effects and the interaction.</p>
 <p>OK. Let’s fit the model</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we call the model mod_Davis.</span></span>
 <span><span class="va">mod_Davis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">height</span><span class="op">*</span><span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span></code></pre></div>
 <p>That’s it. We’ve got the model. But before we make any attempts at actually evaluating our test of the hypothesis, we have to check the assumptions!</p>
 <p>To do this, we use the <code>autoplot</code> function from the <code>ggfortify</code> package.</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">mod_Davis</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-40-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-41-1.png" width="672"></div>
 <p>OK. Let’s walk through the three core diagnostics.</p>
 <p>In the upper left, we are evaluating the systematic part of the model - are there any systematic departures from the linear model we’ve speficied? Are there interactions missing or specific non-linearities? Nope.</p>
 <p>In the upper right, we are evaluating the normality of the residuals. These too look pretty good. If you notice, event though there are some deviations, but the pattern is that the deviations move away from the line but ‘come back’ at the very ends. This is typical of normally distributed residuals.</p>
@@ -232,21 +232,21 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 </blockquote>
 <p>But if there are real problems, we can use transformations. They do not ‘change the data’ instead, they retain the relationships between the data points, but put everything on a difference scale so that we can use the power of the linear model to answer the question. The tricky thing is how do we report our insights to the reader back on the original ‘response’ scale. We’ll get to that. But rest assured, transformations don’t change the data.</p>
 <p>So, here are the data where we transform both continuous variables - the continuous response variable and the continuous explanatory variable.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># re-plot with log-log</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula = 'y ~ x'</code></pre>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-41-1.png" width="672"></div>
+<pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-42-1.png" width="672"></div>
 <p>OK. The patterns are still there. And let’s see what happens with the model and assumptions now!</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># fit the model - note we can specify the transformation RIGHT IN THE MODEL</span></span>
 <span><span class="va">mod_Davis_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">*</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># check the new residuals</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-42-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-43-1.png" width="672"></div>
 <p>The scale-location plot is definitely flatter - you can tell by the range on the y-axis of the scale-location plot. So, with this transformation, we can now move to evaluating the model. You are probably thinking about what it means to analyse the data on the log-log axis…. we will come to that shortly.</p>
 </div>
 <div id="making-inference-on-the-ancova" class="section level3" number="7.4.2">
@@ -261,7 +261,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <li>There might be a difference in slopes - the Male line is steeper.</li>
 </ol>
 <p>Together, the graph and these guesses lead to a feeling that <em>the effect of height on weight varies by sex</em>.</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -290,7 +290,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <span class="header-section-number">7.4.3</span> The summary table, the actual slopes and making sense of the log stuff.<a class="anchor" aria-label="anchor" href="#the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff."><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s start investigating the details via the <code>summary</code> table:</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
 ## Call:
@@ -332,7 +332,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <span class="header-section-number">7.4.4</span> Specifying the equations supported by the model.<a class="anchor" aria-label="anchor" href="#specifying-the-equations-supported-by-the-model."><i class="fas fa-link"></i></a>
 </h3>
 <p>In order to identify the equations supported by the model - e.g. the equations associated with the estimation of teo lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the <code>*</code> with the <code>+</code>.</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mod_Davis_log2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">+</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## 
@@ -364,7 +364,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <span class="header-section-number">7.4.5</span> Making even more inference and drawing the picture<a class="anchor" aria-label="anchor" href="#making-even-more-inference-and-drawing-the-picture"><i class="fas fa-link"></i></a>
 </h3>
 <p>OK, lets use a variation on our plotting tricks from the regression module (week 6) to get a nice picture.</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># first create a data frame to use that combines the raw data</span></span>
 <span><span class="co"># with the predictions from the model.</span></span>
 <span></span>
@@ -386,7 +386,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## 6   M     76    170    76   165   4.224381</code></pre>
 <p>You can see we have a fourth column now…. these are predictions (also known as fitted values) of <code>log(weight)</code> as a function of <code>log(height)</code> using the additive model, <em>at each of the originally measured height values in the data frame</em>.</p>
 <p>We can actually use this data frame to generate the picture that represents the output of the statistical model.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Step 3: make a figure with lines from the model predictions</span></span>
 <span><span class="co"># Step 4: add the raw data points from the original dataset</span></span>
 <span><span class="co"># NOTE! pay attention to where we are using log()!</span></span>
@@ -394,7 +394,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
 <span>  <span class="co"># now add the raw data note</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-48-1.png" width="672"></div>
+<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-49-1.png" width="672"></div>
 <p>Great. Now we can see that the full model (mod_Davis_log) told us. The lines are parallel. There is no interaction. In fact, we can do a bit more here. Remember that the model says</p>
 <p>For women <span class="math inline">\(log(weight)= -6.46 + 2.05 * log(height)\)</span>
 For men <span class="math inline">\(log(weight)= (-6.46 + 0.12) + 2.05 * log(height)\)</span></p>
@@ -420,7 +420,7 @@ For men <span class="math inline">\(log(weight)= (-6.46 + 0.12) + 2.05 * log(hei
 <p>Note that just because your data looks like a particular pattern doesn’t mean you should use that model. Your statistical model should be driven by your question and original design.</p>
 </blockquote>
 <div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-49"></span>
+<span style="display:block;" id="fig:unnamed-chunk-50"></span>
 <img src="images/GSwithR_Grid.png" alt="From Getting Started with R, 2nd Edition, OUP" width="740"><p class="caption">
 Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 </p>
@@ -429,7 +429,7 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 <blockquote>
 <p>Proof: If we compare the additive model and the model with the interaction, we are <em>specifically</em> testing for whether allowing the slopes to vary by sex <em>explains additional variation</em> above and beyond the main, additive effects of height and sex. To do this, we use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function, but pass it two models instead of one! This does what is called a <em>Liklihood Ratio Test</em> comparing the two models. Remembering that the difference between the <code>*</code> model and the <code>+</code> model is just the presence/absence of the interaction term, this <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> comparison evaluates how much more variation is explained by the interaction, after the additive effects have been modelled. In the follow code, compare the result of the first test to the <em>last line</em> of the second. This proves that when we fit model E, the test for the interaction is actually a comparison of model E with model D!</p>
 </blockquote>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span>, <span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -438,7 +438,7 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 ##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
 ## 1    196 2.5574                           
 ## 2    197 2.5718 -1 -0.014402 1.1038 0.2947</code></pre>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
@@ -510,7 +510,7 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-12.</p>
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-13.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -1,4 +1,4 @@
-fig:unnamed-chunk-49
+fig:unnamed-chunk-50
 introduction
 the-three-rs-the-foundation-of-experimental-design.
 the-general-linear-model
