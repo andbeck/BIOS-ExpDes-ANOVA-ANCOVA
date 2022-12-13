@@ -413,7 +413,7 @@ I'll leave it to you now to generate the following plot of the means ± standard
 To do this you can use
 
 ```{r, eval = FALSE}
-plantYield_Block <- read_csv("/data/plantYield_Block.csv") %>% 
+plantYield_Block <- read_csv("data/plantYield_Block.csv") %>% 
   mutate(block = factor(block))
 ```
 
