@@ -30,14 +30,16 @@ The learning outcome for this mini-module are that you will understand the basic
 - The 2-way ANOVA
 - The ANCOVA Design
 
-In order to be successful with this final section of the course, you need to feel comfortable with the 1-way ANOVA and the Regression model.  Please review these concepts.  You can also refer to Chapter 5 and 6 in Getting Started with R (available as an online Resource via STARPlus) which covers a great deal of the mechanics of using R to do these types of models. Finally, you will also need to feel comfortable with dplyr and ggplot - we'll be reinforcing the old stuff and introducing a few new tricks.
+In order to be successful with this final section of the course, you need to feel comfortable with the 1-way ANOVA and the Regression model.  Please review these concepts.  
+
+You can also refer to Chapter 5 and 6 in Getting Started with R (available as an online Resource via STARPlus via the Library) which covers a great deal of the mechanics of using R to do these types of models. Finally, you will also need to feel comfortable with dplyr and ggplot - we'll be reinforcing the old stuff and introducing a few new tricks.
 
 ## The Three Rs: The Foundation of Experimental Design.
 
 Before we get started, it's vital that you understand that there are some very basic principles needed to ensure that your experiments can provide robust and reliable inference (answers to your questions).  The “3 R’s”. 
 
-- **Randomisation**: the random allocation of treatments to the experimental units, to avoid confounding between treatment effects and other unknown effects.
-- **Replication**: the repetition of a treatment within an experiment, to quantify the natural variation between experimental units and increase accuracy of estimated effects.
+- **Randomisation**: the random allocation of _treatment levels_ to the experimental units, to avoid confounding between treatment effects and other unknown effects.  Remember, for example, that the parasite treatment with the Daphnia has 4 levels - control and three different parasites.  These are the four levels of the parasite treatment, and these have to be allocated randomly among the individual daphnids.
+- **Replication**: the repetition of a treatment within an experiment, to quantify the natural variation between experimental units and increase accuracy of estimated effects.  Remember, for example, that we had 10 individual daphnids for experiencing each treatment level.
 - **Reduce noise:** by controlling as much as possible the conditions in the experiment, e.g. by grouping of similar experimental units in blocks.
 
 At this point, you may want to revisit, again, the following section of the APS 240 book [on Randomisation](https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html#randomisation)
@@ -52,7 +54,7 @@ There are a few key characteristics to remember about these models. The general 
 
 $y = \beta_{0}+\beta_{1}*X_{1}+\beta_{2}*X_{2}+\epsilon$
 
-Where the $y$ is the response variable, the $\beta$'s are estimated parameters, the $X$'s are the predictor variables and the $\epsilon$ comes from a Gaussian distribution with zero mean and constant variance.
+Where the $y$ is the response variable, the $\beta$'s are estimated parameters (e.g. the gradients or the means), the $X$'s are the predictor variables and the $\epsilon$ is the leftover variation, captured in the residuals, that is expected to reflect a Gaussian distribution with zero mean and constant variance.  With  $\epsilon$, think about all of the discussion we've had about residuals and the three core diagnostics we use.
 
 Let's decompose that a bit more.
 
@@ -60,16 +62,16 @@ There are two types of predictor variable:
 
 _Metric_ predictor variables are measurements of some quantity that may help to predict the value of the response. For example, if the response is the blood pressure of patients in a clinical trial, then age, fat mass and height are potential metric predictor variables.  You may know these as **continuous explanatory (independent) variables**
 
-_Factor_ variables are labels that serve to categorize the response measurements into groups, which may have different expected values. Continuing the blood pressure example, factor variables might be sex and drug treatment received (drug A, drug B or placebo, for example).  You may also know these as **categorical explanatory (independent) variables**.
+_Factor_ variables are labels that serve to categorize the response measurements into groups, which may have different expected values. Continuing the blood pressure example, factor variables might be sex and drug treatment received (drug A, drug B or placebo, for example).  You may also know these as **categorical explanatory (independent) variables**.  A key feature of declaring a _Factor_ is that it's levels are specifically identified as part of the variable.  These levels are the basis for all comparisons among means we make to test the Null Hypothesis of ANOVA and ANOVA related models.  We experienced a bit of an introduction to _Factor_ vs _Metric_ when trying to use `multcomp` in Week 7.
 
 So, you hopefully can see how this _general_ linear model is capable of representing
 
 1. *ANOVA* – Analysis of variance -> Predictors are factors.
 2. *Regression* -> Predictor is a metric variable (continuous variable).                  
 3. *Multiple regression* -> Predictors are metric variables (continuous variables). 
-4. *ANCOVA* - Analysis of co-variance -> Predictors are a mixture of metric variables (continuous variables) and factors.
+4. *ANCOVA* - Analysis of co-variance -> Predictors are a mixture of metric variables (continuous variables) and factors (categorical variables).
 
-Finally, it is important to understand that non-linear relationships such as these data below can be modelled with a linear model:
+Finally, it is important to understand that non-linear relationships, such as these data below, can be modelled with a linear model:
 
 ```{r, echo = FALSE}
 # because we are using random numbers
@@ -99,7 +101,9 @@ we hopefully can see that $\beta_{0} = 0.01$, $\beta_{1} = 0$ and $\beta_{2} = 1
 
 Linear models are perfectly capable of being used to estimate non-linear relationships!
 
-Here is the code to make that figure.
+When we talk about the systematic part of the model (Upper Left Diagnostic Plot from autoplot), we are specifically assessing whether the number and nature of the terms in the equation(s) above are appropriate to capture the patterns.  Of note is that all of the terms in our original and quadratic model above are connected by `+` symbols...
+
+Here is the code to make that figure, btw.
 
 ```{r, eval = FALSE}
 # because we are using random numbers
@@ -121,19 +125,22 @@ ggplot(df, aes(x = x, y = y))+
 
 There are several resources that will help with this section of the stats course, and onwards
 
-- Getting Started with R - An Introducton for Biologists, Second Edition (available as an electronic online resource via StarPlus).  Specifically Chapter 5 and 6.
-- Experimental Design for the Life Sciences - Nick Colegrave and Graham Ruxton (seen on eBay for £2.50!)
+- Getting Started with R - An Introducton for Biologists, Second Edition (available as an electronic online resource via StarPlus).  Specifically, Chapter 5 and 6 cover details on how to fit and interpret statistical models fit to data in this workbook.
+- Experimental Design for the Life Sciences - Nick Colegrave and Graham Ruxton (seen on eBay for £2.50!). Specifically, this book gives an excellent overview of how to design experiments in the Life Sciences
 - Of course, the venerable coursebook for APS 240: https://dzchilds.github.io/stats-for-bio/index.html
 
 ## Install some extra packages ----
 
 In order to make this module more effective, we are going to use some additional resources from CRAN.
 
-Please install these packages, if you have not already, using the install packages tab in RStudio:
+Please ensure you have ALREADY installed these packages, using the install packages tab in RStudio:
 
 - `tidyverse`
 - `ggfortify`
 - `agricolae`
+- `patchwork`
+
+Please ensure you ALSO install these packages, using the install packages tab in RStudio:
+
 - `car`
 - `visreg`
-- `patchwork`
