@@ -121,7 +121,7 @@ ggplot(df, aes(x = x, y = y))+
   geom_point()
 ```
 
-# Readings ----
+# Readings
 
 There are several resources that will help with this section of the stats course, and onwards
 
@@ -129,7 +129,7 @@ There are several resources that will help with this section of the stats course
 - Experimental Design for the Life Sciences - Nick Colegrave and Graham Ruxton (seen on eBay for £2.50!). Specifically, this book gives an excellent overview of how to design experiments in the Life Sciences
 - Of course, the venerable coursebook for APS 240: https://dzchilds.github.io/stats-for-bio/index.html
 
-## Install some extra packages ----
+## Install some extra packages 
 
 In order to make this module more effective, we are going to use some additional resources from CRAN.
 

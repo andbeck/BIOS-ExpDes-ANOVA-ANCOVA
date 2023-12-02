@@ -68,3 +68,5 @@ making-even-more-inference-and-drawing-the-picture
 some-general-principles-for-anova-and-ancova-modelling.
 ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model
 a-few-parting-tricks-about-specifying-models-in-r
+readings
+install-some-extra-packages
