@@ -54,15 +54,15 @@ Let's be super clear: in these data we start with the fundamental question that 
 
 Let us also recall the sequential nature of the ANOVA table output. This is about what we expect to see, having fit a model, which we will do below.  In contrast to the ANOVA, with an ANCOVA, we will see first an estimate of variation explained by the continuous variable, then the categorical variable and finally, after seeing the report on both of those, an estimate of the variation attributable to the interaction.  Another way to think of this is as follows (explore the figures above along with this):
 
-What is the estimate of the intercept and slope, ignoring the different categories, and how much variation does this explain.
-What happens if we let there be two lines, one for each category, but with the same slope (e.g. different intercepts, but same slope).  Does this explain more variation?
-Finally, what if we let there be two lines, and different slopes (the interaction exists) - does this explain additional variation?
+- What is the estimate of the intercept and slope, ignoring the different categories, and how much variation does this explain.
+- What happens if we let there be two lines, one for each category, but with the same slope (e.g. different intercepts, but same slope).  Does this explain more variation?
+- Finally, what if we let there be two lines, and different slopes (the interaction exists) - does this explain additional variation?
 
 If we get to the last scenario, and the answer is yes, after all the other options, the _different slopes_ does capture variation in our response, we have evidence of an interaction.
 
 ## Working through an ANCOVA example.
 
-Let's work with a built in dataset in R - the Davis Study, which is exactly these data.  The associated assignment is another example.
+Let's work with a built in dataset in R - the Davis Study, which is exactly these data.  The associated assignment provides another example.
 
 The process of doing this will follow a tried and true approach to analysing data.  You should have this workflow fully embedded in your head now:
 
@@ -182,11 +182,11 @@ There is a short section in the (APS 240 reading)[https://dzchilds.github.io/sta
 
 A question that routinely comes up is whether transformations are 'changing the data'.  Rather than focusing on this, we offer the following interpretation.  Linear models fit by `lm()` carry a set of assumptions (our focus on the three panels using autoplot).  If these are not met, we can not trust our inference (F-testing). 
 
-> Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that t-tests, ANOVAs and regressions are generally quite robust—they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances change a lot across groups  - from (APS 240)[https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction].
+> Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that t-tests, ANOVAs and regressions (e.g. the latter two being general linear models) are quite robust—they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances change a lot across groups  - from (APS 240)[https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction].
 
 But if there are real problems, we can use transformations.  They do not 'change the data'  instead, they retain the relationships between the data points, but put everything on a difference scale so that we can use the power of the linear model to answer the question.  The tricky thing is how do we report our insights to the reader back on the original 'response' scale.  We'll get to that.  But rest assured, transformations don't change the data.
 
-So, here are the data where we transform both continuous variables - the continuous response variable and the continuous explanatory variable.
+So, here are the data where we transform both continuous variables with a `log` transformation - the continuous response variable and the continuous explanatory variable.  Perhaps check `?log` to remind yourself of whether this is a log10 or natural log transformation.....
 
 ```{r}
 # re-plot with log-log
@@ -239,7 +239,7 @@ There is a slope associated with Height (we don't know whether it's positive or 
 
 Let's work sequentially to read the table now:
 
-When we allow for a common slope associated with `log(Height)`, we capture $4.66$ units of variation in `log(weight)`, which when compared to the $0.013$ units of variation left over (residual MSE), is a lot.  The F-value is thus BIG and the p-value small.  When we allow for an effect of Sex to define different average `log(weight)`, this too is important as it captures $0.344$ units of variation, which comparied to the $0.013$ units in the residual, is also big (Big F, small P).  
+When we allow for a common slope associated with `log(Height)`, we capture $4.66$ units of variation in `log(weight)`, which when compared to the $0.013$ units of variation left over (residual MSE), is a lot.  The F-value is thus BIG and the p-value small.  When we allow for an effect of Sex to define different average `log(weight)`, this too is important as it captures $0.344$ units of variation, which compared to the $0.013$ units in the residual, is also big (Big F, small P).  
 
 However, when we allow for the slopes caused by `log(height)` to vary with `sex`, this captures very little additional variation with respect to the residual variation ($0.014$ comprared to $0.013$) hence a small F and a large P for this term.
 
@@ -330,19 +330,23 @@ Great.  Now we can see that the full model (mod_Davis_log) told us.  The lines a
 For women $log(weight)= -6.46 + 2.05 * log(height)$
 For men   $log(weight)= (-6.46 + 0.12) + 2.05 * log(height)$
 
-Because we are in log land, we can do some clever maths: We know that 
+Because we are in the land of log transformations, we can do some clever maths: 
+
+We know that 
 
 $log(weight Female) - log(weight Male) = - 0.12$
 
-(this is the treatment contrast for the intercept).  We also know (please memorise) that the _difference between logs is equal to the log of the ratio_:
+(this is the treatment contrast for the intercept).  We also know (please memorise this) that the _difference between logs is equal to the log of the ratio_:
 
 $log(weightF/weightM) = -0.12$
 
-Finally, we can convert both sides to non-log by exponentiating:
+Finally, we can convert both sides to non-log by exponentiating (which is the anti-log):
 
 $exp(log(weightF/weightM)) = exp(-0.12) = 0.88$
 
-What does this mean?  At any given height, female weight is 88% of a males (e.g. 12% lower). Cool!  That's one of the benefits of log-log linear relationships.  _The ratio of the categories in log-log land directly translates to a percent difference between the groups_. It's also worth noting that the height slope is ~2, which suggests... yes... because we are in log-land, that weight scales with $height^2$.
+What does this mean?  At any given height, female weight is 88% of a males (e.g. 12% lower). Cool!  
+
+This exercise demonstrates one of the benefits of log-log linear relationships.  _The ratio of the categories in log-log land directly translates to a percent difference between the groups_. It's also worth noting that the height slope is ~2, which suggests... yes... because we are in log-land, that weight scales with $height^2$.
 
 ## Some General Principles for ANOVA and ANCOVA modelling.
 

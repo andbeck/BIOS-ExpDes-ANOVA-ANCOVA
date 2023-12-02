@@ -1,65 +1,264 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" xml:lang="">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 7 Interactions Part 2: Introducing the ANCOVA (analysis of covariance) | An Introduction to Experimental Design ANOVA and ANCOVA</title>
-<meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
-<meta name="description" content="In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
-<meta property="og:title" content="Chapter 7 Interactions Part 2: Introducing the ANCOVA (analysis of covariance) | An Introduction to Experimental Design ANOVA and ANCOVA">
-<meta property="og:type" content="book">
-<meta property="og:description" content="In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 Interactions Part 2: Introducing the ANCOVA (analysis of covariance) | An Introduction to Experimental Design ANOVA and ANCOVA">
-<meta name="twitter:description" content="In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the...">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
-    
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  </style>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Interactions Part 2: Introducing the ANCOVA (analysis of covariance) | An Introduction to Experimental Design ANOVA and ANCOVA</title>
+  <meta name="description" content="This is an introduction to Experimental Design, ANOVA and ANCOVA analyses." />
+  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Interactions Part 2: Introducing the ANCOVA (analysis of covariance) | An Introduction to Experimental Design ANOVA and ANCOVA" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is an introduction to Experimental Design, ANOVA and ANCOVA analyses." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Interactions Part 2: Introducing the ANCOVA (analysis of covariance) | An Introduction to Experimental Design ANOVA and ANCOVA" />
+  
+  <meta name="twitter:description" content="This is an introduction to Experimental Design, ANOVA and ANCOVA analyses." />
+  
+
+<meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)" />
+
+
+<meta name="date" content="2023-12-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
 </head>
-<body data-spy="scroll" data-target="#toc">
 
-<div class="container-fluid">
-<div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<body>
 
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="">An Introduction to Experimental Design ANOVA and ANCOVA</a>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
 
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
-</form>
 
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
-<li><a class="" href="index.html"><span class="header-section-number">1</span> Introduction</a></li>
-<li><a class="" href="readings--.html"><span class="header-section-number">2</span> Readings —-</a></li>
-<li><a class="" href="introduction-to-experimental-design.html"><span class="header-section-number">3</span> Introduction To Experimental Design</a></li>
-<li><a class="" href="some-initial-examples-and-challenge-questions.html"><span class="header-section-number">4</span> Some initial examples and challenge questions</a></li>
-<li><a class="" href="design-and-analysis-of-experiments.html"><span class="header-section-number">5</span> Design and Analysis of Experiments</a></li>
-<li><a class="" href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></li>
-<li><a class="active" href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><span class="header-section-number">7</span> Interactions Part 2: Introducing the ANCOVA (analysis of covariance)</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Experimental Design, ANOVA and ANCOVA</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-three-rs-the-foundation-of-experimental-design."><i class="fa fa-check"></i><b>1.1</b> The Three Rs: The Foundation of Experimental Design.</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#the-general-linear-model"><i class="fa fa-check"></i><b>1.2</b> The General Linear Model</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#install-some-extra-packages"><i class="fa fa-check"></i><b>1.3</b> Install some extra packages</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html"><i class="fa fa-check"></i><b>2</b> Introduction To Experimental Design</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#conepts-associated-with-causation"><i class="fa fa-check"></i><b>2.1</b> Conepts associated with causation</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#components-of-an-experiment"><i class="fa fa-check"></i><b>2.2</b> Components of an Experiment</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#the-holy-grail-of-a-control"><i class="fa fa-check"></i><b>2.2.1</b> The holy grail of a control</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#so-what-does-a-good-experimental-design-do"><i class="fa fa-check"></i><b>2.3</b> So what does a good experimental design do?</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#how-do-we-increase-precision-and-reduce-bias"><i class="fa fa-check"></i><b>2.4</b> How do we increase precision and reduce bias?</a>
+<ul>
+<li class="chapter" data-level="2.4.1" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#blinding"><i class="fa fa-check"></i><b>2.4.1</b> Blinding</a></li>
+<li class="chapter" data-level="2.4.2" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#placebos"><i class="fa fa-check"></i><b>2.4.2</b> Placebos</a></li>
+<li class="chapter" data-level="2.4.3" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#confounders"><i class="fa fa-check"></i><b>2.4.3</b> Confounders</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#experimental-vs.-measurement-units"><i class="fa fa-check"></i><b>2.5</b> Experimental vs. Measurement units</a>
+<ul>
+<li class="chapter" data-level="2.5.1" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#experimental-and-measurement-units-an-example"><i class="fa fa-check"></i><b>2.5.1</b> Experimental and measurement units: an example</a></li>
+<li class="chapter" data-level="2.5.2" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#identifying-the-experimental-unit---an-example-of-pseudo-replication"><i class="fa fa-check"></i><b>2.5.2</b> Identifying the experimental unit - an example of <strong>pseudo-replication</strong></a></li>
+<li class="chapter" data-level="2.5.3" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#psudo-replication"><i class="fa fa-check"></i><b>2.5.3</b> Psudo-replication</a></li>
+<li class="chapter" data-level="2.5.4" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#randomization-with-replication-protects-against-confounding"><i class="fa fa-check"></i><b>2.5.4</b> Randomization with Replication protects against Confounding</a></li>
+<li class="chapter" data-level="2.5.5" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#haphazard-is-not-randomized---beware-the-non-randomized-experiment"><i class="fa fa-check"></i><b>2.5.5</b> <strong>Haphazard</strong> is NOT randomized - beware the non-randomized experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#mini-quiz"><i class="fa fa-check"></i><b>2.6</b> Mini-Quiz</a></li>
+<li class="chapter" data-level="2.7" data-path="introduction-to-experimental-design.html"><a href="introduction-to-experimental-design.html#replication-how-many"><i class="fa fa-check"></i><b>2.7</b> Replication: How many?</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="some-initial-examples-and-challenge-questions.html"><a href="some-initial-examples-and-challenge-questions.html"><i class="fa fa-check"></i><b>3</b> Some initial examples and challenge questions</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="some-initial-examples-and-challenge-questions.html"><a href="some-initial-examples-and-challenge-questions.html#designing-your-first-experiment"><i class="fa fa-check"></i><b>3.1</b> Designing your first experiment</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html"><i class="fa fa-check"></i><b>4</b> Design and Analysis of Experiments</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#a-crd-completely-randomised-design-example"><i class="fa fa-check"></i><b>4.1</b> A CRD (Completely Randomised Design) Example</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#the-dplyr-and-ggplot-pipeline-for-inference."><i class="fa fa-check"></i><b>4.1.1</b> The dplyr and ggplot pipeline for inference.</a></li>
+<li class="chapter" data-level="4.1.2" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#the-one-way-anova."><i class="fa fa-check"></i><b>4.1.2</b> The One-Way ANOVA.</a></li>
+<li class="chapter" data-level="4.1.3" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#making-insight-and-inference"><i class="fa fa-check"></i><b>4.1.3</b> Making insight and inference</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#a-priori-vs.-post-hoc-contrasts"><i class="fa fa-check"></i><b>4.2</b> A priori vs. Post-Hoc Contrasts</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#custom-contrasts-versus-the-tukey-test"><i class="fa fa-check"></i><b>4.2.1</b> Custom contrasts versus the Tukey Test</a></li>
+<li class="chapter" data-level="4.2.2" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#the-write-up-using-contrasts."><i class="fa fa-check"></i><b>4.2.2</b> The Write Up using contrasts.</a></li>
+<li class="chapter" data-level="4.2.3" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#coming-back-to-randomisation"><i class="fa fa-check"></i><b>4.2.3</b> Coming Back to Randomisation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#the-rcbd---the-randomised-complete-block-design"><i class="fa fa-check"></i><b>4.3</b> THE RCBD - The Randomised Complete Block Design</a></li>
+<li class="chapter" data-level="4.4" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#an-example-of-the-rcbd"><i class="fa fa-check"></i><b>4.4</b> An example of the RCBD</a></li>
+<li class="chapter" data-level="4.5" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#analysing-the-crbd"><i class="fa fa-check"></i><b>4.5</b> Analysing the CRBD</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#building-the-model"><i class="fa fa-check"></i><b>4.5.1</b> Building the model</a></li>
+<li class="chapter" data-level="4.5.2" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#are-the-estimates-of-the-parameters-what-we-expect"><i class="fa fa-check"></i><b>4.5.2</b> Are the estimates of the parameters what we expect?</a></li>
+<li class="chapter" data-level="4.5.3" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#correct-standard-errors-for-a-figure"><i class="fa fa-check"></i><b>4.5.3</b> Correct Standard Errors for a Figure</a></li>
+<li class="chapter" data-level="4.5.4" data-path="design-and-analysis-of-experiments.html"><a href="design-and-analysis-of-experiments.html#making-inference-in-a-blocked-model-confidence-intervals-and-contrasts"><i class="fa fa-check"></i><b>4.5.4</b> Making inference in a blocked model: confidence intervals and contrasts</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><i class="fa fa-check"></i><b>5</b> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html#introducing-interactions"><i class="fa fa-check"></i><b>5.1</b> Introducing Interactions</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html#an-example-with-co2-and-uv-b-solar-radiation-impact-on-plant-growth-in-the-artic."><i class="fa fa-check"></i><b>5.1.1</b> An Example with CO2 and UV-B solar radiation impact on plant growth in the artic.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html#a-factorial-design-and-the-two-way-anova"><i class="fa fa-check"></i><b>5.2</b> A Factorial Design and the Two-Way ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html#plot-the-factorial-design"><i class="fa fa-check"></i><b>5.2.1</b> Plot the factorial design!</a></li>
+<li class="chapter" data-level="5.2.2" data-path="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html#how-to-analyse-and-interpret-the-factorial-design"><i class="fa fa-check"></i><b>5.2.2</b> How to analyse and interpret the factorial design</a></li>
+<li class="chapter" data-level="5.2.3" data-path="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html#visreg-and-the-2-way-anova"><i class="fa fa-check"></i><b>5.2.3</b> visreg and the 2-way ANOVA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><i class="fa fa-check"></i><b>6</b> Interactions Part 2: Introducing the ANCOVA (analysis of covariance)</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#what-this-chapter-covers."><i class="fa fa-check"></i><b>6.1</b> What this chapter covers.</a></li>
+<li class="chapter" data-level="6.2" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#setting-up-the-various-ideas."><i class="fa fa-check"></i><b>6.2</b> Setting up the various ideas.</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#anticipating-the-anova-table-for-an-ancova-model"><i class="fa fa-check"></i><b>6.2.1</b> Anticipating the ANOVA table for an ANCOVA model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#working-through-an-ancova-example."><i class="fa fa-check"></i><b>6.3</b> Working through an ANCOVA example.</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#organise-the-packages-and-get-the-data-and-make-your-picture"><i class="fa fa-check"></i><b>6.3.1</b> Organise the packages and get the data and make your picture</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#building-the-model-and-understanding-it"><i class="fa fa-check"></i><b>6.4</b> Building the model (and understanding it)</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#dealing-with-the-mean-variance-breakdown."><i class="fa fa-check"></i><b>6.4.1</b> Dealing with the mean-variance breakdown.</a></li>
+<li class="chapter" data-level="6.4.2" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#making-inference-on-the-ancova"><i class="fa fa-check"></i><b>6.4.2</b> Making inference on the ANCOVA</a></li>
+<li class="chapter" data-level="6.4.3" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff."><i class="fa fa-check"></i><b>6.4.3</b> The summary table, the actual slopes and making sense of the log stuff.</a></li>
+<li class="chapter" data-level="6.4.4" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#specifying-the-equations-supported-by-the-model."><i class="fa fa-check"></i><b>6.4.4</b> Specifying the equations supported by the model.</a></li>
+<li class="chapter" data-level="6.4.5" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#making-even-more-inference-and-drawing-the-picture"><i class="fa fa-check"></i><b>6.4.5</b> Making even more inference and drawing the picture</a></li>
+</ul></li>
+<li class="chapter" data-level="6.5" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#some-general-principles-for-anova-and-ancova-modelling."><i class="fa fa-check"></i><b>6.5</b> Some General Principles for ANOVA and ANCOVA modelling.</a>
+<ul>
+<li class="chapter" data-level="6.5.1" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model"><i class="fa fa-check"></i><b>6.5.1</b> ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!</a></li>
+</ul></li>
+<li class="chapter" data-level="6.6" data-path="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#a-few-parting-tricks-about-specifying-models-in-r"><i class="fa fa-check"></i><b>6.6</b> A few parting tricks about specifying models in R</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
 </ul>
 
-        <div class="book-extra">
-          
-        </div>
       </nav>
-</div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="interactions-part-2-introducing-the-ancova-analysis-of-covariance" class="section level1" number="7">
-<h1>
-<span class="header-section-number">7</span> Interactions Part 2: Introducing the ANCOVA (analysis of covariance)<a class="anchor" aria-label="anchor" href="#interactions-part-2-introducing-the-ancova-analysis-of-covariance"><i class="fas fa-link"></i></a>
-</h1>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">An Introduction to Experimental Design ANOVA and ANCOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="interactions-part-2-introducing-the-ancova-analysis-of-covariance" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Interactions Part 2: Introducing the ANCOVA (analysis of covariance)<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#interactions-part-2-introducing-the-ancova-analysis-of-covariance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the explanatory variables are categorical (they are factors). This means explanatory variable has distinct, discrete categories or <em>levels</em>.</p>
 <p>In many of our experiments, however, we might combine a categorical variable with a continuous variable. For example, we might estimate eggs produced as a function of body size (continuous) and season (categorical). Or we might estimate the effect of a mutagen (continuous) on tumour formation in wild type vs. genetically modified (categorical) fruit flies.</p>
 <p>These simple examples describe an ANCOVA, where the one explanatory variable is continuous (e.g. body size or mutagen) and the other is categorical (e.g. season or fly-type). When this is the case, we are essentially combining the ANOVA with the Regression model! If we recall that regression is largely about estimating slopes and intercepts, we might think, hey, COOL, so in an ANCOVA, we can ask if the categorical variable alters the slope or not….. and that’d be correct.</p>
@@ -68,10 +267,8 @@
 <p>The effect of X on Y varies by Z, translates to a) The effect of body size on egg production varies by season; or b) the effect of mutagen on tumour formation varies by fly-type.</p>
 </blockquote>
 <p>When written like this, the previous statements about slopes should be even more clear. The effect of body size (continuous) on egg production is a regression and we estimate a slope. The effect of the mutagen concentration on tumour formation is a regression and we estimate a slope. We then can ask whether this slope is different between seasons or fly-type.</p>
-<div id="what-this-chapter-covers." class="section level2" number="7.1">
-<h2>
-<span class="header-section-number">7.1</span> What this chapter covers.<a class="anchor" aria-label="anchor" href="#what-this-chapter-covers."><i class="fas fa-link"></i></a>
-</h2>
+<div id="what-this-chapter-covers." class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> What this chapter covers.<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#what-this-chapter-covers." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>This chapter will focus on the ANCOVA, but it also touches on additional concepts. The primary foci are thus:</p>
 <ol style="list-style-type: decimal">
 <li>The ANCOVA model</li>
@@ -79,13 +276,11 @@
 <li>plotting model results when you’ve made transformations.</li>
 </ol>
 </div>
-<div id="setting-up-the-various-ideas." class="section level2" number="7.2">
-<h2>
-<span class="header-section-number">7.2</span> Setting up the various ideas.<a class="anchor" aria-label="anchor" href="#setting-up-the-various-ideas."><i class="fas fa-link"></i></a>
-</h2>
+<div id="setting-up-the-various-ideas." class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Setting up the various ideas.<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#setting-up-the-various-ideas." class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Let’s start by looking at an example where the effect of Height on Weight varies by Sex. This is a classic set of data from numerous organisms…. it captures biologically the question about sexual dimorphism - does the relationship between Height and Weight (a regression with the continuous variable Weight) vary by Sex (the categorical variable [e.g. ANOVA], in this case M/F but it can be more depending on organism)?</p>
 <p>This relationship can take on many patterns.</p>
-<div class="inline-figure"><img src="images/ANCOVA_1.png" width="644"></div>
+<p><img src="images/ANCOVA_1.png" /><!-- --></p>
 <ul>
 <li>In the upper left we see a pattern where Males are heavier than Females, but there is no effect of Height on Weight.</li>
 <li>In the upper right, we see that there is a positive relationship between Weight and Height, but no differences between Males and Females.</li>
@@ -97,22 +292,20 @@
 <blockquote>
 <p>If you need a refresher on what the * symbol means, pop back to chapter 5 where we explain this when we fit the models; we also review this below.</p>
 </blockquote>
-<div id="anticipating-the-anova-table-for-an-ancova-model" class="section level3" number="7.2.1">
-<h3>
-<span class="header-section-number">7.2.1</span> Anticipating the ANOVA table for an ANCOVA model<a class="anchor" aria-label="anchor" href="#anticipating-the-anova-table-for-an-ancova-model"><i class="fas fa-link"></i></a>
-</h3>
+<div id="anticipating-the-anova-table-for-an-ancova-model" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Anticipating the ANOVA table for an ANCOVA model<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#anticipating-the-anova-table-for-an-ancova-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let us also recall the sequential nature of the ANOVA table output. This is about what we expect to see, having fit a model, which we will do below. In contrast to the ANOVA, with an ANCOVA, we will see first an estimate of variation explained by the continuous variable, then the categorical variable and finally, after seeing the report on both of those, an estimate of the variation attributable to the interaction. Another way to think of this is as follows (explore the figures above along with this):</p>
-<p>What is the estimate of the intercept and slope, ignoring the different categories, and how much variation does this explain.
-What happens if we let there be two lines, one for each category, but with the same slope (e.g. different intercepts, but same slope). Does this explain more variation?
-Finally, what if we let there be two lines, and different slopes (the interaction exists) - does this explain additional variation?</p>
+<ul>
+<li>What is the estimate of the intercept and slope, ignoring the different categories, and how much variation does this explain.</li>
+<li>What happens if we let there be two lines, one for each category, but with the same slope (e.g. different intercepts, but same slope). Does this explain more variation?</li>
+<li>Finally, what if we let there be two lines, and different slopes (the interaction exists) - does this explain additional variation?</li>
+</ul>
 <p>If we get to the last scenario, and the answer is yes, after all the other options, the <em>different slopes</em> does capture variation in our response, we have evidence of an interaction.</p>
 </div>
 </div>
-<div id="working-through-an-ancova-example." class="section level2" number="7.3">
-<h2>
-<span class="header-section-number">7.3</span> Working through an ANCOVA example.<a class="anchor" aria-label="anchor" href="#working-through-an-ancova-example."><i class="fas fa-link"></i></a>
-</h2>
-<p>Let’s work with a built in dataset in R - the Davis Study, which is exactly these data. The associated assignment is another example.</p>
+<div id="working-through-an-ancova-example." class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Working through an ANCOVA example.<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#working-through-an-ancova-example." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let’s work with a built in dataset in R - the Davis Study, which is exactly these data. The associated assignment provides another example.</p>
 <p>The process of doing this will follow a tried and true approach to analysing data. You should have this workflow fully embedded in your head now:</p>
 <ol style="list-style-type: decimal">
 <li>PLOT the Data</li>
@@ -121,28 +314,25 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <li>Make Inference</li>
 <li>Update the Figure for Publication</li>
 </ol>
-<div id="organise-the-packages-and-get-the-data-and-make-your-picture" class="section level3" number="7.3.1">
-<h3>
-<span class="header-section-number">7.3.1</span> Organise the packages and get the data and make your picture<a class="anchor" aria-label="anchor" href="#organise-the-packages-and-get-the-data-and-make-your-picture"><i class="fas fa-link"></i></a>
-</h3>
+<div id="organise-the-packages-and-get-the-data-and-make-your-picture" class="section level3 hasAnchor" number="6.3.1">
+<h3><span class="header-section-number">6.3.1</span> Organise the packages and get the data and make your picture<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#organise-the-packages-and-get-the-data-and-make-your-picture" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The data we are using is an example dataset built into R, but embedded in the <code>carData</code> package, which is installed with the <code>car</code> package - download and install this and they you can use the following code (don’t forget the <code>tidyverse</code>, <code>agricolae</code>, <code>ggfortify</code>, <code>visreg</code> etc).</p>
 <blockquote>
 <p>These data ARE NOT on the blackboard site.</p>
 </blockquote>
 <p>Note also that if you are building your own script, you need the following packages: <code>tidyverse</code>, <code>ggfortify</code>, <code>visreg</code>, <code>patchwork</code></p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/sinhrks/ggfortify">ggfortify</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://pbreheny.github.io/visreg">visreg</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com">patchwork</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># this creates a working version of the davis data for you.</span></span>
-<span><span class="co"># the carData:: syntax is a way to use this package without using</span></span>
-<span><span class="co"># the library() function.</span></span>
-<span><span class="va">Davis</span> <span class="op">&lt;-</span> <span class="fu">carData</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/carData/man/Davis.html">Davis</a></span></span>
-<span></span>
-<span><span class="co"># check it out</span></span>
-<span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">Davis</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(ggfortify)</span>
+<span id="cb1-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(visreg)</span>
+<span id="cb1-4"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-5"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-6" tabindex="-1"></a><span class="co"># this creates a working version of the davis data for you.</span></span>
+<span id="cb1-7"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-7" tabindex="-1"></a><span class="co"># the carData:: syntax is a way to use this package without using</span></span>
+<span id="cb1-8"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-8" tabindex="-1"></a><span class="co"># the library() function.</span></span>
+<span id="cb1-9"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-9" tabindex="-1"></a>Davis <span class="ot">&lt;-</span> carData<span class="sc">::</span>Davis</span>
+<span id="cb1-10"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-10" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-11" tabindex="-1"></a><span class="co"># check it out</span></span>
+<span id="cb1-12"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb1-12" tabindex="-1"></a><span class="fu">glimpse</span>(Davis)</span></code></pre></div>
 <pre><code>## Rows: 200
 ## Columns: 5
 ## $ sex    &lt;fct&gt; M, F, F, M, F, M, M, M, M, M, M, F, F, F, F, F, M, F, M, F, M, …
@@ -150,45 +340,39 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## $ height &lt;int&gt; 182, 161, 161, 177, 157, 170, 167, 186, 178, 171, 175, 57, 161,…
 ## $ repwt  &lt;int&gt; 77, 51, 54, 70, 59, 76, 77, 73, 71, 64, 75, 56, 52, 64, 57, 66,…
 ## $ repht  &lt;int&gt; 180, 159, 158, 175, 155, 165, 165, 180, 175, 170, 174, 163, 158…</code></pre>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># make the most basic of exploratory plots.</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-37-1.png" width="672"></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb3-1" tabindex="-1"></a><span class="co"># make the most basic of exploratory plots.</span></span>
+<span id="cb3-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb3-2" tabindex="-1"></a><span class="fu">ggplot</span>(Davis, <span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight, <span class="at">col =</span> sex))<span class="sc">+</span></span>
+<span id="cb3-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb3-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Whoa!… what’s going on here? Well,here is a massive justification of why we say <em>“always plot your data”</em> before you do anything. It looks like one of the data points has the height and weight data entered incorrectly, the wrong way around. This is a ‘feature’ of this dataset. Of course you could go back to your master spreadsheet and make the corretion, which is a good idea in real life, but let’s see how to fix this using R. Let’s fix that. Lets find the row with the mistake by looking for height values &lt;100, and then make the switch.</p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#which row? 12</span></span>
-<span><span class="va">Davis</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">height</span> <span class="op">&lt;</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb4-1" tabindex="-1"></a><span class="co">#which row? 12</span></span>
+<span id="cb4-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb4-2" tabindex="-1"></a>Davis <span class="sc">%&gt;%</span> <span class="fu">filter</span>(height <span class="sc">&lt;</span> <span class="dv">100</span>)</span></code></pre></div>
 <pre><code>##    sex weight height repwt repht
 ## 12   F    166     57    56   163</code></pre>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># BASE R syntax to see each observation</span></span>
-<span><span class="va">Davis</span><span class="op">$</span><span class="va">weight</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb6-1" tabindex="-1"></a><span class="co"># BASE R syntax to see each observation</span></span>
+<span id="cb6-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb6-2" tabindex="-1"></a>Davis<span class="sc">$</span>weight[<span class="dv">12</span>]</span></code></pre></div>
 <pre><code>## [1] 166</code></pre>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Davis</span><span class="op">$</span><span class="va">height</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb8-1" tabindex="-1"></a>Davis<span class="sc">$</span>height[<span class="dv">12</span>]</span></code></pre></div>
 <pre><code>## [1] 57</code></pre>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># BASE R syntax to change the specific values in the specific row</span></span>
-<span><span class="va">Davis</span><span class="op">$</span><span class="va">weight</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">57</span></span>
-<span><span class="va">Davis</span><span class="op">$</span><span class="va">height</span><span class="op">[</span><span class="fl">12</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">166</span></span>
-<span></span>
-<span><span class="co"># replot</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-38-1.png" width="672"></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb10-1" tabindex="-1"></a><span class="co"># BASE R syntax to change the specific values in the specific row</span></span>
+<span id="cb10-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb10-2" tabindex="-1"></a>Davis<span class="sc">$</span>weight[<span class="dv">12</span>] <span class="ot">&lt;-</span> <span class="dv">57</span></span>
+<span id="cb10-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb10-3" tabindex="-1"></a>Davis<span class="sc">$</span>height[<span class="dv">12</span>] <span class="ot">&lt;-</span> <span class="dv">166</span></span>
+<span id="cb10-4"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb10-4" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb10-5" tabindex="-1"></a><span class="co"># replot</span></span>
+<span id="cb10-6"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb10-6" tabindex="-1"></a><span class="fu">ggplot</span>(Davis, <span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight, <span class="at">col =</span> sex))<span class="sc">+</span></span>
+<span id="cb10-7"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb10-7" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Excellent. Let’s look at this picture and ask ourselves the null hypothesis question: does the effect of Height on Weight vary by Sex? What do you think?</p>
-<p>We can actually get a bit of help here. We can use some ggplot magic to help us make this GUESS. Let’s use <code><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth()</a></code> to help us guess the answer.</p>
+<p>We can actually get a bit of help here. We can use some ggplot magic to help us make this GUESS. Let’s use <code>geom_smooth()</code> to help us guess the answer.</p>
 <blockquote>
 <p>NOTE: this is not doing statistics. This is using graphics to help guide insight and our expectation of the outcome before doing the statistical test of our hypothesis.</p>
 </blockquote>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">height</span>, y <span class="op">=</span> <span class="va">weight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="co"># add a best fit line to each group (the sex category)</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-39-1.png" width="672"></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(Davis, <span class="fu">aes</span>(<span class="at">x =</span> height, <span class="at">y =</span> weight, <span class="at">col =</span> sex))<span class="sc">+</span></span>
+<span id="cb11-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb11-2" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb11-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb11-3" tabindex="-1"></a>  <span class="co"># add a best fit line to each group (the sex category)</span></span>
+<span id="cb11-4"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb11-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Again, we have not ‘proven’ anything or tested our hypothesis. What we have is a good guess though. We can guess that</p>
 <ol style="list-style-type: decimal">
 <li>Males are heavier than females (what is the difference in the intercepts?)</li>
@@ -198,62 +382,52 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p>We might even go as far to estimate by eye the overall slope, assuming that there is no effect of Sex. Recalling that the slope is the rise over run or the change in y over the change in x, we can guess that the slope is ~ <span class="math inline">\((100-40)/(200-140) = (60/60) = 1\)</span>. Can you guess a slope for each Sex?</p>
 </div>
 </div>
-<div id="building-the-model-and-understanding-it" class="section level2" number="7.4">
-<h2>
-<span class="header-section-number">7.4</span> Building the model (and understanding it)<a class="anchor" aria-label="anchor" href="#building-the-model-and-understanding-it"><i class="fas fa-link"></i></a>
-</h2>
+<div id="building-the-model-and-understanding-it" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Building the model (and understanding it)<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#building-the-model-and-understanding-it" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The next step is to build the model to test our hypothesis. As we declared above, the model to test the interaction is <code>lm(weight ~ height * sex, data = Davis)</code>. Let’s discuss this a bit.</p>
 <p>First, as described above, and in Chapter 5, this model with the <code>*</code> expands to the following full model of two main effects and an interaction:</p>
 <p><code>lm(weight ~ height + sex + height:sex, data = Davis)</code></p>
 <p>This reads as “weight is a function of the effect of height (slope), sex (intercept) and the interaction between height and sex (do the slopes vary?). The <code>height * aex</code> syntax always expands to this <em>full model</em> - the model containing the main effects and the interaction.</p>
 <p>OK. Let’s fit the model</p>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># we call the model mod_Davis.</span></span>
-<span><span class="va">mod_Davis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">weight</span> <span class="op">~</span> <span class="va">height</span><span class="op">*</span><span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb13-1" tabindex="-1"></a><span class="co"># we call the model mod_Davis.</span></span>
+<span id="cb13-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb13-2" tabindex="-1"></a>mod_Davis <span class="ot">&lt;-</span> <span class="fu">lm</span>(weight <span class="sc">~</span> height<span class="sc">*</span>sex, <span class="at">data =</span> Davis)</span></code></pre></div>
 <p>That’s it. We’ve got the model. But before we make any attempts at actually evaluating our test of the hypothesis, we have to check the assumptions!</p>
 <p>To do this, we use the <code>autoplot</code> function from the <code>ggfortify</code> package.</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">mod_Davis</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-41-1.png" width="672"></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb14-1" tabindex="-1"></a><span class="fu">autoplot</span>(mod_Davis)</span></code></pre></div>
+<p><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>OK. Let’s walk through the three core diagnostics.</p>
 <p>In the upper left, we are evaluating the systematic part of the model - are there any systematic departures from the linear model we’ve speficied? Are there interactions missing or specific non-linearities? Nope.</p>
 <p>In the upper right, we are evaluating the normality of the residuals. These too look pretty good. If you notice, event though there are some deviations, but the pattern is that the deviations move away from the line but ‘come back’ at the very ends. This is typical of normally distributed residuals.</p>
 <p>In the lower left, we are evaluating the assumption of a constant mean-variance relationship. Oops. Remember, we are expecting something that does not show a trend at all. Even without the panic lines, this looks like the variance (y-axis) is increasing with the mean (x-axis).</p>
-<div id="dealing-with-the-mean-variance-breakdown." class="section level3" number="7.4.1">
-<h3>
-<span class="header-section-number">7.4.1</span> Dealing with the mean-variance breakdown.<a class="anchor" aria-label="anchor" href="#dealing-with-the-mean-variance-breakdown."><i class="fas fa-link"></i></a>
-</h3>
+<div id="dealing-with-the-mean-variance-breakdown." class="section level3 hasAnchor" number="6.4.1">
+<h3><span class="header-section-number">6.4.1</span> Dealing with the mean-variance breakdown.<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#dealing-with-the-mean-variance-breakdown." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The above issue is one we can deal with via a <em>transformation</em>.</p>
 <p>Let’s start with the facts…. When the <em>variance increases with the mean</em>, a transformation that can work is the <em>logarithm of the continuous variables</em>.</p>
 <p>There is a short section in the (APS 240 reading)[<a href="https://dzchilds.github.io/stats-for-bio/data-transformations.html#trans-types" class="uri">https://dzchilds.github.io/stats-for-bio/data-transformations.html#trans-types</a>] to explore. Please do read this summary about transformations, and bookmark it for the future. It is very handy.</p>
-<p>A question that routinely comes up is whether transformations are ‘changing the data’. Rather than focusing on this, we offer the following interpretation. Linear models fit by <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> carry a set of assumptions (our focus on the three panels using autoplot). If these are not met, we can not trust our inference (F-testing).</p>
+<p>A question that routinely comes up is whether transformations are ‘changing the data’. Rather than focusing on this, we offer the following interpretation. Linear models fit by <code>lm()</code> carry a set of assumptions (our focus on the three panels using autoplot). If these are not met, we can not trust our inference (F-testing).</p>
 <blockquote>
-<p>Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that t-tests, ANOVAs and regressions are generally quite robust—they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances change a lot across groups - from (APS 240)[<a href="https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction" class="uri">https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction</a>].</p>
+<p>Most biological data are unlikely to conform perfectly to all the assumptions, but experience has shown (fortunately) that t-tests, ANOVAs and regressions (e.g. the latter two being general linear models) are quite robust—they perform reasonably well with data that deviate to some extent from the assumptions of the tests. However, in some cases residuals are clearly very far from normal, or variances change a lot across groups - from (APS 240)[<a href="https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction" class="uri">https://dzchilds.github.io/stats-for-bio/data-transformations.html#transforms-introduction</a>].</p>
 </blockquote>
 <p>But if there are real problems, we can use transformations. They do not ‘change the data’ instead, they retain the relationships between the data points, but put everything on a difference scale so that we can use the power of the linear model to answer the question. The tricky thing is how do we report our insights to the reader back on the original ‘response’ scale. We’ll get to that. But rest assured, transformations don’t change the data.</p>
-<p>So, here are the data where we transform both continuous variables - the continuous response variable and the continuous explanatory variable.</p>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># re-plot with log-log</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">Davis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">geom_smooth</a></span><span class="op">(</span>method <span class="op">=</span> <span class="va">lm</span>, se <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-42-1.png" width="672"></div>
+<p>So, here are the data where we transform both continuous variables with a <code>log</code> transformation - the continuous response variable and the continuous explanatory variable. Perhaps check <code>?log</code> to remind yourself of whether this is a log10 or natural log transformation…..</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb15-1" tabindex="-1"></a><span class="co"># re-plot with log-log</span></span>
+<span id="cb15-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb15-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> Davis, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(height), <span class="at">y =</span> <span class="fu">log</span>(weight), <span class="at">col =</span> sex))<span class="sc">+</span></span>
+<span id="cb15-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb15-3" tabindex="-1"></a>  <span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb15-4"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb15-4" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> lm, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## `geom_smooth()` using formula = &#39;y ~ x&#39;</code></pre>
+<p><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>OK. The patterns are still there. And let’s see what happens with the model and assumptions now!</p>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># fit the model - note we can specify the transformation RIGHT IN THE MODEL</span></span>
-<span><span class="va">mod_Davis_log</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">*</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># check the new residuals</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/autoplot.html">autoplot</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-43-1.png" width="672"></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb17-1" tabindex="-1"></a><span class="co"># fit the model - note we can specify the transformation RIGHT IN THE MODEL</span></span>
+<span id="cb17-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb17-2" tabindex="-1"></a>mod_Davis_log <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(weight) <span class="sc">~</span> <span class="fu">log</span>(height) <span class="sc">*</span> sex, <span class="at">data =</span> Davis)</span>
+<span id="cb17-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb17-3" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb17-4" tabindex="-1"></a><span class="co"># check the new residuals</span></span>
+<span id="cb17-5"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb17-5" tabindex="-1"></a><span class="fu">autoplot</span>(mod_Davis_log)</span></code></pre></div>
+<p><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>The scale-location plot is definitely flatter - you can tell by the range on the y-axis of the scale-location plot. So, with this transformation, we can now move to evaluating the model. You are probably thinking about what it means to analyse the data on the log-log axis…. we will come to that shortly.</p>
 </div>
-<div id="making-inference-on-the-ancova" class="section level3" number="7.4.2">
-<h3>
-<span class="header-section-number">7.4.2</span> Making inference on the ANCOVA<a class="anchor" aria-label="anchor" href="#making-inference-on-the-ancova"><i class="fas fa-link"></i></a>
-</h3>
-<p>The next step is to use the detail in the ANOVA table - yes, we use the same <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function to build an anova table to explore the results of an ANCOVA.</p>
+<div id="making-inference-on-the-ancova" class="section level3 hasAnchor" number="6.4.2">
+<h3><span class="header-section-number">6.4.2</span> Making inference on the ANCOVA<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#making-inference-on-the-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The next step is to use the detail in the ANOVA table - yes, we use the same <code>anova()</code> function to build an anova table to explore the results of an ANCOVA.</p>
 <p>Let’s revisit our initial guesses and work through what the model is telling us:</p>
 <ol style="list-style-type: decimal">
 <li>Males are heavier than females (what is the difference in the intercepts?)</li>
@@ -261,8 +435,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <li>There might be a difference in slopes - the Male line is steeper.</li>
 </ol>
 <p>Together, the graph and these guesses lead to a feeling that <em>the effect of height on weight varies by sex</em>.</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb18-1" tabindex="-1"></a><span class="fu">anova</span>(mod_Davis_log)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: log(weight)
@@ -272,26 +445,23 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## log(height):sex   1 0.0144  0.0144   1.1038    0.2947    
 ## Residuals       196 2.5574  0.0130                       
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p>Howwever…. The table tells us that there is <em>no evidence for an interaction</em>. The last line of this table contains the p-value for the interaction. It is testing the null hypothesis that the slopes are the same. We can not reject this null hypothesis. There is no evidence that allowing the slopes for Males and Females be different is supported. That’s the answer to guess 3 above. It is also the answer to our question: does the effect of Height on Weight vary by Sex. <em>Nope.</em></p>
 <p>However, we do detect <em>main effects</em> of height and sex. This means that each of these DOES have an effect - but we say the effects are additive.</p>
 <p>Great. What this means is that the data, despite the pattern our eye sees, can not be distinguished from the pattern in the picture in the lower left.</p>
-<div class="inline-figure"><img src="images/ANCOVA_1.png" width="644"></div>
+<p><img src="images/ANCOVA_1.png" /><!-- --></p>
 <p>There is a slope associated with Height (we don’t know whether it’s positive or not, but we think it is), and there is an effect of sex (we don’t know whether Males are heavier yet). What we can say, with confidence, is this.</p>
 <blockquote>
 <p>The effect of height on weight did not vary by sex (F = 1.01, df = 1,196, p = 0.29). The effect of sex (F, df, p) and height (F, df, p) are thus additive on Weight.</p>
 </blockquote>
 <p>Let’s work sequentially to read the table now:</p>
-<p>When we allow for a common slope associated with <code>log(Height)</code>, we capture <span class="math inline">\(4.66\)</span> units of variation in <code>log(weight)</code>, which when compared to the <span class="math inline">\(0.013\)</span> units of variation left over (residual MSE), is a lot. The F-value is thus BIG and the p-value small. When we allow for an effect of Sex to define different average <code>log(weight)</code>, this too is important as it captures <span class="math inline">\(0.344\)</span> units of variation, which comparied to the <span class="math inline">\(0.013\)</span> units in the residual, is also big (Big F, small P).</p>
+<p>When we allow for a common slope associated with <code>log(Height)</code>, we capture <span class="math inline">\(4.66\)</span> units of variation in <code>log(weight)</code>, which when compared to the <span class="math inline">\(0.013\)</span> units of variation left over (residual MSE), is a lot. The F-value is thus BIG and the p-value small. When we allow for an effect of Sex to define different average <code>log(weight)</code>, this too is important as it captures <span class="math inline">\(0.344\)</span> units of variation, which compared to the <span class="math inline">\(0.013\)</span> units in the residual, is also big (Big F, small P).</p>
 <p>However, when we allow for the slopes caused by <code>log(height)</code> to vary with <code>sex</code>, this captures very little additional variation with respect to the residual variation (<span class="math inline">\(0.014\)</span> comprared to <span class="math inline">\(0.013\)</span>) hence a small F and a large P for this term.</p>
 </div>
-<div id="the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff." class="section level3" number="7.4.3">
-<h3>
-<span class="header-section-number">7.4.3</span> The summary table, the actual slopes and making sense of the log stuff.<a class="anchor" aria-label="anchor" href="#the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff."><i class="fas fa-link"></i></a>
-</h3>
+<div id="the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff." class="section level3 hasAnchor" number="6.4.3">
+<h3><span class="header-section-number">6.4.3</span> The summary table, the actual slopes and making sense of the log stuff.<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Let’s start investigating the details via the <code>summary</code> table:</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb20-1" tabindex="-1"></a><span class="fu">summary</span>(mod_Davis_log)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(weight) ~ log(height) * sex, data = Davis)
@@ -307,7 +477,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## sexM              -2.3724     2.3765  -0.998  0.31936    
 ## log(height):sexM   0.4852     0.4618   1.051  0.29473    
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.1142 on 196 degrees of freedom
 ## Multiple R-squared:  0.6626, Adjusted R-squared:  0.6575 
@@ -327,14 +497,11 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p><code>log(weightM) = (-5.32-2.37) + (1.82+0.48)*(log(heightF))</code></p>
 <p>However, we know that the <span class="math inline">\(0.48\)</span> increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept moving from Female to Male is also not a significant change</p>
 </div>
-<div id="specifying-the-equations-supported-by-the-model." class="section level3" number="7.4.4">
-<h3>
-<span class="header-section-number">7.4.4</span> Specifying the equations supported by the model.<a class="anchor" aria-label="anchor" href="#specifying-the-equations-supported-by-the-model."><i class="fas fa-link"></i></a>
-</h3>
+<div id="specifying-the-equations-supported-by-the-model." class="section level3 hasAnchor" number="6.4.4">
+<h3><span class="header-section-number">6.4.4</span> Specifying the equations supported by the model.<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#specifying-the-equations-supported-by-the-model." class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>In order to identify the equations supported by the model - e.g. the equations associated with the estimation of teo lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the <code>*</code> with the <code>+</code>.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod_Davis_log2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span> <span class="op">+</span> <span class="va">sex</span>, data <span class="op">=</span> <span class="va">Davis</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb22-1" tabindex="-1"></a>mod_Davis_log2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(weight) <span class="sc">~</span> <span class="fu">log</span>(height) <span class="sc">+</span> sex, <span class="at">data =</span> Davis)</span>
+<span id="cb22-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb22-2" tabindex="-1"></a><span class="fu">summary</span>(mod_Davis_log2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = log(weight) ~ log(height) + sex, data = Davis)
@@ -349,7 +516,7 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## log(height)  2.05688    0.23030   8.931 2.99e-16 ***
 ## sexM         0.12417    0.02417   5.138 6.66e-07 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.1143 on 197 degrees of freedom
 ## Multiple R-squared:  0.6607, Adjusted R-squared:  0.6573 
@@ -359,24 +526,21 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 <p><code>log(weightM) = (-6.46 + 0.12) + 2.05*log(heightF)</code></p>
 <p>We can see the common slope and the slightly higher average weight (<span class="math inline">\(0.12\)</span> units!) of males.</p>
 </div>
-<div id="making-even-more-inference-and-drawing-the-picture" class="section level3" number="7.4.5">
-<h3>
-<span class="header-section-number">7.4.5</span> Making even more inference and drawing the picture<a class="anchor" aria-label="anchor" href="#making-even-more-inference-and-drawing-the-picture"><i class="fas fa-link"></i></a>
-</h3>
+<div id="making-even-more-inference-and-drawing-the-picture" class="section level3 hasAnchor" number="6.4.5">
+<h3><span class="header-section-number">6.4.5</span> Making even more inference and drawing the picture<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#making-even-more-inference-and-drawing-the-picture" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>OK, lets use a variation on our plotting tricks from the regression module (week 6) to get a nice picture.</p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># first create a data frame to use that combines the raw data</span></span>
-<span><span class="co"># with the predictions from the model.</span></span>
-<span></span>
-<span><span class="co"># note that the model is the ADDITIVE model, for plotting</span></span>
-<span><span class="co"># step 1: make a copy of the raw data</span></span>
-<span><span class="co"># step 2: use mutate to add the fitted values (at each value of height (x-axis) where we have measured data)</span></span>
-<span><span class="va">plotThis</span> <span class="op">&lt;-</span> <span class="va">Davis</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="co"># ... a column of numbers of predicted weight using the model</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>predWeight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">mod_Davis_log2</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># check it out.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">plotThis</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-1" tabindex="-1"></a><span class="co"># first create a data frame to use that combines the raw data</span></span>
+<span id="cb24-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-2" tabindex="-1"></a><span class="co"># with the predictions from the model.</span></span>
+<span id="cb24-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-3" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-4" tabindex="-1"></a><span class="co"># note that the model is the ADDITIVE model, for plotting</span></span>
+<span id="cb24-5"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-5" tabindex="-1"></a><span class="co"># step 1: make a copy of the raw data</span></span>
+<span id="cb24-6"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-6" tabindex="-1"></a><span class="co"># step 2: use mutate to add the fitted values (at each value of height (x-axis) where we have measured data)</span></span>
+<span id="cb24-7"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-7" tabindex="-1"></a>plotThis <span class="ot">&lt;-</span> Davis <span class="sc">%&gt;%</span></span>
+<span id="cb24-8"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-8" tabindex="-1"></a>  <span class="co"># ... a column of numbers of predicted weight using the model</span></span>
+<span id="cb24-9"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-9" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">predWeight =</span> <span class="fu">predict</span>(mod_Davis_log2))</span>
+<span id="cb24-10"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-10" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-11" tabindex="-1"></a><span class="co"># check it out.</span></span>
+<span id="cb24-12"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb24-12" tabindex="-1"></a><span class="fu">head</span>(plotThis)</span></code></pre></div>
 <pre><code>##   sex weight height repwt repht predWeight
 ## 1   M     77    182    77   180   4.364677
 ## 2   F     58    161    51   159   3.988326
@@ -386,51 +550,47 @@ Finally, what if we let there be two lines, and different slopes (the interactio
 ## 6   M     76    170    76   165   4.224381</code></pre>
 <p>You can see we have a fourth column now…. these are predictions (also known as fitted values) of <code>log(weight)</code> as a function of <code>log(height)</code> using the additive model, <em>at each of the originally measured height values in the data frame</em>.</p>
 <p>We can actually use this data frame to generate the picture that represents the output of the statistical model.</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Step 3: make a figure with lines from the model predictions</span></span>
-<span><span class="co"># Step 4: add the raw data points from the original dataset</span></span>
-<span><span class="co"># NOTE! pay attention to where we are using log()!</span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">plotThis</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">predWeight</span>, col <span class="op">=</span> <span class="va">sex</span><span class="op">)</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span><span class="op">+</span></span>
-<span>  <span class="co"># now add the raw data note</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">height</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">weight</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-49-1.png" width="672"></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb26-1" tabindex="-1"></a><span class="co"># Step 3: make a figure with lines from the model predictions</span></span>
+<span id="cb26-2"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb26-2" tabindex="-1"></a><span class="co"># Step 4: add the raw data points from the original dataset</span></span>
+<span id="cb26-3"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb26-3" tabindex="-1"></a><span class="co"># </span><span class="al">NOTE</span><span class="co">! pay attention to where we are using log()!</span></span>
+<span id="cb26-4"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb26-4" tabindex="-1"></a><span class="fu">ggplot</span>(plotThis, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(height), <span class="at">y =</span> predWeight, <span class="at">col =</span> sex))<span class="sc">+</span></span>
+<span id="cb26-5"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb26-5" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb26-6"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb26-6" tabindex="-1"></a>  <span class="co"># now add the raw data note</span></span>
+<span id="cb26-7"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb26-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log</span>(height), <span class="at">y =</span> <span class="fu">log</span>(weight)))</span></code></pre></div>
+<p><img src="Experimental-Design,-ANOVA-and-ANCOVA_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Great. Now we can see that the full model (mod_Davis_log) told us. The lines are parallel. There is no interaction. In fact, we can do a bit more here. Remember that the model says</p>
 <p>For women <span class="math inline">\(log(weight)= -6.46 + 2.05 * log(height)\)</span>
 For men <span class="math inline">\(log(weight)= (-6.46 + 0.12) + 2.05 * log(height)\)</span></p>
-<p>Because we are in log land, we can do some clever maths: We know that</p>
+<p>Because we are in the land of log transformations, we can do some clever maths:</p>
+<p>We know that</p>
 <p><span class="math inline">\(log(weight Female) - log(weight Male) = - 0.12\)</span></p>
-<p>(this is the treatment contrast for the intercept). We also know (please memorise) that the <em>difference between logs is equal to the log of the ratio</em>:</p>
+<p>(this is the treatment contrast for the intercept). We also know (please memorise this) that the <em>difference between logs is equal to the log of the ratio</em>:</p>
 <p><span class="math inline">\(log(weightF/weightM) = -0.12\)</span></p>
-<p>Finally, we can convert both sides to non-log by exponentiating:</p>
+<p>Finally, we can convert both sides to non-log by exponentiating (which is the anti-log):</p>
 <p><span class="math inline">\(exp(log(weightF/weightM)) = exp(-0.12) = 0.88\)</span></p>
-<p>What does this mean? At any given height, female weight is 88% of a males (e.g. 12% lower). Cool! That’s one of the benefits of log-log linear relationships. <em>The ratio of the categories in log-log land directly translates to a percent difference between the groups</em>. It’s also worth noting that the height slope is ~2, which suggests… yes… because we are in log-land, that weight scales with <span class="math inline">\(height^2\)</span>.</p>
+<p>What does this mean? At any given height, female weight is 88% of a males (e.g. 12% lower). Cool!</p>
+<p>This exercise demonstrates one of the benefits of log-log linear relationships. <em>The ratio of the categories in log-log land directly translates to a percent difference between the groups</em>. It’s also worth noting that the height slope is ~2, which suggests… yes… because we are in log-land, that weight scales with <span class="math inline">\(height^2\)</span>.</p>
 </div>
 </div>
-<div id="some-general-principles-for-anova-and-ancova-modelling." class="section level2" number="7.5">
-<h2>
-<span class="header-section-number">7.5</span> Some General Principles for ANOVA and ANCOVA modelling.<a class="anchor" aria-label="anchor" href="#some-general-principles-for-anova-and-ancova-modelling."><i class="fas fa-link"></i></a>
-</h2>
-<div id="ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model" class="section level3" number="7.5.1">
-<h3>
-<span class="header-section-number">7.5.1</span> ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!<a class="anchor" aria-label="anchor" href="#ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model"><i class="fas fa-link"></i></a>
-</h3>
-<p>This figure highlights the various <code><a href="https://rdrr.io/r/stats/lm.html">lm()</a></code> models and their interpretations/assumptions associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.</p>
+<div id="some-general-principles-for-anova-and-ancova-modelling." class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Some General Principles for ANOVA and ANCOVA modelling.<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#some-general-principles-for-anova-and-ancova-modelling." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model" class="section level3 hasAnchor" number="6.5.1">
+<h3><span class="header-section-number">6.5.1</span> ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This figure highlights the various <code>lm()</code> models and their interpretations/assumptions associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.</p>
 <blockquote>
 <p>Note that just because your data looks like a particular pattern doesn’t mean you should use that model. Your statistical model should be driven by your question and original design.</p>
 </blockquote>
-<div class="figure">
-<span style="display:block;" id="fig:unnamed-chunk-50"></span>
-<img src="images/GSwithR_Grid.png" alt="From Getting Started with R, 2nd Edition, OUP" width="740"><p class="caption">
-Figure 7.1: From Getting Started with R, 2nd Edition, OUP
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-16"></span>
+<img src="images/GSwithR_Grid.png" alt="From Getting Started with R, 2nd Edition, OUP"  />
+<p class="caption">
+Figure 6.1: From Getting Started with R, 2nd Edition, OUP
 </p>
 </div>
 <p>For example, if you design a study with an ANCOVA question in mind, you are always starting your analysis with the question of whether the effect of X on Y varies by Z. Thus, ANCOVA always starts with comparing the interaction (model E) against the additive model (model D).</p>
 <blockquote>
-<p>Proof: If we compare the additive model and the model with the interaction, we are <em>specifically</em> testing for whether allowing the slopes to vary by sex <em>explains additional variation</em> above and beyond the main, additive effects of height and sex. To do this, we use the <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> function, but pass it two models instead of one! This does what is called a <em>Liklihood Ratio Test</em> comparing the two models. Remembering that the difference between the <code>*</code> model and the <code>+</code> model is just the presence/absence of the interaction term, this <code><a href="https://rdrr.io/r/stats/anova.html">anova()</a></code> comparison evaluates how much more variation is explained by the interaction, after the additive effects have been modelled. In the follow code, compare the result of the first test to the <em>last line</em> of the second. This proves that when we fit model E, the test for the interaction is actually a comparison of model E with model D!</p>
+<p>Proof: If we compare the additive model and the model with the interaction, we are <em>specifically</em> testing for whether allowing the slopes to vary by sex <em>explains additional variation</em> above and beyond the main, additive effects of height and sex. To do this, we use the <code>anova()</code> function, but pass it two models instead of one! This does what is called a <em>Liklihood Ratio Test</em> comparing the two models. Remembering that the difference between the <code>*</code> model and the <code>+</code> model is just the presence/absence of the interaction term, this <code>anova()</code> comparison evaluates how much more variation is explained by the interaction, after the additive effects have been modelled. In the follow code, compare the result of the first test to the <em>last line</em> of the second. This proves that when we fit model E, the test for the interaction is actually a comparison of model E with model D!</p>
 </blockquote>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span>, <span class="va">mod_Davis_log2</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb27-1" tabindex="-1"></a><span class="fu">anova</span>(mod_Davis_log, mod_Davis_log2)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Model 1: log(weight) ~ log(height) * sex
@@ -438,8 +598,7 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 ##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
 ## 1    196 2.5574                           
 ## 2    197 2.5718 -1 -0.014402 1.1038 0.2947</code></pre>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/anova.html">anova</a></span><span class="op">(</span><span class="va">mod_Davis_log</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#cb29-1" tabindex="-1"></a><span class="fu">anova</span>(mod_Davis_log)</span></code></pre></div>
 <pre><code>## Analysis of Variance Table
 ## 
 ## Response: log(weight)
@@ -449,13 +608,11 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 ## log(height):sex   1 0.0144  0.0144   1.1038    0.2947    
 ## Residuals       196 2.5574  0.0130                       
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 </div>
 </div>
-<div id="a-few-parting-tricks-about-specifying-models-in-r" class="section level2" number="7.6">
-<h2>
-<span class="header-section-number">7.6</span> A few parting tricks about specifying models in R<a class="anchor" aria-label="anchor" href="#a-few-parting-tricks-about-specifying-models-in-r"><i class="fas fa-link"></i></a>
-</h2>
+<div id="a-few-parting-tricks-about-specifying-models-in-r" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> A few parting tricks about specifying models in R<a href="interactions-part-2-introducing-the-ancova-analysis-of-covariance.html#a-few-parting-tricks-about-specifying-models-in-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We can add terms
 <code>weight ~ sex + height</code></p>
 <p>Have can crossed terms (interactions)
@@ -467,58 +624,68 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
 
 </div>
 </div>
-  <div class="chapter-nav">
-<div class="prev"><a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html"><span class="header-section-number">6</span> Designs for testing for interactions: the two-way ANOVA and factorial designs.</a></div>
-<div class="empty"></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#interactions-part-2-introducing-the-ancova-analysis-of-covariance"><span class="header-section-number">7</span> Interactions Part 2: Introducing the ANCOVA (analysis of covariance)</a></li>
-<li><a class="nav-link" href="#what-this-chapter-covers."><span class="header-section-number">7.1</span> What this chapter covers.</a></li>
-<li>
-<a class="nav-link" href="#setting-up-the-various-ideas."><span class="header-section-number">7.2</span> Setting up the various ideas.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#anticipating-the-anova-table-for-an-ancova-model"><span class="header-section-number">7.2.1</span> Anticipating the ANOVA table for an ANCOVA model</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#working-through-an-ancova-example."><span class="header-section-number">7.3</span> Working through an ANCOVA example.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#organise-the-packages-and-get-the-data-and-make-your-picture"><span class="header-section-number">7.3.1</span> Organise the packages and get the data and make your picture</a></li></ul>
-</li>
-<li>
-<a class="nav-link" href="#building-the-model-and-understanding-it"><span class="header-section-number">7.4</span> Building the model (and understanding it)</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#dealing-with-the-mean-variance-breakdown."><span class="header-section-number">7.4.1</span> Dealing with the mean-variance breakdown.</a></li>
-<li><a class="nav-link" href="#making-inference-on-the-ancova"><span class="header-section-number">7.4.2</span> Making inference on the ANCOVA</a></li>
-<li><a class="nav-link" href="#the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff."><span class="header-section-number">7.4.3</span> The summary table, the actual slopes and making sense of the log stuff.</a></li>
-<li><a class="nav-link" href="#specifying-the-equations-supported-by-the-model."><span class="header-section-number">7.4.4</span> Specifying the equations supported by the model.</a></li>
-<li><a class="nav-link" href="#making-even-more-inference-and-drawing-the-picture"><span class="header-section-number">7.4.5</span> Making even more inference and drawing the picture</a></li>
-</ul>
-</li>
-<li>
-<a class="nav-link" href="#some-general-principles-for-anova-and-ancova-modelling."><span class="header-section-number">7.5</span> Some General Principles for ANOVA and ANCOVA modelling.</a><ul class="nav navbar-nav"><li><a class="nav-link" href="#ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model"><span class="header-section-number">7.5.1</span> ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!</a></li></ul>
-</li>
-<li><a class="nav-link" href="#a-few-parting-tricks-about-specifying-models-in-r"><span class="header-section-number">7.6</span> A few parting tricks about specifying models in R</a></li>
-</ul>
+            </section>
 
-      <div class="book-extra">
-        <ul class="list-unstyled">
-          
-        </ul>
-</div>
-    </nav>
-</div>
+          </div>
+        </div>
+      </div>
+<a href="designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs..html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-</div>
-</div> <!-- .container -->
-
-<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2022-12-13.</p>
+    </div>
   </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/06-Interactions-_The_ANCOVA.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Experimental Design, ANOVA and ANCOVA.pdf", "Experimental Design, ANOVA and ANCOVA.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
 
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
-</div></div>
-</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -530,22 +697,7 @@ Figure 7.1: From Getting Started with R, 2nd Edition, OUP
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
-</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
-for (let popover of popovers) {
-  const div = document.createElement('div');
-  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
-  div.innerHTML = popover.getAttribute('data-content');
-
-  var has_math = div.querySelector("span.math");
-  if (has_math) {
-    document.body.appendChild(div);
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
-    MathJax.Hub.Queue(function() {
-      popover.setAttribute('data-content', div.innerHTML);
-      document.body.removeChild(div);
-    })
-  }
-}
 </script>
 </body>
+
 </html>

@@ -2,15 +2,14 @@
 
 Experiments help us answer questions, but there are also non-experimental techniques. What is so special about experiments? 
 
-One of the central features of an experiment is the _treatment_ - a manipulation of some variable of interest that should have an effect on the response variable we are investigating.  Whether you are manipulating the levels of a hormone to explore it's impact on a cell/organ or embryo development, the concentration of a drug to explore it's efficancy in treating a disease or the levels of nitrogen in soil to explore the impacts on plant growth, a treatment is a deliberate manipulation.  
-
-It is also important to remember that there can be _natural_ treatments - there may be natural variation among cells, organisms or gradients in the environment that you can use to represent treatments.  
+One of the central features of an experiment is the _treatment_ - a manipulation of some variable of interest that should have an effect on the response variable we are investigating.  Whether you are manipulating the levels of a hormone to explore it's impact on a cell/organ or embryo development, the concentration of a drug to explore it's efficacy in treating a disease, or the levels of nitrogen in soil to explore the impacts on plant growth, a treatment is a *deliberate* manipulation.  
+It is also important to remember that there can be _natural_ treatments - there may be natural variation among cells, organisms, spatial locations or gradients of some environmental variable in the environment that you can use to represent treatments.  
 
 So, to be very clear:
 
 1. Experiments allow us to set up a direct comparison among the _levels_ or _values_ of *treatments* of interest.
-2. We can design experiments to minimize any bias in the comparison.
-3. We can design experiments so that the error in the comparison is small.
+2. We design experiments to minimize any bias in the comparison.
+3. We design experiments so that the error in the comparison is small.
 4. We design experiments to be in control, and having that control allows us to make stronger inferences about the nature of differences that we see in the response variable. 
 
 > Experiments allow us to move towards making inferences about causation.
@@ -73,13 +72,12 @@ There are several key concepts
 _Blinding_ occurs when the evaluators of a response do not know which treatment was given to which unit. Blinding helps prevent bias in the evaluation, even unconscious bias from well-intentioned evaluators. Double blinding occurs when both the evaluators of the response and the (human subject) experimental units do not know the assignment of treatments to units. Blinding the subjects can also prevent bias, because subject responses can change when subjects have expectations for certain treatments.
 
 ### Placebos
-_Placebo_ is a null treatment that is used when the _act_ of applying a treatment— any treatment — has an effect. Placebos are often used with human subjects, because people often respond to the process of receiving any treatment: for example,
-reduction in headache pain when given a sugar pill. Blinding is important when placebos are used with human subjects. Placebos are also useful for nonhuman subjects. The apparatus for spraying a field with a pesticide may compact the soil. Thus we drive the apparatus over the field, without actually spraying, as a placebo treatment.
+_Placebo_ is a null treatment that is used when the _act_ of applying a treatment— any treatment — has an effect. Placebos are often used with human subjects, because people often respond to the process of receiving any treatment: for example, reduction in headache pain when given a sugar pill. Blinding is important when placebos are used with human subjects. Placebos are also useful for nonhuman subjects. The apparatus for spraying a field with a pesticide may compact the soil. Thus we drive the apparatus over the field, without actually spraying, as a placebo treatment.
 
 ### Confounders
 _Confounding_ occurs when the effect of one factor or treatment cannot be distinguished from that of another factor or treatment. The two factors or treatments are said to be confounded. Except in very special circumstances, confounding should be avoided. Consider the following example.  We plant corn variety A in Yorkshire and corn variety B in Lancashire. In this experiment, we cannot distinguish location effects (Yorkshire vs. Lancashire) from variety effects (cornA vs. cornB) — the variety factor and the location factor are confounded.
 
-This is despite the fact that we know that Yorkshire will be better.... (that's a joke)
+This is despite the fact that we know that Yorkshire will be better.... (that *is* a joke)
 
 ## Experimental vs. Measurement units
 
@@ -140,7 +138,7 @@ The beauty of randomization is that it helps prevent *confounding*, even for fac
 
 A company is evaluating two different word processing packages for use by its clerical staff. Part of the evaluation is how quickly a test document can be entered correctly using the two programs. We have 20 test secretaries, and each secretary will enter the document twice, using each programme once.
 
-Suppose that all secretaries did the evaluation in the order A first and B second. Does the second programme have an advantage because the secretary will be familiar with the document and thus enter it faster? Or maybe the second programme will be at a disadvantage because the secretary will be tired and thus slower?
+Suppose that all secretaries did the evaluation in the order A first and B second. The haphazardness here is chooseing to evaluate A first and B second, perhaps by a coin-toss.  But does the second programme have an advantage because the secretary will be familiar with the document and thus enter it faster? Or maybe the second programme will be at a disadvantage because the secretary will be tired and thus slower?
 
 Randomization generally costs little in time and trouble, but it can save us from `disaster`.  The experiment above needs secretaries randomly assigned to A first -> B second and B first -> A second (50% in each!).
 

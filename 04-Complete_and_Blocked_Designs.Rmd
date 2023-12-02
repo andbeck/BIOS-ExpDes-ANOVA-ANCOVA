@@ -1,6 +1,6 @@
 # Design and Analysis of Experiments
 
-In this section we are going to learn about how to implement two experimental designs:
+In this section we are going to learn about how to implement two classical experimental designs:
 
 - CRD: the completely randomised design
 - CRBD: the completely randomised block design.
@@ -26,7 +26,7 @@ In the following sections, we are going to focus on the first three.  In doing s
 
 The experiment is about plant crop biomass yield under several herbicide treatments - the herbicide targets weeds and not our target plant (e.g. Glyphosate): a control and two herbicides, and a third treatment that is a placebo - applied water but no herbicide.  
 
-The data for this example are called `plantYield.csv`.
+The data for this example are called `plantYield.csv`and are available on Blackboard.  This means that you could load these data into R and follow along replicating the output in this workbook in your R/RStudio.
 
 For each treatment, we have n = 30 plants in separate pots in standarised conditions.
 
@@ -184,7 +184,7 @@ The estimate associated with Control is 20!  Just where it should be.
 
 The estimates associated with Herb1, Herb2 and Placebo are the differences between the mean of these treatments and the control (the reference level!).  These differences are positive for Herb1 and Herb2, close to 5 and 6 respectively (as expected) and this positive difference is not 0 via the statistical test.  
 
-However, the difference for Placebo is close to 0 and therefore we can not reject the null hypothesis test that it differs from control.  GENUIS!
+However, the difference for Placebo is close to 0 and therefore we can not reject the null hypothesis test that this treatment level differs from control. GENUIS! This is what we wanted - the method of delivering the treatments is having no effect.
 
 ## A priori vs. Post-Hoc Contrasts
 
@@ -192,21 +192,21 @@ As we discussed above, there are likely several other questions we might have wa
 
 ### Custom contrasts versus the Tukey Test
 
-In the semester 1, we introduced how to do a Tukey Test. This is known as an _a posteriori_ test – testing the significance of things suggested by the experiment, also known as data snooping or data dredging. These are multiple comparison methods (Bonferroni, Scheffe method, Tukey honest significant difference, Duncan’s multiple range test) which try to control the chance of getting a significant result by chance.
+In the semester 1, we introduced how to do a Tukey Test. This is known as an _a posteriori_ test – testing the significance of things suggested by the experiment after we've fit the model.  This is sometimes classified as data snooping or data dredging. These are multiple comparison methods (Bonferroni, Scheffe method, Tukey honest significant difference, Duncan’s multiple range test) which try to control the chance of getting a significant result by chance.
 
-To understand the risks of these, consider this experimental design.  We have 7 treatments.  With 7 treatments, there are 21 pairwise comparisons. With p-value threshold of $0.05$ we expect 1/20 (5/100) tests to be significant.  So with this 7 treatment and 21 comparison design, would you expect a signficant result by chance?  You betyja.
+To understand the risks of these post-hoc tests, consider this experimental design.  We have 7 treatment levels.  With 7 treatment levels, there are 21 pairwise comparisons. With a p-value threshold of $0.05$ we expect 1/20 (5/100) tests to be significant.  So with this 7 treatment level and 21 comparison design, how many significant effects would we expect by chance? At least 1, right?
 
-This is why, unless a priori (in advance) you can justify ALL pairwise comparisons, a Tukey Test may not be appropriate.
+This is why, unless _a priori_ (in advance) you can justify ALL pairwise comparisons, a Tukey Test may not be appropriate.
 
-Some statisticians really don’t like them:
+Some statisticians really don’t like the Tukey test:
 
 > “In my view multiple comparison methods have no place at all in the interpretation of data” -Nelder (a very very very well respected statistician).
 
 #### The more appropriate approach - custom contrasts
 
-The _more appropriate_ approach is to specify _a priori_ (before the experiment) a set of hypotheses you want to test, and then test them using contrasts.  
+The _more appropriate_ approach is to specify _a priori_ (before the experiment) a set of hypotheses you want to test, and then test them using *contrasts*.  
 
-For our experiment, as noted above, we were probably interested in what our treatment contrasts provided - tests of difference with the control.  But we had a few others too.
+For our experiment, as noted above, we were probably interested in what our _treatment contrasts_, as reported by the summary table, provided - tests of difference with the control.  But we had a few others too.
 
 Specifying specific contrasts is easy once you get your head around the 'structure' of the syntax.  
 
@@ -230,7 +230,9 @@ contrast <- c(-1,1,0,0)
 fit.contrast(modYield, "treat", contrast)
 ```
 
-So, this says that the difference between the control and Herbicide 1 is ~5 and that this is different from 0.  Does that number `4.16` look familiar?  It should.  It is the same number from the `summary()` table of the full model.  This is because we just specified one of the three treatment contrasts that `summary()` uses.
+So, we've specifically asked for a comparison among two things, the control and Herbicide 1 via `c(-1,1,0,0)`.  Make sure you understand this.
+
+The output says that the difference between the control and Herbicide 1 is ~5 and that this is different from 0.  Does that number `4.16` look familiar?  It should.  It is the same number from the `summary()` table of the full model.  This is because we just specified one of the three treatment contrasts that `summary()` uses.
 
 ```{r}
 # remind ourselves of the contrast from the summary table
@@ -239,7 +241,7 @@ summary(modYield)
 
 #### A different contrast - Herbicide 1 vs Herbicide 2.
 
-If we want to compare the two herbicides we can use this approach.  Note in advance that this contrast DOES NOT exist in the summary table!
+If we want to compare the two herbicides we can use this approach.  Note in advance that this contrast DOES NOT exist in the `summary` table!
 
 ```{r}
 # define the contrast you want using -1, 1 and 0's
@@ -276,7 +278,9 @@ contrast <- c(-1, 1/2, 1/2, 0)
 fit.contrast(modYield, "treat", contrast)
 ```
 
-How very cool.  This custom contrast delivers the inference that herbicides on average increase yield by five units.
+How very cool.  We've specified the average _Herbicide Effect_ by using 1/2 and 1/2 for each Herbicide.  If you think about what an average of two things would be, its their sum divided by 2!
+
+This custom contrast delivers the inference that herbicides _on average_ increase yield by five units.
 
 Again, checking sumDat, we can see where this result comes from.
 
@@ -339,7 +343,7 @@ Here is another picture of a block design that moves from just letters to someth
 knitr::include_graphics("images/BlockDesignGraphic.png")
 ```
 
-The blocks are arranged along a gradient, say along the side of a hill, so represent low and high elevation and associated soil moisture. The blocks capture this background variation. THEN, each treatment level (1-4) is allocated a random position in each block.  In the end, each treatment level is replicated across blocks (n = 6!). From: https://www.researchgate.net/publication/322369242_Randomized_Block_Design_probiotic_example/figures?lo=1
+The blocks are arranged along a gradient, say along the side of a hill, so represent low and high elevation and associated soil moisture. The blocks capture this background variation. THEN, each treatment level (1-4) is allocated a random position in each block. In the end, each treatment level is replicated across blocks (n = 6!). Image From: https://www.researchgate.net/publication/322369242_Randomized_Block_Design_probiotic_example/figures?lo=1
 
 It is important to note that blocks exist at the time of the randomization of treatments to units. We cannot impose blocking structure on a completely randomized design after the fact; either the randomization was blocked or it was not.
 
@@ -406,7 +410,7 @@ plantYield_Block <- tibble(design2)
 
 ## Analysing the CRBD
 
-I'll leave it to you now to generate the following plot of the means ± standard errors from the `plantYield_Blocked.csv` file.
+I'll leave it to you now to generate the following plot of the means ± standard errors from the `plantYield_Blocked.csv` file.  These data are available on Blackboard.
 
 > Note that when you import the data, you need to make block a factor, as it is numeric (integer) in the raw data and would be treated as a number (continuous variable) otherwise.
 
@@ -417,7 +421,11 @@ plantYield_Block <- read_csv("data/plantYield_Block.csv") %>%
   mutate(block = factor(block))
 ```
 
-To make this figure requires thinking hard about the use of dplyr tools (`group_by()` and `summarise()`) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data).  You need to make a _sumDat_ object for the means and se's.  Then you need to plot the raw data, and overlay the mean±se info from the sumDat.
+To make this figure requires thinking hard about the use of dplyr tools (`group_by()` and `summarise()`) and ggplot (adding more than one layer from two different sources of data - the summary data and the raw data).  You have done something similar with the boxplots earlier in the semester.
+
+1. You need to make a _sumDat_ object for the means and se's.  
+2. Then you need to plot the raw data
+3. Then you overlay the mean±se info from the sumDat, specifying these data for this geom.
 
 Can you see the variation between block 1 and 5?  Block 2-4 are all similar.... Block 1 is 10 units more, and Block 5 is 10 units less.
 
@@ -474,11 +482,13 @@ Let's remember that, for example, the mean of Herb1 is expected to be 10 units h
 summary(block_model)
 ```
 
-In this table, the _INTERCEPT_ is specifying the **FIRST BLOCK** and the **CONTROL TREATMENT LEVEL**. We know this because it's these words that are missing from the rest of the table, and they are each the first alpha-numerially in the list of blocks and treatments.  Make sure you understand this.  It's tricky, but once you get it, it becomes obvious.... look for what is missing from the rest of the table!
+In this table, the _INTERCEPT_ is specifying the **FIRST BLOCK** and the **CONTROL TREATMENT LEVEL**. 
 
-- The value of the control, block 1 is approximately 30!  Which is 20+10, which is what we expected.
+We know this because it's these words that are missing from the rest of the table, and they are each the first alpha-numerially in the list of blocks and treatments.  Make sure you understand this.  It's tricky, but once you get it, it becomes obvious.... look for what is missing from the rest of the table!
+
+- The value of the combination `control - block 1` is approximately 30!  Which is 20+10, which is what we expected.
 - The value of Herb1 is ~10 units higher than this (remember, the value 9.84 is the DIFFERENCE between the control and treatment).
-- And the value of block 5 is reported as 20 unites lower than block 1 control.  This too is correct because, as above, block 1 control is 10 units higher than the control mean (20+10) and block 5 is 10 units lower....  
+- And the value of block 5 is reported as 20 unites lower than block 1 control. This too is correct because, as above, block 1 control is 10 units higher than the control mean (20+10) and block 5 is 10 units lower....  
 
 _Make sure you get this logic!_
 

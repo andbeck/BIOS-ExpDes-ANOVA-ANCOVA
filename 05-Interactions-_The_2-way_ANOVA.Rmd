@@ -157,7 +157,7 @@ xtabs(~UVB+CO2, data = plantYield_factorial)
 
 ### Plot the factorial design!
 
-Here we combine some dplyr magic (calculating means in each group - there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts. 
+Here we combine some dplyr magic (calculating means in each group - NOTE that there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts. 
 
 Our goal here is to plot the data that does not have the interaction next to a plot of the data that does have the interaction.
 
