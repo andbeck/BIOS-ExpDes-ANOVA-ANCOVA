@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Design and Analysis of Experiments | An Introduction to Experimental Design ANOVA and ANCOVA</title>
   <meta name="description" content="This is an introduction to Experimental Design, ANOVA and ANCOVA analyses." />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Design and Analysis of Experiments | An Introduction to Experimental Design ANOVA and ANCOVA" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)" />
 
 
-<meta name="date" content="2023-12-02" />
+<meta name="date" content="2023-12-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -119,10 +119,6 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -582,7 +578,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [4,] &quot;E&quot;  &quot;C&quot;  &quot;E&quot;  &quot;B&quot;  &quot;E&quot; 
 ## [5,] &quot;B&quot;  &quot;D&quot;  &quot;C&quot;  &quot;A&quot;  &quot;B&quot;</code></pre>
 <p>Here is another picture of a block design that moves from just letters to something more literal.</p>
-<p><img src="images/BlockDesignGraphic.png" /><!-- --></p>
+<p><img src="images/BlockDesignGraphic.png" width="320" /></p>
 <p>The blocks are arranged along a gradient, say along the side of a hill, so represent low and high elevation and associated soil moisture. The blocks capture this background variation. THEN, each treatment level (1-4) is allocated a random position in each block. In the end, each treatment level is replicated across blocks (n = 6!). Image From: <a href="https://www.researchgate.net/publication/322369242_Randomized_Block_Design_probiotic_example/figures?lo=1" class="uri">https://www.researchgate.net/publication/322369242_Randomized_Block_Design_probiotic_example/figures?lo=1</a></p>
 <p>It is important to note that blocks exist at the time of the randomization of treatments to units. We cannot impose blocking structure on a completely randomized design after the fact; either the randomization was blocked or it was not.</p>
 <p>We use an RCB to increase the power and precision of an experiment by decreasing the error variance. This decrease in error variance is achieved by finding groups of units that are homogeneous (blocks) and, in effect, repeating the experiment independently in the different blocks. The RCB is an effective design when there is a single source of extraneous variation in the responses that we can identify ahead of time and use to partition the units into blocks.</p>
