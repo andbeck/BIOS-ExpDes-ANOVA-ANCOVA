@@ -7,7 +7,7 @@
 <title>Chapter 5 Design and Analysis of Experiments | An Introduction to Experimental Design ANOVA and ANCOVA</title>
 <meta name="author" content="Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)">
 <meta name="description" content="In this section we are going to learn about how to implement two classical experimental designs: CRD: the completely randomised design CRBD: the completely randomised block design. These two...">
-<meta name="generator" content="bookdown 0.30 with bs4_book()">
+<meta name="generator" content="bookdown 0.43 with bs4_book()">
 <meta property="og:title" content="Chapter 5 Design and Analysis of Experiments | An Introduction to Experimental Design ANOVA and ANCOVA">
 <meta property="og:type" content="book">
 <meta property="og:description" content="In this section we are going to learn about how to implement two classical experimental designs: CRD: the completely randomised design CRBD: the completely randomised block design. These two...">
@@ -16,7 +16,7 @@
 <meta name="twitter:description" content="In this section we are going to learn about how to implement two classical experimental designs: CRD: the completely randomised design CRBD: the completely randomised block design. These two...">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.0/transition.js"></script><script src="libs/bs3compat-0.4.0/tabs.js"></script><script src="libs/bs3compat-0.4.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.9.0/transition.js"></script><script src="libs/bs3compat-0.9.0/tabs.js"></script><script src="libs/bs3compat-0.9.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
@@ -285,9 +285,7 @@
 <span><span class="co"># use the fit.contrast function from gmodels</span></span>
 <span><span class="fu">fit.contrast</span><span class="op">(</span><span class="va">modYield</span>, <span class="st">"treat"</span>, <span class="va">contrast</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                      Estimate Std. Error t value     Pr(&gt;|t|)
-## treat c=( -1 1 0 0 ) 4.165507   0.734555 5.67079 1.058335e-07
-## attr(,"class")
-## [1] "fit_contrast"</code></pre>
+## treat c=( -1 1 0 0 ) 4.165507   0.734555 5.67079 1.058335e-07</code></pre>
 <p>So, we’ve specifically asked for a comparison among two things, the control and Herbicide 1 via <code>c(-1,1,0,0)</code>. Make sure you understand this.</p>
 <p>The output says that the difference between the control and Herbicide 1 is ~5 and that this is different from 0. Does that number <code>4.16</code> look familiar? It should. It is the same number from the <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> table of the full model. This is because we just specified one of the three treatment contrasts that <code><a href="https://rdrr.io/r/base/summary.html">summary()</a></code> uses.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -328,9 +326,7 @@
 <span><span class="co"># use the fit.contrast function from gmodels</span></span>
 <span><span class="fu">fit.contrast</span><span class="op">(</span><span class="va">modYield</span>, <span class="st">"treat"</span>, <span class="va">contrast</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                      Estimate Std. Error  t value    Pr(&gt;|t|)
-## treat c=( 0 -1 1 0 ) 2.079439   0.734555 2.830882 0.005473189
-## attr(,"class")
-## [1] "fit_contrast"</code></pre>
+## treat c=( 0 -1 1 0 ) 2.079439   0.734555 2.830882 0.005473189</code></pre>
 <p>Isn’t this cool? And quite surprising, right? We did not expect this. This says that despite the difference we created of ~1 unit of yield between Herb1 and Herb2, and even with the big variation, the statistics detect a significant difference.</p>
 <p>Note that the difference reported is the difference between the two means that we calcuated from the sumDat calculation above!:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -359,9 +355,7 @@
 <span><span class="co"># use the fit.contrast function from gmodels</span></span>
 <span><span class="fu">fit.contrast</span><span class="op">(</span><span class="va">modYield</span>, <span class="st">"treat"</span>, <span class="va">contrast</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                          Estimate Std. Error  t value     Pr(&gt;|t|)
-## treat c=( -1 0.5 0.5 0 ) 5.205226  0.6361433 8.182475 4.015904e-13
-## attr(,"class")
-## [1] "fit_contrast"</code></pre>
+## treat c=( -1 0.5 0.5 0 ) 5.205226  0.6361433 8.182475 4.015904e-13</code></pre>
 <p>How very cool. We’ve specified the average <em>Herbicide Effect</em> by using 1/2 and 1/2 for each Herbicide. If you think about what an average of two things would be, its their sum divided by 2!</p>
 <p>This custom contrast delivers the inference that herbicides <em>on average</em> increase yield by five units.</p>
 <p>Again, checking sumDat, we can see where this result comes from.</p>
@@ -589,9 +583,7 @@
 <span><span class="va">contrast</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu">fit.contrast</span><span class="op">(</span><span class="va">block_model</span>, <span class="st">"treat"</span>, <span class="va">contrast</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                       Estimate Std. Error   t value   Pr(&gt;|t|)
-## treat c=( 0 -1 1 0 ) -1.272934  0.6126423 -2.077777 0.05985811
-## attr(,"class")
-## [1] "fit_contrast"</code></pre>
+## treat c=( 0 -1 1 0 ) -1.272934  0.6126423 -2.077777 0.05985811</code></pre>
 <p>Amazing. The contrast defining a specific test provides a different answer than the post-hoc Tukey test. This is important… the Tukey Test makes lots of tests and they are penalised for so many tests. But, the contrast is the correct and most reliable result. While both <em>fit.contrast</em> and <em>HSD.test</em> both manage the model complexity and variance estimates properly, only the contrast reduces the probability of finding a significant difference by chance or failing to find one.</p>
 
 </div>
@@ -644,7 +636,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2023-12-04.</p>
+    <p>"<strong>An Introduction to Experimental Design ANOVA and ANCOVA</strong>" was written by Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix). It was last built on 2025-12-12.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

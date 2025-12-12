@@ -1,10 +1,11 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
 ]{book}
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -35,7 +36,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -88,21 +88,24 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
 \usepackage{booktabs}
 \usepackage{amsthm}
 \makeatletter
@@ -111,12 +114,7 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\usepackage[]{natbib}
-\bibliographystyle{plainnat}
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
 \hypersetup{
@@ -127,7 +125,7 @@
 
 \title{An Introduction to Experimental Design ANOVA and ANCOVA}
 \author{Andrew P Beckerman (with support from text and slides from Mark Rees and Gareth Phoenix)}
-\date{2023-12-04}
+\date{2025-12-12}
 
 \begin{document}
 \maketitle
@@ -136,8 +134,7 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{introduction}{%
-\chapter{Introduction}\label{introduction}}
+\chapter{Introduction}\label{introduction}
 
 Welcome to An Introduction to Experimental Design ANOVA and ANCOVA
 
@@ -167,8 +164,7 @@ In order to be successful with this final section of the course, you need to fee
 
 You can also refer to Chapter 5 and 6 in Getting Started with R (available as an online Resource via STARPlus via the Library) which covers a great deal of the mechanics of using R to do these types of models. Finally, you will also need to feel comfortable with dplyr and ggplot - we'll be reinforcing the old stuff and introducing a few new tricks.
 
-\hypertarget{the-three-rs-the-foundation-of-experimental-design.}{%
-\section{The Three Rs: The Foundation of Experimental Design.}\label{the-three-rs-the-foundation-of-experimental-design.}}
+\section{The Three Rs: The Foundation of Experimental Design.}\label{the-three-rs-the-foundation-of-experimental-design.}
 
 Before we get started, it's vital that you understand that there are some very basic principles needed to ensure that your experiments can provide robust and reliable inference (answers to your questions). The ``3 R's''.
 
@@ -184,8 +180,7 @@ Before we get started, it's vital that you understand that there are some very b
 
 At this point, you may want to revisit, again, the following section of the APS 240 book \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#randomisation}{on Randomisation}
 
-\hypertarget{the-general-linear-model}{%
-\section{The General Linear Model}\label{the-general-linear-model}}
+\section{The General Linear Model}\label{the-general-linear-model}
 
 This section of the course is focused on a class of model called the General Linear Model. It is not a \textbf{GLM}. The \textbf{GLM} is a generalised linear model. I know, right?
 
@@ -222,7 +217,7 @@ So, you hopefully can see how this \emph{general} linear model is capable of rep
 
 Finally, it is important to understand that non-linear relationships, such as these data below, can be modelled with a linear model:
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-2-1.pdf}}
 
 How, you ask!? Well\ldots. consider this equation:
 
@@ -258,8 +253,7 @@ Here is the code to make that figure, btw.
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{readings}{%
-\chapter{Readings}\label{readings}}
+\chapter{Readings}\label{readings}
 
 There are several resources that will help with this section of the stats course, and onwards
 
@@ -273,8 +267,7 @@ There are several resources that will help with this section of the stats course
   Of course, the venerable coursebook for APS 240: \url{https://dzchilds.github.io/stats-for-bio/index.html}
 \end{itemize}
 
-\hypertarget{install-some-extra-packages}{%
-\section{Install some extra packages}\label{install-some-extra-packages}}
+\section{Install some extra packages}\label{install-some-extra-packages}
 
 In order to make this module more effective, we are going to use some additional resources from CRAN.
 
@@ -302,8 +295,7 @@ Please ensure you ALSO install these packages, using the install packages tab in
   \texttt{visreg}
 \end{itemize}
 
-\hypertarget{introduction-to-experimental-design}{%
-\chapter{Introduction To Experimental Design}\label{introduction-to-experimental-design}}
+\chapter{Introduction To Experimental Design}\label{introduction-to-experimental-design}
 
 Experiments help us answer questions, but there are also non-experimental techniques. What is so special about experiments?
 
@@ -334,8 +326,7 @@ This last point distinguishes an experiment from an observational study. In an o
 \includegraphics[width=7.44in]{images/IceCream_Shark}
 \includegraphics[width=8.89in]{images/Autism_Organic}
 
-\hypertarget{conepts-associated-with-causation}{%
-\section{Conepts associated with causation}\label{conepts-associated-with-causation}}
+\section{Conepts associated with causation}\label{conepts-associated-with-causation}
 
 Mosteller and Tukey (1977) list three concepts associated with causation and state that at least two (preferably all three) are needed to support a causal relationship:
 
@@ -353,20 +344,17 @@ Let's look at a classic example. Smoking and lung cancer -- from 1922 to 1947 an
 
 Note the initial study was an observational study and in this case it was not ethical to do the experiment per se!
 
-\hypertarget{components-of-an-experiment}{%
-\section{Components of an Experiment}\label{components-of-an-experiment}}
+\section{Components of an Experiment}\label{components-of-an-experiment}
 
 An experiment has \emph{treatments, experimental units, responses, and a method to assign treatments to units}. These four things specify the experimental design.
 
 Not all experimental designs are created equal. A good experimental design must adhere to the 3Rs. It should reveal consistency, responsiveness and mechanism. The way this happens is by avoiding systematic error in measuring things, and allow estimation of error in measurements with precision.
 
-\hypertarget{the-holy-grail-of-a-control}{%
-\subsection{The holy grail of a control}\label{the-holy-grail-of-a-control}}
+\subsection{The holy grail of a control}\label{the-holy-grail-of-a-control}
 
 At this point, it would be very good to revisit the APS 240 sections \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#experimental-control}{on controls} and \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#EXPT-DESIGN-PROCEDURAL-CONTROLS}{procedural controls}
 
-\hypertarget{so-what-does-a-good-experimental-design-do}{%
-\section{So what does a good experimental design do?}\label{so-what-does-a-good-experimental-design-do}}
+\section{So what does a good experimental design do?}\label{so-what-does-a-good-experimental-design-do}
 
 In short, a good experimental design must:
 
@@ -394,37 +382,31 @@ Experiments must be designed so that we have an estimate of the size of random e
 
 We cannot do inference without an estimate of this variation. We would like our conclusions to be valid for a wide population, so we need to \emph{randomise} our subjects or objects we are measuring - for example, we may need to be aware of both sexes and of young and old individuals. But there are always compromises - for example, broadening the scope of validity by using a variety of experimental units may decrease the precision of the responses.
 
-\hypertarget{how-do-we-increase-precision-and-reduce-bias}{%
-\section{How do we increase precision and reduce bias?}\label{how-do-we-increase-precision-and-reduce-bias}}
+\section{How do we increase precision and reduce bias?}\label{how-do-we-increase-precision-and-reduce-bias}
 
 There are several key concepts
 
-\hypertarget{blinding}{%
-\subsection{Blinding}\label{blinding}}
+\subsection{Blinding}\label{blinding}
 
 \emph{Blinding} occurs when the evaluators of a response do not know which treatment was given to which unit. Blinding helps prevent bias in the evaluation, even unconscious bias from well-intentioned evaluators. Double blinding occurs when both the evaluators of the response and the (human subject) experimental units do not know the assignment of treatments to units. Blinding the subjects can also prevent bias, because subject responses can change when subjects have expectations for certain treatments.
 
-\hypertarget{placebos}{%
-\subsection{Placebos}\label{placebos}}
+\subsection{Placebos}\label{placebos}
 
 \emph{Placebo} is a null treatment that is used when the \emph{act} of applying a treatment--- any treatment --- has an effect. Placebos are often used with human subjects, because people often respond to the process of receiving any treatment: for example, reduction in headache pain when given a sugar pill. Blinding is important when placebos are used with human subjects. Placebos are also useful for nonhuman subjects. The apparatus for spraying a field with a pesticide may compact the soil. Thus we drive the apparatus over the field, without actually spraying, as a placebo treatment.
 
-\hypertarget{confounders}{%
-\subsection{Confounders}\label{confounders}}
+\subsection{Confounders}\label{confounders}
 
 \emph{Confounding} occurs when the effect of one factor or treatment cannot be distinguished from that of another factor or treatment. The two factors or treatments are said to be confounded. Except in very special circumstances, confounding should be avoided. Consider the following example. We plant corn variety A in Yorkshire and corn variety B in Lancashire. In this experiment, we cannot distinguish location effects (Yorkshire vs.~Lancashire) from variety effects (cornA vs.~cornB) --- the variety factor and the location factor are confounded.
 
 This is despite the fact that we know that Yorkshire will be better\ldots. (that \emph{is} a joke)
 
-\hypertarget{experimental-vs.-measurement-units}{%
-\section{Experimental vs.~Measurement units}\label{experimental-vs.-measurement-units}}
+\section{Experimental vs.~Measurement units}\label{experimental-vs.-measurement-units}
 
 A common source of difficulty in designing experiments is the distinction between experimental units and measurement units. We need to know the experimental units, as this is the key value used to generate our inference.
 
 Now is a good time to re-look at the short section on \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#jargon-busting}{Jargon Busting} from the APS 240 book.
 
-\hypertarget{experimental-and-measurement-units-an-example}{%
-\subsection{Experimental and measurement units: an example}\label{experimental-and-measurement-units-an-example}}
+\subsection{Experimental and measurement units: an example}\label{experimental-and-measurement-units-an-example}
 
 Consider an educational study, with six classrooms of 25 pupils. Each classroom of students is then assigned, at random, to one of two different reading programmes.
 
@@ -436,8 +418,7 @@ At the end of a six-week term, all the students are evaluated via a common readi
 Are there six experimental units (the classrooms) or 150 (25*6; the students)? We measured the reading ability of the students\ldots{} but they were in classroom sets of 25\ldots.
 \end{quote}
 
-\hypertarget{identifying-the-experimental-unit---an-example-of-pseudo-replication}{%
-\subsection{\texorpdfstring{Identifying the experimental unit - an example of \textbf{pseudo-replication}}{Identifying the experimental unit - an example of pseudo-replication}}\label{identifying-the-experimental-unit---an-example-of-pseudo-replication}}
+\subsection{\texorpdfstring{Identifying the experimental unit - an example of \textbf{pseudo-replication}}{Identifying the experimental unit - an example of pseudo-replication}}\label{identifying-the-experimental-unit---an-example-of-pseudo-replication}
 
 To identify the experimental units the key question is: To which \emph{thing} (students or classrooms) did we randomly allocate our treatments?
 
@@ -447,15 +428,13 @@ If we randomly allocated reading programmes to students, then students would be 
 
 However, you are right - we don't \emph{measure} how a classroom reads; we measure how students read. Thus \emph{students are the measurement units} for this experiment.
 
-\hypertarget{psudo-replication}{%
-\subsection{Psudo-replication}\label{psudo-replication}}
+\subsection{Psudo-replication}\label{psudo-replication}
 
 Confusing these two things can lead to \textbf{pseudo-replication}. Treating measurement units as experimental usually leads to overoptimistic analysis --- we will reject null hypotheses more often than we should, and our confidence intervals will be too narrow. The usual way around this is to determine a single response for each experimental unit.
 
 There is additional information on \href{https://dzchilds.github.io/stats-for-bio/principles-experimental-design.html\#independence}{Independence and Pseudoreplication} in the the APS 240 book.
 
-\hypertarget{independence-an-example}{%
-\subsubsection{Independence: an example}\label{independence-an-example}}
+\subsubsection{Independence: an example}\label{independence-an-example}
 
 Consider an experiment with two growth chambers each containing 100 plants. One of the chambers received enhanced C02. One night after collecting data you leave the door open on the C02 chamber and the temperature drops and so the plants grow more slowly. When you come to analyze the data you get a highly significant effect of slow growth. However, that C02 results in reduced plant growth not what you expect (CO2 is good for photosynthesis\ldots).
 
@@ -469,8 +448,7 @@ There are 9 x 1058 ways selecting 100 chambers from 200 chambers so the chance o
 
 Proper \textbf{randomization} and \textbf{replication} is very different from \textbf{pseudo-replication}.
 
-\hypertarget{randomization-with-replication-protects-against-confounding}{%
-\subsection{Randomization with Replication protects against Confounding}\label{randomization-with-replication-protects-against-confounding}}
+\subsection{Randomization with Replication protects against Confounding}\label{randomization-with-replication-protects-against-confounding}
 
 An experiment is properly randomized if the method for assigning treatments to units involves a known, well-understood probabilistic scheme. The probabilistic scheme is called a randomization.
 
@@ -484,8 +462,7 @@ Recall our example above of considering sex and age of subjects and imagine a tr
 
 The beauty of randomization is that it helps prevent \emph{confounding}, even for factors that we do not know are important.
 
-\hypertarget{haphazard-is-not-randomized---beware-the-non-randomized-experiment}{%
-\subsection{\texorpdfstring{\textbf{Haphazard} is NOT randomized - beware the non-randomized experiment}{Haphazard is NOT randomized - beware the non-randomized experiment}}\label{haphazard-is-not-randomized---beware-the-non-randomized-experiment}}
+\subsection{\texorpdfstring{\textbf{Haphazard} is NOT randomized - beware the non-randomized experiment}{Haphazard is NOT randomized - beware the non-randomized experiment}}\label{haphazard-is-not-randomized---beware-the-non-randomized-experiment}
 
 A company is evaluating two different word processing packages for use by its clerical staff. Part of the evaluation is how quickly a test document can be entered correctly using the two programs. We have 20 test secretaries, and each secretary will enter the document twice, using each programme once.
 
@@ -505,8 +482,7 @@ Anything that might affect your responses should be \emph{randomized}! For examp
   If you use more than one measuring instrument for determining response, you can (should) randomize which units are measured on which instruments.
 \end{itemize}
 
-\hypertarget{mini-quiz}{%
-\section{Mini-Quiz}\label{mini-quiz}}
+\section{Mini-Quiz}\label{mini-quiz}
 
 \begin{quote}
 A PhD student want to determine the effects of protein on beetle reproduction, so they design an experiment with a control and protein enhanced diet. To assign beetles to each of the treatments they pour a culture onto the table and catch the first 30 beetles that run to the edge of the table, these receive the protein enhanced diet. The next 30 beetles go in the control. \textbf{Is this randomized?}
@@ -514,8 +490,7 @@ A PhD student want to determine the effects of protein on beetle reproduction, s
 
 (Hmm \ldots. is there anything about the first 30 beetles that reach the edge of the table that could \emph{bias} your inference?)
 
-\hypertarget{replication-how-many}{%
-\section{Replication: How many?}\label{replication-how-many}}
+\section{Replication: How many?}\label{replication-how-many}
 
 There is a really common question that people ask. How many replicates do I need? Unfortunatly, there are no simple rules\ldots{} it depends\ldots{} on\ldots.
 
@@ -535,15 +510,13 @@ There is a really common question that people ask. How many replicates do I need
 
 There is, however, a set of tools that can help with estimating sample sizes. It's called power analysis and requires that you have some a priori estimate of the expected variation in your response variable.
 
-\hypertarget{some-initial-examples-and-challenge-questions}{%
-\chapter{Some initial examples and challenge questions}\label{some-initial-examples-and-challenge-questions}}
+\chapter{Some initial examples and challenge questions}\label{some-initial-examples-and-challenge-questions}
 
 In this section, we will review a field based experimental design example. There are challenge questions to answer.
 
 We will also introduce tools to generate randomised experimental designs - this is a good trick to have up your sleeves!
 
-\hypertarget{designing-your-first-experiment}{%
-\section{Designing your first experiment}\label{designing-your-first-experiment}}
+\section{Designing your first experiment}\label{designing-your-first-experiment}
 
 You are challenged to design an Arctic field manipulation experiment to evaluate UV-B radiation and increased \(CO_{2}\) impacts on plant growth.
 
@@ -589,8 +562,7 @@ Design an experiment to test the hypotheses (i.e.~the design of the plots and tr
 
 Write an answer down, before moving to the next section (this is part of the DO THIS package of challenges). We'll provide the answer separately!
 
-\hypertarget{design-and-analysis-of-experiments}{%
-\chapter{Design and Analysis of Experiments}\label{design-and-analysis-of-experiments}}
+\chapter{Design and Analysis of Experiments}\label{design-and-analysis-of-experiments}
 
 In this section we are going to learn about how to implement two classical experimental designs:
 
@@ -631,8 +603,7 @@ We will consider these together, as some of the techniques for dealing with them
 
 In the following sections, we are going to focus on the first three. In doing so, we will also revisit how we make inference from 1-way ANOVA experiments and introduce a more generalised approach to making \emph{contrasts} we want. If you recall from the 1-way ANOVA work you did in the previous module (Week 7), we learned about \emph{treatment contrasts}, the default comparison of means to a reference level, and then the \emph{Tukey test}, which makes all pairwise comparisons. Here will will find an intermediate zone.
 
-\hypertarget{a-crd-completely-randomised-design-example}{%
-\section{A CRD (Completely Randomised Design) Example}\label{a-crd-completely-randomised-design-example}}
+\section{A CRD (Completely Randomised Design) Example}\label{a-crd-completely-randomised-design-example}
 
 The experiment is about plant crop biomass yield under several herbicide treatments - the herbicide targets weeds and not our target plant (e.g.~Glyphosate): a control and two herbicides, and a third treatment that is a placebo - applied water but no herbicide.
 
@@ -700,8 +671,7 @@ And there is the answer to one of the questions above!
 ## 6     6 2    Cont 21.65736
 \end{verbatim}
 
-\hypertarget{the-dplyr-and-ggplot-pipeline-for-inference.}{%
-\subsection{The dplyr and ggplot pipeline for inference.}\label{the-dplyr-and-ggplot-pipeline-for-inference.}}
+\subsection{The dplyr and ggplot pipeline for inference.}\label{the-dplyr-and-ggplot-pipeline-for-inference.}
 
 Now we can move to our standard data management and visualisation pipeline.
 
@@ -763,7 +733,7 @@ Now we can move to our standard data management and visualisation pipeline.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-10-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-10-1.pdf}}
 
 A few things to notice.
 
@@ -780,8 +750,7 @@ A few things to notice.
   For those of you interested in some extra reading and thinking, the 95\% Confidence Interval around the means can be calculated using \(1.96*SE` == `1.96*sd(obs)/sqrt(n())\). Go ahead and do that and look into that if you want\ldots{}
 \end{enumerate}
 
-\hypertarget{the-one-way-anova.}{%
-\subsection{The One-Way ANOVA.}\label{the-one-way-anova.}}
+\subsection{The One-Way ANOVA.}\label{the-one-way-anova.}
 
 If you've been paying attention, we've essentially designed and plotted the data for a 1-way ANOVA. These data are very similar to the daphnia parasite data we finished semester 1 with.
 
@@ -797,7 +766,7 @@ To analyse these data, we use the \texttt{lm()} function to build the model, che
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-11-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-11-1.pdf}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -847,8 +816,7 @@ To analyse these data, we use the \texttt{lm()} function to build the model, che
 ## F-statistic: 33.26 on 3 and 116 DF,  p-value: 1.383e-15
 \end{verbatim}
 
-\hypertarget{making-insight-and-inference}{%
-\subsection{Making insight and inference}\label{making-insight-and-inference}}
+\subsection{Making insight and inference}\label{making-insight-and-inference}
 
 Lets walks through things very discretely.
 
@@ -877,13 +845,11 @@ The estimates associated with Herb1, Herb2 and Placebo are the differences betwe
 
 However, the difference for Placebo is close to 0 and therefore we can not reject the null hypothesis test that this treatment level differs from control. GENUIS! This is what we wanted - the method of delivering the treatments is having no effect.
 
-\hypertarget{a-priori-vs.-post-hoc-contrasts}{%
-\section{A priori vs.~Post-Hoc Contrasts}\label{a-priori-vs.-post-hoc-contrasts}}
+\section{A priori vs.~Post-Hoc Contrasts}\label{a-priori-vs.-post-hoc-contrasts}
 
 As we discussed above, there are likely several other questions we might have wanted to answer when designing this experiment. For example, are the two herbicides different in their effects?
 
-\hypertarget{custom-contrasts-versus-the-tukey-test}{%
-\subsection{Custom contrasts versus the Tukey Test}\label{custom-contrasts-versus-the-tukey-test}}
+\subsection{Custom contrasts versus the Tukey Test}\label{custom-contrasts-versus-the-tukey-test}
 
 In the semester 1, we introduced how to do a Tukey Test. This is known as an \emph{a posteriori} test -- testing the significance of things suggested by the experiment after we've fit the model. This is sometimes classified as data snooping or data dredging. These are multiple comparison methods (Bonferroni, Scheffe method, Tukey honest significant difference, Duncan's multiple range test) which try to control the chance of getting a significant result by chance.
 
@@ -897,8 +863,7 @@ Some statisticians really don't like the Tukey test:
 ``In my view multiple comparison methods have no place at all in the interpretation of data'' -Nelder (a very very very well respected statistician).
 \end{quote}
 
-\hypertarget{the-more-appropriate-approach---custom-contrasts}{%
-\subsubsection{The more appropriate approach - custom contrasts}\label{the-more-appropriate-approach---custom-contrasts}}
+\subsubsection{The more appropriate approach - custom contrasts}\label{the-more-appropriate-approach---custom-contrasts}
 
 The \emph{more appropriate} approach is to specify \emph{a priori} (before the experiment) a set of hypotheses you want to test, and then test them using \emph{contrasts}.
 
@@ -939,8 +904,6 @@ Lets have a go with specifying a comparison JUST between Herbicide 1 and the con
 \begin{verbatim}
 ##                      Estimate Std. Error t value     Pr(>|t|)
 ## treat c=( -1 1 0 0 ) 4.165507   0.734555 5.67079 1.058335e-07
-## attr(,"class")
-## [1] "fit_contrast"
 \end{verbatim}
 
 So, we've specifically asked for a comparison among two things, the control and Herbicide 1 via \texttt{c(-1,1,0,0)}. Make sure you understand this.
@@ -977,8 +940,7 @@ The output says that the difference between the control and Herbicide 1 is \text
 ## F-statistic: 33.26 on 3 and 116 DF,  p-value: 1.383e-15
 \end{verbatim}
 
-\hypertarget{a-different-contrast---herbicide-1-vs-herbicide-2.}{%
-\subsubsection{A different contrast - Herbicide 1 vs Herbicide 2.}\label{a-different-contrast---herbicide-1-vs-herbicide-2.}}
+\subsubsection{A different contrast - Herbicide 1 vs Herbicide 2.}\label{a-different-contrast---herbicide-1-vs-herbicide-2.}
 
 If we want to compare the two herbicides we can use this approach. Note in advance that this contrast DOES NOT exist in the \texttt{summary} table!
 
@@ -997,8 +959,6 @@ If we want to compare the two herbicides we can use this approach. Note in advan
 \begin{verbatim}
 ##                      Estimate Std. Error  t value    Pr(>|t|)
 ## treat c=( 0 -1 1 0 ) 2.079439   0.734555 2.830882 0.005473189
-## attr(,"class")
-## [1] "fit_contrast"
 \end{verbatim}
 
 Isn't this cool? And quite surprising, right? We did not expect this. This says that despite the difference we created of \textasciitilde1 unit of yield between Herb1 and Herb2, and even with the big variation, the statistics detect a significant difference.
@@ -1024,8 +984,7 @@ Note that the difference reported is the difference between the two means that w
 
 Here it is: \(26.2 - 24.2 = 2\)
 
-\hypertarget{a-more-complex-contrast-comparing-the-average-of-the-herbicide-effect-with-the-control.}{%
-\subsubsection{A more complex contrast: comparing the average of the herbicide effect with the control.}\label{a-more-complex-contrast-comparing-the-average-of-the-herbicide-effect-with-the-control.}}
+\subsubsection{A more complex contrast: comparing the average of the herbicide effect with the control.}\label{a-more-complex-contrast-comparing-the-average-of-the-herbicide-effect-with-the-control.}
 
 This might be a comparison you intended to make also\ldots{} the average effect of herbicides in general. To do this, we expand the idea of -1,1 and 0's to include 1/2s (yes, 1/3's and more are possible):
 
@@ -1044,8 +1003,6 @@ This might be a comparison you intended to make also\ldots{} the average effect 
 \begin{verbatim}
 ##                          Estimate Std. Error  t value     Pr(>|t|)
 ## treat c=( -1 0.5 0.5 0 ) 5.205226  0.6361433 8.182475 4.015904e-13
-## attr(,"class")
-## [1] "fit_contrast"
 \end{verbatim}
 
 How very cool. We've specified the average \emph{Herbicide Effect} by using 1/2 and 1/2 for each Herbicide. If you think about what an average of two things would be, its their sum divided by 2!
@@ -1072,8 +1029,7 @@ Again, checking sumDat, we can see where this result comes from.
 
 \((24.2+26.2)/2 = 25.2\) --\textgreater{} \(25.2 - 20 = 5.2\)
 
-\hypertarget{the-write-up-using-contrasts.}{%
-\subsection{The Write Up using contrasts.}\label{the-write-up-using-contrasts.}}
+\subsection{The Write Up using contrasts.}\label{the-write-up-using-contrasts.}
 
 Fill in these blanks using the various contrasts you made above!
 
@@ -1081,8 +1037,7 @@ Fill in these blanks using the various contrasts you made above!
 We conclude that herbicides on average cause an \_\_\_\_\_ gram increase in yield (t = \_\_\_ , p = \_\_\_ ). We also note that there was a significant difference of \_\_\_\_\_ grams between the herbicides (t = \_\_\_\_\_ p = \_\_\_\_\_\_). The additional placebo treatment had no effect on yield (t = \_\_\_\_\_\_\_ p = \_\_\_\_\_\_\_\_\_\_).
 \end{quote}
 
-\hypertarget{coming-back-to-randomisation}{%
-\subsection{Coming Back to Randomisation}\label{coming-back-to-randomisation}}
+\subsection{Coming Back to Randomisation}\label{coming-back-to-randomisation}
 
 We have worked here with a CRD where the measurement units are completely randomised to the experimental treatments. This simple effort is super valuable. As you've read.
 
@@ -1092,8 +1047,7 @@ Randomisation guards against a variety of possible biases and confounding effect
 
 But what if we know there is a gradient, or a feature of the environment or lab system that we KNOW could confound the design. Is there any way we can remove this known pattern? Yes\ldots. of course there is.
 
-\hypertarget{the-rcbd---the-randomised-complete-block-design}{%
-\section{THE RCBD - The Randomised Complete Block Design}\label{the-rcbd---the-randomised-complete-block-design}}
+\section{THE RCBD - The Randomised Complete Block Design}\label{the-rcbd---the-randomised-complete-block-design}
 
 Blocking allows us to reduce known experimental error.
 
@@ -1144,8 +1098,7 @@ You can have spatial blocks, or temporal blocks where you repeat the experiment 
 
 In general, any source of variation that you think may influence the response and which can be identified prior to the experiment is a candidate for blocking.
 
-\hypertarget{an-example-of-the-rcbd}{%
-\section{An example of the RCBD}\label{an-example-of-the-rcbd}}
+\section{An example of the RCBD}\label{an-example-of-the-rcbd}
 
 Lets modify our previous example to including blocking. If you wish to replicate the analysis, the data are \texttt{plantYield\_Blocked.csv}. In these data, the means are similar to \texttt{plantYield} above, but Herbicide 1 is 10 units higher than the control and Herbicide 2 is 9 units higher. Furthermore, block 1 is supposed to be \textasciitilde10 units higher than blocks 2,3,4 while block 5 is \textasciitilde10 units lower.
 
@@ -1163,8 +1116,7 @@ Lets modify our previous example to including blocking. If you wish to replicate
 ## 10    32     3   Herb1 30.29749
 \end{verbatim}
 
-\hypertarget{analysing-the-crbd}{%
-\section{Analysing the CRBD}\label{analysing-the-crbd}}
+\section{Analysing the CRBD}\label{analysing-the-crbd}
 
 I'll leave it to you now to generate the following plot of the means ± standard errors from the \texttt{plantYield\_Blocked.csv} file. These data are available on Blackboard.
 
@@ -1196,10 +1148,9 @@ To make this figure requires thinking hard about the use of dplyr tools (\texttt
 
 Can you see the variation between block 1 and 5? Block 2-4 are all similar\ldots. Block 1 is 10 units more, and Block 5 is 10 units less.
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-23-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-23-1.pdf}}
 
-\hypertarget{building-the-model}{%
-\subsection{Building the model}\label{building-the-model}}
+\subsection{Building the model}\label{building-the-model}
 
 In order to understand what's going on with blocking, and it's importance, lets build two models. This is a good trick and a good process to learn. The first model is a \emph{naive} model that ignores block - treating this as a CRB. The second model is the \emph{correct} model, letting block absorb the variation we can see among the blocks 1, 2-4 and 5.
 
@@ -1250,8 +1201,7 @@ The first important thing to focus on here is the difference in the Mean Sq Resi
 
 The second important thing to notice is that having allocated variation to block in the \texttt{block\_model}, and thus reducing the error variation, the \emph{treatment} effect shifts from being insignificant to significant. At this point you should try and recall how F-tests are generated (what is the equation!) to really understand how blocking has made such a different.
 
-\hypertarget{are-the-estimates-of-the-parameters-what-we-expect}{%
-\subsection{Are the estimates of the parameters what we expect?}\label{are-the-estimates-of-the-parameters-what-we-expect}}
+\subsection{Are the estimates of the parameters what we expect?}\label{are-the-estimates-of-the-parameters-what-we-expect}
 
 Lets check that the model is estimating differences as we might have expected. We can do this using the summary table.
 
@@ -1308,15 +1258,13 @@ We know this because it's these words that are missing from the rest of the tabl
 
 The take home message here is that these numbers from the model make complete sense with respect to the actual data. Furthermore, controlling for the among block variation \emph{gave us more power to detect a treatment effect}, something we would have missed had we not estimated the block source of variation.
 
-\hypertarget{correct-standard-errors-for-a-figure}{%
-\subsection{Correct Standard Errors for a Figure}\label{correct-standard-errors-for-a-figure}}
+\subsection{Correct Standard Errors for a Figure}\label{correct-standard-errors-for-a-figure}
 
 When we made our initial plot above, we calculated the standard error based on all observations among blocks. However, the variation we really wish to represent is the variation after having controlled for the blocking effects. This means that the standard deviation we should probably use is of the error variance from the correct model: \(0.94\). Can you see where this comes from? The \texttt{Mean\ Sq} column and \texttt{Residuals} row from the \texttt{anova()} table.
 
 The standard deviation is the \(\sqrt{Var}\) and thus, our correct standard errors from the model are \(\sqrt{0.94}\)
 
-\hypertarget{visreg---a-helpful-package-for-automating-this.}{%
-\subsubsection{\texorpdfstring{\texttt{visreg} - a helpful package for automating this.}{visreg - a helpful package for automating this.}}\label{visreg---a-helpful-package-for-automating-this.}}
+\subsubsection{\texorpdfstring{\texttt{visreg} - a helpful package for automating this.}{visreg - a helpful package for automating this.}}\label{visreg---a-helpful-package-for-automating-this.}
 
 There is a very nice plotting function in the package \emph{visreg} that delivers these proper standard errors in a nice ggplot framework.
 
@@ -1330,10 +1278,9 @@ It presents points that are the partial residuals (deviation from the mean for e
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-26-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-26-1.pdf}}
 
-\hypertarget{making-inference-in-a-blocked-model-confidence-intervals-and-contrasts}{%
-\subsection{Making inference in a blocked model: confidence intervals and contrasts}\label{making-inference-in-a-blocked-model-confidence-intervals-and-contrasts}}
+\subsection{Making inference in a blocked model: confidence intervals and contrasts}\label{making-inference-in-a-blocked-model-confidence-intervals-and-contrasts}
 
 We are now in a very strong position to make inference.
 
@@ -1374,17 +1321,13 @@ Let's make a formal test, using the \texttt{contrast()} and \texttt{fit.contrast
 \begin{verbatim}
 ##                       Estimate Std. Error   t value   Pr(>|t|)
 ## treat c=( 0 -1 1 0 ) -1.272934  0.6126423 -2.077777 0.05985811
-## attr(,"class")
-## [1] "fit_contrast"
 \end{verbatim}
 
 Amazing. The contrast defining a specific test provides a different answer than the post-hoc Tukey test. This is important\ldots{} the Tukey Test makes lots of tests and they are penalised for so many tests. But, the contrast is the correct and most reliable result. While both \emph{fit.contrast} and \emph{HSD.test} both manage the model complexity and variance estimates properly, only the contrast reduces the probability of finding a significant difference by chance or failing to find one.
 
-\hypertarget{designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs.}{%
-\chapter{Designs for testing for interactions: the two-way ANOVA and factorial designs.}\label{designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs.}}
+\chapter{Designs for testing for interactions: the two-way ANOVA and factorial designs.}\label{designs-for-testing-for-interactions-the-two-way-anova-and-factorial-designs.}
 
-\hypertarget{introducing-interactions}{%
-\section{Introducing Interactions}\label{introducing-interactions}}
+\section{Introducing Interactions}\label{introducing-interactions}
 
 In the previous sections, and the 1-way ANOVA module in week 7, we have focused on a single explanatory variable. In week 7, it was the \texttt{parasite} factor. In the previous chapters focusing on yield, it was the \texttt{herbicide} treatment. In these cases, the question we are asking is about a single, main effect. However, there are many cases where we design experiments that might have two variables. For example, we may be interesting in the effect of \texttt{parasite} on growth but also whether this effect varies by the amount of food available. Or we might be interested in the yeild of a crop as a function of the herbicide, but also of soil water content. Or we might be interested in the rate of cell division as a function of a growth hormon, but also of whether this varies by the presence of a calcium blocker. In all of these cases we are asking a question about whether the effect of one treatment varies by the level of another. Thus, our question here is about an \emph{interaction}.
 
@@ -1398,8 +1341,7 @@ The effect of X on Y varies by Z. \textbf{OR} The effect of X on Y depends on Z.
 
 This use of \emph{varies by} \textbf{OR} \emph{depends on} defines context dependency and that's what defines interactions.
 
-\hypertarget{an-example-with-co2-and-uv-b-solar-radiation-impact-on-plant-growth-in-the-artic.}{%
-\subsection{An Example with CO2 and UV-B solar radiation impact on plant growth in the artic.}\label{an-example-with-co2-and-uv-b-solar-radiation-impact-on-plant-growth-in-the-artic.}}
+\subsection{An Example with CO2 and UV-B solar radiation impact on plant growth in the artic.}\label{an-example-with-co2-and-uv-b-solar-radiation-impact-on-plant-growth-in-the-artic.}
 
 Context: an arctic tundra study
 Increasing ultraviolet-B (+UV-B) radiation from ozone depletion (the arctic ozone hole)
@@ -1447,8 +1389,7 @@ the effect of CO2 on plant biomass yield varies with UV-B radiation levels.
 
 This simple phrasing describes any interaction.
 
-\hypertarget{numerical-example-for-emphasis}{%
-\subsubsection{Numerical example for emphasis}\label{numerical-example-for-emphasis}}
+\subsubsection{Numerical example for emphasis}\label{numerical-example-for-emphasis}
 
 Let's imagine the following situation. The folowing three numbers are what we call \emph{Main Effects}:
 
@@ -1465,8 +1406,7 @@ However, this additive outcome may not be what happens. Imagine if there were Sy
 SYNERGISTIC RESULT: C02 + UV-B = 60g Yield
 ANTAGONISTIC RESULT: C02 + UV-B = 19g Yield
 
-\hypertarget{the-factorial-design-why-study-interactions}{%
-\subsubsection{The Factorial Design: Why Study Interactions?}\label{the-factorial-design-why-study-interactions}}
+\subsubsection{The Factorial Design: Why Study Interactions?}\label{the-factorial-design-why-study-interactions}
 
 The UV-B and C02 experiment could be thought of as two experiments -- a Control vs UV-B and a Control vs C02 experiment. If we combine these we get a Factorial Experiment where we can actually estimate whether there is an interaction, and whether it is synergy or antagonism. In the factorial design for this example, there are four treatment levels and all combinations of all treatments.
 
@@ -1492,8 +1432,7 @@ Furthermore, when factors \emph{DON'T interact}, \emph{factorial designs} are mo
 
 Hence ALWAYS use factorial designs when your experimental design contains the interaction (when you are asking the question that includes the word(s) \emph{depends} or \emph{varies by}!
 
-\hypertarget{a-factorial-design-and-the-two-way-anova}{%
-\section{A Factorial Design and the Two-Way ANOVA}\label{a-factorial-design-and-the-two-way-anova}}
+\section{A Factorial Design and the Two-Way ANOVA}\label{a-factorial-design-and-the-two-way-anova}
 
 The following dataset \texttt{plantYield\_factorial} contains two observation columns - \texttt{yield\_ind} are data where there is NO INTERACTION. \texttt{yield\_int} are data where there are an interaction. We will use both of these to showcase how to work the 2-way ANOVA and the analysis of a factorial design.
 
@@ -1514,14 +1453,13 @@ Here is the evidence of the factorial design
 ##   UVB+   4    4
 \end{verbatim}
 
-\hypertarget{plot-the-factorial-design}{%
-\subsection{Plot the factorial design!}\label{plot-the-factorial-design}}
+\subsection{Plot the factorial design!}\label{plot-the-factorial-design}
 
 Here we combine some dplyr magic (calculating means in each group - NOTE that there are two grouping variables!), some ggplot magic (adding the lines connecting the means on top of the raw data) and the beauty of patchwork, the package for plot layouts.
 
 Our goal here is to plot the data that does not have the interaction next to a plot of the data that does have the interaction.
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-32-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-32-1.pdf}}
 
 Given what you've read above, you should be able to fill in these blanks:
 
@@ -1529,8 +1467,7 @@ What you see above on the left, is a pattern that suggest that the effect of \_\
 
 In contrast, on the right the pattern suggests that the effect of \_\_\_\_\_\_ on \_\_\_\_\_\_\_\_ \_\_\_\_\_\_\_\_ by \_\_\_\_\_\_\_\_:
 
-\hypertarget{how-to-analyse-and-interpret-the-factorial-design}{%
-\subsection{How to analyse and interpret the factorial design}\label{how-to-analyse-and-interpret-the-factorial-design}}
+\subsection{How to analyse and interpret the factorial design}\label{how-to-analyse-and-interpret-the-factorial-design}
 
 As with the plotting, we now analyse each data set.
 
@@ -1610,7 +1547,7 @@ Let's focus on model 2 and how we interpret this. The ANOVA table now has multip
 
 Great. So, remember as well how we calculate the F-value. In the ANOVA (categorial variable) framework, the F-value is the ratio of variance explained by the factor relative to the residual variation. So that's where the F values come from\ldots. And recall that BIG F-values indicate that more variation is allocated to the treatment levels, versus what's left over. The bigger the numerator value relative to the residual denominator, the more variation this term has explained.
 
-In this experimental design, and any like it, one must remember that there is actually a single question, and it does not related to the independent main effects.It relates only to the interaction term: we designed this experiment to test the hypothesis that the effect of CO2 on yield varies by UVB. There is only a single choice of answer - yes or no. In this case, having captured variation with each independent effect, there is still a large amount of variation captured by `allowing' the effects of each to vary by the other. Under a null hypothesis that these two variables to not interact (do not depend on each other), getting a Mean square estimate of \(127.72\) relative to the residual of \(11.11\) is very unlikely. So we reject the null!
+In this experimental design, and any like it, one must remember that there is actually a single question, and it does not related to the independent main effects.It relates only to the interaction term: we designed this experiment to test the hypothesis that the effect of CO2 on yield varies by UVB. There is only a single choice of answer - yes or no. In this case (Model 2), having captured variation with each independent effect, there is still a large amount of variation captured by `allowing' the effects of each to vary by the other. Under a null hypothesis that these two variables to not interact (do not depend on each other), getting a Mean square estimate of \(82.15\) relative to the residual of \(9.59\) is very unlikely. So we reject the null!
 
 Spend some time investigating what has happened with model 2 and model 3 and recall that ONLY ONE OF THEM IS CORRECT, regardless of whether the data look like the left or right panel above. Note the differences in the outputs. Note what we infer if we model the interaction data incorrectly.
 
@@ -1618,8 +1555,7 @@ There is no free lunch.
 
 You must understand your data and your question and you must fit the model that correctly matches your design! In this case, there really is only one model you should fit. It is model 2. EVEN if the data look like the left panel, with no interaction, this experiment was designed to test the hypothesis that the effect of CO2 varies by UVB. You can only accept or reject the null hypothesis of no interaction by fitting model 2. You can not guess the right model from the picture. The design dictates the model. But, you can guess the answer\ldots.
 
-\hypertarget{visreg-and-the-2-way-anova}{%
-\subsection{visreg and the 2-way ANOVA}\label{visreg-and-the-2-way-anova}}
+\subsection{visreg and the 2-way ANOVA}\label{visreg-and-the-2-way-anova}
 
 Don't forget that the correct standard error for the `result' is the residuals mean squared. You can use the dplyr + ggplot2 method, or visreg to estimate these. Here we use the \texttt{visreg} package and put the figure next to our original ggplot for the interaction data. Either of these would be OK for presentation, and most would opt for the left panel. Note the use of the the correct model for the design and question (model 2).
 
@@ -1632,10 +1568,9 @@ Don't forget that the correct standard error for the `result' is the residuals m
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-34-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-34-1.pdf}}
 
-\hypertarget{interactions-part-2-introducing-the-ancova-analysis-of-covariance}{%
-\chapter{Interactions Part 2: Introducing the ANCOVA (analysis of covariance)}\label{interactions-part-2-introducing-the-ancova-analysis-of-covariance}}
+\chapter{Interactions Part 2: Introducing the ANCOVA (analysis of covariance)}\label{interactions-part-2-introducing-the-ancova-analysis-of-covariance}
 
 In the previous chapters, we introduced classic experimental design principles, and in doing so, we focused on revisiting the 1-way ANOVA and introduced the 2-way ANOVA. In these models, the explanatory variables are categorical (they are factors). This means explanatory variable has distinct, discrete categories or \emph{levels}.
 
@@ -1651,8 +1586,7 @@ The effect of X on Y varies by Z, translates to a) The effect of body size on eg
 
 When written like this, the previous statements about slopes should be even more clear. The effect of body size (continuous) on egg production is a regression and we estimate a slope. The effect of the mutagen concentration on tumour formation is a regression and we estimate a slope. We then can ask whether this slope is different between seasons or fly-type.
 
-\hypertarget{what-this-chapter-covers.}{%
-\section{What this chapter covers.}\label{what-this-chapter-covers.}}
+\section{What this chapter covers.}\label{what-this-chapter-covers.}
 
 This chapter will focus on the ANCOVA, but it also touches on additional concepts. The primary foci are thus:
 
@@ -1667,8 +1601,7 @@ This chapter will focus on the ANCOVA, but it also touches on additional concept
   plotting model results when you've made transformations.
 \end{enumerate}
 
-\hypertarget{setting-up-the-various-ideas.}{%
-\section{Setting up the various ideas.}\label{setting-up-the-various-ideas.}}
+\section{Setting up the various ideas.}\label{setting-up-the-various-ideas.}
 
 Let's start by looking at an example where the effect of Height on Weight varies by Sex. This is a classic set of data from numerous organisms\ldots. it captures biologically the question about sexual dimorphism - does the relationship between Height and Weight (a regression with the continuous variable Weight) vary by Sex (the categorical variable {[}e.g.~ANOVA{]}, in this case M/F but it can be more depending on organism)?
 
@@ -1696,8 +1629,7 @@ Let's be super clear: in these data we start with the fundamental question that 
 If you need a refresher on what the * symbol means, pop back to chapter 5 where we explain this when we fit the models; we also review this below.
 \end{quote}
 
-\hypertarget{anticipating-the-anova-table-for-an-ancova-model}{%
-\subsection{Anticipating the ANOVA table for an ANCOVA model}\label{anticipating-the-anova-table-for-an-ancova-model}}
+\subsection{Anticipating the ANOVA table for an ANCOVA model}\label{anticipating-the-anova-table-for-an-ancova-model}
 
 Let us also recall the sequential nature of the ANOVA table output. This is about what we expect to see, having fit a model, which we will do below. In contrast to the ANOVA, with an ANCOVA, we will see first an estimate of variation explained by the continuous variable, then the categorical variable and finally, after seeing the report on both of those, an estimate of the variation attributable to the interaction. Another way to think of this is as follows (explore the figures above along with this):
 
@@ -1713,8 +1645,7 @@ Let us also recall the sequential nature of the ANOVA table output. This is abou
 
 If we get to the last scenario, and the answer is yes, after all the other options, the \emph{different slopes} does capture variation in our response, we have evidence of an interaction.
 
-\hypertarget{working-through-an-ancova-example.}{%
-\section{Working through an ANCOVA example.}\label{working-through-an-ancova-example.}}
+\section{Working through an ANCOVA example.}\label{working-through-an-ancova-example.}
 
 Let's work with a built in dataset in R - the Davis Study, which is exactly these data. The associated assignment provides another example.
 
@@ -1735,8 +1666,7 @@ The process of doing this will follow a tried and true approach to analysing dat
   Update the Figure for Publication
 \end{enumerate}
 
-\hypertarget{organise-the-packages-and-get-the-data-and-make-your-picture}{%
-\subsection{Organise the packages and get the data and make your picture}\label{organise-the-packages-and-get-the-data-and-make-your-picture}}
+\subsection{Organise the packages and get the data and make your picture}\label{organise-the-packages-and-get-the-data-and-make-your-picture}
 
 The data we are using is an example dataset built into R, but embedded in the \texttt{carData} package, which is installed with the \texttt{car} package - download and install this and they you can use the following code (don't forget the \texttt{tidyverse}, \texttt{agricolae}, \texttt{ggfortify}, \texttt{visreg} etc).
 
@@ -1781,7 +1711,7 @@ Note also that if you are building your own script, you need the following packa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-37-1.pdf}}
 
 Whoa!\ldots{} what's going on here? Well,here is a massive justification of why we say \emph{``always plot your data''} before you do anything. It looks like one of the data points has the height and weight data entered incorrectly, the wrong way around. This is a `feature' of this dataset. Of course you could go back to your master spreadsheet and make the corretion, which is a good idea in real life, but let's see how to fix this using R. Let's fix that. Lets find the row with the mistake by looking for height values \textless100, and then make the switch.
 
@@ -1830,7 +1760,7 @@ Whoa!\ldots{} what's going on here? Well,here is a massive justification of why 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-38-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-38-1.pdf}}
 
 Excellent. Let's look at this picture and ask ourselves the null hypothesis question: does the effect of Height on Weight vary by Sex? What do you think?
 
@@ -1850,10 +1780,10 @@ NOTE: this is not doing statistics. This is using graphics to help guide insight
 \end{Shaded}
 
 \begin{verbatim}
-## `geom_smooth()` using formula 'y ~ x'
+## `geom_smooth()` using formula = 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-39-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-39-1.pdf}}
 
 Again, we have not `proven' anything or tested our hypothesis. What we have is a good guess though. We can guess that
 
@@ -1870,8 +1800,7 @@ Again, we have not `proven' anything or tested our hypothesis. What we have is a
 
 We might even go as far to estimate by eye the overall slope, assuming that there is no effect of Sex. Recalling that the slope is the rise over run or the change in y over the change in x, we can guess that the slope is \textasciitilde{} \((100-40)/(200-140) = (60/60) = 1\). Can you guess a slope for each Sex?
 
-\hypertarget{building-the-model-and-understanding-it}{%
-\section{Building the model (and understanding it)}\label{building-the-model-and-understanding-it}}
+\section{Building the model (and understanding it)}\label{building-the-model-and-understanding-it}
 
 The next step is to build the model to test our hypothesis. As we declared above, the model to test the interaction is \texttt{lm(weight\ \textasciitilde{}\ height\ *\ sex,\ data\ =\ Davis)}. Let's discuss this a bit.
 
@@ -1900,7 +1829,7 @@ To do this, we use the \texttt{autoplot} function from the \texttt{ggfortify} pa
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-41-1.pdf}}
 
 OK. Let's walk through the three core diagnostics.
 
@@ -1910,8 +1839,7 @@ In the upper right, we are evaluating the normality of the residuals. These too 
 
 In the lower left, we are evaluating the assumption of a constant mean-variance relationship. Oops. Remember, we are expecting something that does not show a trend at all. Even without the panic lines, this looks like the variance (y-axis) is increasing with the mean (x-axis).
 
-\hypertarget{dealing-with-the-mean-variance-breakdown.}{%
-\subsection{Dealing with the mean-variance breakdown.}\label{dealing-with-the-mean-variance-breakdown.}}
+\subsection{Dealing with the mean-variance breakdown.}\label{dealing-with-the-mean-variance-breakdown.}
 
 The above issue is one we can deal with via a \emph{transformation}.
 
@@ -1939,10 +1867,10 @@ So, here are the data where we transform both continuous variables with a \textt
 \end{Shaded}
 
 \begin{verbatim}
-## `geom_smooth()` using formula 'y ~ x'
+## `geom_smooth()` using formula = 'y ~ x'
 \end{verbatim}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-42-1.pdf}}
 
 OK. The patterns are still there. And let's see what happens with the model and assumptions now!
 
@@ -1956,12 +1884,11 @@ OK. The patterns are still there. And let's see what happens with the model and 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-43-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-43-1.pdf}}
 
 The scale-location plot is definitely flatter - you can tell by the range on the y-axis of the scale-location plot. So, with this transformation, we can now move to evaluating the model. You are probably thinking about what it means to analyse the data on the log-log axis\ldots. we will come to that shortly.
 
-\hypertarget{making-inference-on-the-ancova}{%
-\subsection{Making inference on the ANCOVA}\label{making-inference-on-the-ancova}}
+\subsection{Making inference on the ANCOVA}\label{making-inference-on-the-ancova}
 
 The next step is to use the detail in the ANOVA table - yes, we use the same \texttt{anova()} function to build an anova table to explore the results of an ANCOVA.
 
@@ -2019,8 +1946,7 @@ When we allow for a common slope associated with \texttt{log(Height)}, we captur
 
 However, when we allow for the slopes caused by \texttt{log(height)} to vary with \texttt{sex}, this captures very little additional variation with respect to the residual variation (\(0.014\) comprared to \(0.013\)) hence a small F and a large P for this term.
 
-\hypertarget{the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff.}{%
-\subsection{The summary table, the actual slopes and making sense of the log stuff.}\label{the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff.}}
+\subsection{The summary table, the actual slopes and making sense of the log stuff.}\label{the-summary-table-the-actual-slopes-and-making-sense-of-the-log-stuff.}
 
 Let's start investigating the details via the \texttt{summary} table:
 
@@ -2079,8 +2005,7 @@ This allows the following maths to be worked out \ldots.
 
 However, we know that the \(0.48\) increase in the slope is not signficant, and as a result, the -2.37 increase in the intercept moving from Female to Male is also not a significant change
 
-\hypertarget{specifying-the-equations-supported-by-the-model.}{%
-\subsection{Specifying the equations supported by the model.}\label{specifying-the-equations-supported-by-the-model.}}
+\subsection{Specifying the equations supported by the model.}\label{specifying-the-equations-supported-by-the-model.}
 
 In order to identify the equations supported by the model - e.g.~the equations associated with the estimation of teo lines with different intercepts and the same slope, we can refit the model to reflect the ADDITIVE effects only, replacing the \texttt{*} with the \texttt{+}.
 
@@ -2121,8 +2046,7 @@ Right, now we get our expected pattern where the intercepts are different but th
 
 We can see the common slope and the slightly higher average weight (\(0.12\) units!) of males.
 
-\hypertarget{making-even-more-inference-and-drawing-the-picture}{%
-\subsection{Making even more inference and drawing the picture}\label{making-even-more-inference-and-drawing-the-picture}}
+\subsection{Making even more inference and drawing the picture}\label{making-even-more-inference-and-drawing-the-picture}
 
 OK, lets use a variation on our plotting tricks from the regression module (week 6) to get a nice picture.
 
@@ -2169,7 +2093,7 @@ We can actually use this data frame to generate the picture that represents the 
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-49-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{Experimental-Design,-ANOVA-and-ANCOVA_files/figure-latex/unnamed-chunk-49-1.pdf}}
 
 Great. Now we can see that the full model (mod\_Davis\_log) told us. The lines are parallel. There is no interaction. In fact, we can do a bit more here. Remember that the model says
 
@@ -2194,11 +2118,9 @@ What does this mean? At any given height, female weight is 88\% of a males (e.g.
 
 This exercise demonstrates one of the benefits of log-log linear relationships. \emph{The ratio of the categories in log-log land directly translates to a percent difference between the groups}. It's also worth noting that the height slope is \textasciitilde2, which suggests\ldots{} yes\ldots{} because we are in log-land, that weight scales with \(height^2\).
 
-\hypertarget{some-general-principles-for-anova-and-ancova-modelling.}{%
-\section{Some General Principles for ANOVA and ANCOVA modelling.}\label{some-general-principles-for-anova-and-ancova-modelling.}}
+\section{Some General Principles for ANOVA and ANCOVA modelling.}\label{some-general-principles-for-anova-and-ancova-modelling.}
 
-\hypertarget{ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model}{%
-\subsection{ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!}\label{ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model}}
+\subsection{ANCOVA (and 2-way ANOVA) is always comparing the interaction model against the additive model!}\label{ancova-and-2-way-anova-is-always-comparing-the-interaction-model-against-the-additive-model}
 
 This figure highlights the various \texttt{lm()} models and their interpretations/assumptions associated with the pieces of an ANCOVA dataset. This is a way to envision all of the potential linear relationships among the variables that might arise in an experiment with a continuous and categorical explanatory variable.
 
@@ -2251,8 +2173,7 @@ Proof: If we compare the additive model and the model with the interaction, we a
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 \end{verbatim}
 
-\hypertarget{a-few-parting-tricks-about-specifying-models-in-r}{%
-\section{A few parting tricks about specifying models in R}\label{a-few-parting-tricks-about-specifying-models-in-r}}
+\section{A few parting tricks about specifying models in R}\label{a-few-parting-tricks-about-specifying-models-in-r}
 
 We can add terms
 \texttt{weight\ \textasciitilde{}\ sex\ +\ height}
